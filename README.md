@@ -1,9 +1,10 @@
 ## Despues de clonar
--- composer install
--- cp .env.example .env
--- php artisan key:generate
-#Probar
--- php artisan serve
+- composer install
+- cp .env.example .env
+- php artisan key:generate
+
+<b>levantar el servidor de una aplicación</b>
+- php artisan serve
 
 ## Introducción
 Lo contemplado en la ley 842 de 2003 es información bastante relevante que estudiantes y egresados deberían saber, actualmente dicha información no presenta un formato amigable con el usuario y en muchos casos tiene partes faltantes que yacen en otros sitios web. Este proyecto busca implementar una plataforma web que permita dar a conocerla de una manera más eficiente y así hacer que la información tenga mayor alcance, como también abrir la posibilidad que la página sea administrada de manera más óptima.
