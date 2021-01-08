@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Administrador;
+use App\Http\Controllers\AdministradorController;
+use App\Models\Articulo;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,10 @@ Route::get('/', function () {
 
 
 Route::get('/modeltest', function(){
-    $datos = Administrador::all();
-    echo($datos);
+    $datos = Articulo::all();
+    //echo($datos);
     dd($datos);
     
 });
+
+Route::get('login', [AdministradorController::class, 'login'])->name('adminLogin');

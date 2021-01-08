@@ -60,7 +60,7 @@
                     <a href="https://www.copnia.gov.co/" class="download" target="_blank">COPNIA</a>
                 </li>
                 <li>
-                    <a href="{{route('inicio')}}" class="article">Administrador</a>
+                    <a href="{{route('adminLogin')}}" class="article">Administrador</a>
                 </li>
             </ul>
         </nav>
@@ -91,7 +91,7 @@
                                 <a class="nav-link" href="#">Info</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Administrador</a>
+                                <a class="nav-link" href="{{route('adminLogin')}}">Administrador</a>
                             </li>
                         </ul>
                     </div>
