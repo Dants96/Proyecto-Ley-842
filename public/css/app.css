@@ -9971,3 +9971,54 @@ h3 {
     border-color: #dee2e6;
   }
 }
+
+
+/* About */
+.divimgAboutPRE {
+  width: 1200px;
+  height: 1200px;
+  overflow: hidden;
+  margin-left: 5%;
+  position: relative;
+}
+
+.divimgAboutPOS {
+  width: 900px;
+  height: 1200px;
+  overflow: hidden;
+  margin-left: 5%;
+  position: relative;
+}
+
+.divimgLabout {
+  width: 1200px;
+  height: 800px;
+  overflow: hidden;
+  margin-left: 5%;
+  position: relative;
+}
+
+.imgLabout{
+  margin: 0 auto;
+  width: 360px; 
+  height: 360px;
+}
+
+.ffeat{
+  font-family: "Cambria", cursive; 
+  font-size: 46px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 500; 
+  line-height: 15.4px;
+}
+
+.ffeatc{
+  font-family: "Cambria", cursive; 
+  font-size: 16px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 500; 
+  line-height: 15.4px;
+  margin: 5px;
+}
