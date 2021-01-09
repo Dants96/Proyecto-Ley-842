@@ -27,4 +27,12 @@ Route::get('/modeltest', function(){
     
 });
 
-Route::get('login', [AdministradorController::class, 'showLogin'])->name('adminLogin');
+Route::get('/Administrador/inicio',['middleware' => 'auth', function(){
+    return view('Administrador.inicio');
+}])->name('adminInicio');
+
+//rutas de authh admin
+Route::get('login', [AdministradorController::class, 'showLoginForm'])->name('adminLogin');
+Route::post('login', [AdministradorController::class, 'login'])->name('adminLogin_post');
+Route::post('logout', [AdministradorController::class, 'logout'])->name('adminLogout');
+

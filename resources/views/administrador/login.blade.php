@@ -12,11 +12,20 @@
 
 <body>
     <div class="wrapper fadeInDown">
+        @if(! $errors->isEmpty() )
+      <div class="alert alert-danger">
+        <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+      </div>
+      @endif
         <div id="formContent">
             <!-- Tabs Titles -->
 
             <!-- Icon -->
-            <div class="fadeIn first">
+            <div id="header" class="fadeIn first">
                 <a href="{{route('inicio')}}">
                     <img style="width: 35%" src="{{asset('images/logo2.1.png')}}" id="icon" alt="Icon" />
                 </a>
@@ -24,9 +33,10 @@
             </div>
 
             <!-- Login Form -->
-            <form autocomplete="off">
+            <form action="{{route('adminLogin_post')}}"  method="POST" autocomplete="off">
+                @csrf
                 <input type="text" id="cedula" class="fadeIn second" name="cedula" placeholder="Cedula" required>
-                <input type="password" id="pass" class="fadeIn third" name="pass" placeholder="Contraseña" required>
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña" required>
                 <input type="submit" class="fadeIn fourth" value="Acceder">
             </form>
 
