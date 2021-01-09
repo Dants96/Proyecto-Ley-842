@@ -7,6 +7,12 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <title>App Name - @yield('titulo')</title>
     <style>
+         .slideDown{
+            display: none;
+        }
+        .fadeInjs{
+            opacity: 0;
+        }
     </style>
 </head>
 
@@ -14,8 +20,9 @@
     <div class="wrapper">
         <!-- Sidebar Holder -->
         <nav id="sidebar" class="active">
-            <div class="sidebar-header">
-                <h3>Ley 842 de 2013</h3>
+            <div class="sidebar-header" style="text-align: center;padding: 0px;">
+                <a href="{{route('adminInicio')}}"><img style="width: 70%" src="{{asset('images/logo2.1t.png')}}"
+                    id="icon" alt="Icon" /></a>
             </div>
 
             <ul class="list-unstyled components">
@@ -113,6 +120,9 @@
     
     <script type="text/javascript">
         $(document).ready(function () {
+            $('.slideDown').slideDown(1000, function(){
+                $('.fadeInjs').animate({opacity:1, duration: 400});
+            });
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');

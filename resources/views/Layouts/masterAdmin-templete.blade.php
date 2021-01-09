@@ -125,8 +125,9 @@
                 </li>
             </ul>
         </nav>
+        <!--boton de slidebar
         <a id="cerrar-slide" href="#" class="btn btn-info btn-slmenu"><i id="icon-cerrar" class="fas fa-times"></i></a>
-
+        -->
         <!-- Page Content Holder -->
         <div id="content">
             <div class="container">
@@ -160,6 +161,7 @@
                     $('#icon-cerrar').addClass("fa-times");
                 }
             });
+            
         })
         
     </script>
