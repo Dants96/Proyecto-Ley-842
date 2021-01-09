@@ -50,8 +50,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Info Ley 842</a>
-                    <a href="#">Contactanos</a>
+                    <a href="{{route('info')}}">Info Ley 842</a>
+                    <a href="{{route('nosotros')}}">Contactanos</a>
                 </li>
             </ul>
 
@@ -88,7 +88,7 @@
                                 <a class="nav-link" href="{{route('inicio')}}">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Info</a>
+                                <a class="nav-link" href="{{route('info')}}">Info</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('adminLogin')}}">Administrador</a>
