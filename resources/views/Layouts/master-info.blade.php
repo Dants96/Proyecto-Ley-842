@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-    <title>App Name - @yield('titulo')</title>
+    <title>Nosotros - @yield('titulo')</title>
     <style>
     </style>
 </head>
@@ -97,11 +97,15 @@
                     </div>
                 </div>
             </nav>
-            <div class="container">
-                @yield('contenido')
+
+            <!--Contenido-->
+            <div class="card">
+                <iframe src="https://web.archive.org/web/20210109190245/https://sintesis.colombiacompra.gov.co/content/ley-842-de-2003" style="height:500px" id="inneriframe"></iframe>
+                
             </div>
            
         </div>
+
     </div>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -115,7 +119,7 @@
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
+                $(this).toggleClass('active');    
             });
         });
 

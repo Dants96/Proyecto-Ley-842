@@ -45,3 +45,6 @@ Route::get('login', [AdministradorController::class, 'showLoginForm'])->middlewa
 Route::post('login', [AdministradorController::class, 'login'])->middleware('guest')->name('adminLogin_post');
 Route::post('logout', [AdministradorController::class, 'logout'])->middleware('auth')->name('adminLogout');
 
+
+Route::get('/nosotros', function () {return view('Layouts.master-about');})->name('nosotros');
+Route::get('/infoLey842', function () {return view('Layouts.master-info');})->name('info');

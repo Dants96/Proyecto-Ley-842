@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-    <title>App Name - @yield('titulo')</title>
+    <title>Nosotros - @yield('titulo')</title>
     <style>
     </style>
 </head>
@@ -97,11 +97,33 @@
                     </div>
                 </div>
             </nav>
-            <div class="container">
-                @yield('contenido')
+
+            <!--Contenido-->
+            <div>
+                <div id="divimgAbout" class="divimgAboutPRE card" style="padding: 10px">
+                    <img id="imgAbout" class="imgAboutPRE" src="https://i.imgur.com/lQn6Win.png">
+                    <br>
+                    <h1>¿Quiénes somos?</h1>
+                    <h3>Somos una iniciativa que busca facilitar la interpretación de los reglamentos que rigen el desempeño de la respectiva profesión. Nuestra intención es hacer de la lectura y consulta de la información yaciente en la Ley 842 de 2003, una experiencia amigable que supla no sólo la flexibilidad de administración, sino que también ofrezca una serie de herramientas que optimicen la búsqueda de información.</h3>
+                    <br>
+                    <h1>Muestra historia</h1>
+                    <h3>Como estudiantes de últimos semestres de ingeniería de sistemas de la universidad de Nariño, mediante la asignatura con nombre Ingeniería Legal y Ética, desarrollamos una plataforma que permitiese entender a fondo las implicaciones que el formato que solía poseer la ley 842 no facilitaba.</h3>
+                    <div class="card">
+                        <img class="imgLabout" src="https://i.imgur.com/wU8MjB2.png">
+                        <div style="flex-direction: row; display:flex; justify-content: space-between;">
+                            <h2 class="ffeat">Daniel A. Tutistar</h2>
+                            <h2 class="ffeat">Mateo Luna O.</h2>
+                        </div>
+                        <div style="flex-direction: row; display:flex; justify-content: space-between;">
+                            <h2 class="ffeatc">dants@ley842.com</h2>
+                            <h2 class="ffeatc">m@ley842.com</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
            
         </div>
+
     </div>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -116,6 +138,8 @@
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
+                $('#divimgAbout').addClass("divimgAboutPOS");
+                $('#divimgAbout').removeClass("divimgAboutPRE");      
             });
         });
 
