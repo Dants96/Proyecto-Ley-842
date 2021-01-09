@@ -46,5 +46,5 @@ Route::post('login', [AdministradorController::class, 'login'])->middleware('gue
 Route::post('logout', [AdministradorController::class, 'logout'])->middleware('auth')->name('adminLogout');
 
 
-Route::get('/nosotros', function () {return view('Layouts.about');})->name('nosotros');
-Route::get('/infoLey842', function () {return view('Layouts.info');})->name('info');
+Route::get('/nosotros', function () {return view('Layouts.master-about');})->name('nosotros');
+Route::get('/infoLey842', function () {return view('Layouts.master-info');})->name('info');
