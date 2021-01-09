@@ -13,7 +13,7 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar Holder -->
-        <nav id="sidebar">
+        <nav id="sidebar" class="active">
             <div class="sidebar-header">
                 <h3>Ley 842 de 2013</h3>
             </div>
@@ -71,7 +71,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn active">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -120,6 +120,8 @@
         });
 
     </script>
+
+    @yield('codigoExtra')
     
 </body>
 

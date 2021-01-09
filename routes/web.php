@@ -22,9 +22,9 @@ Route::get('/', function () {
 
 Route::get('/modeltest', function(){
     $datos = Articulo::all();
-    //echo($datos);
+    echo($datos);
     dd($datos);
     
 });
 
-Route::get('login', [AdministradorController::class, 'login'])->name('adminLogin');
+Route::get('login', [AdministradorController::class, 'showLogin'])->name('adminLogin');

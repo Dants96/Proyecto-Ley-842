@@ -17,14 +17,16 @@
 
             <!-- Icon -->
             <div class="fadeIn first">
-                <!-- <img src="" id="icon" alt="User Icon" /> -->
-                <h2  class="font-weight-bold">ADMINISTRADOR</h2>
+                <a href="{{route('inicio')}}">
+                    <img style="width: 35%" src="{{asset('images/logo2.1.png')}}" id="icon" alt="Icon" />
+                </a>
+                <h2  class="font-weight-bold">MODO ADMINISTRADOR</h2>
             </div>
 
             <!-- Login Form -->
             <form autocomplete="off">
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Cedula">
-                <input type="password" id="password" class="fadeIn third" name="login" placeholder="Contraseña">
+                <input type="text" id="cedula" class="fadeIn second" name="cedula" placeholder="Cedula" required>
+                <input type="password" id="pass" class="fadeIn third" name="pass" placeholder="Contraseña" required>
                 <input type="submit" class="fadeIn fourth" value="Acceder">
             </form>
 
