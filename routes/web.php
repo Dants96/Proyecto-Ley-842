@@ -38,6 +38,8 @@ Route::get('/Administrador/inicio',['middleware' => 'auth', function(){
 Route::get('/Administrador/agregar/{seccion}',[AdministradorController::class, 'addSection'])->middleware('auth')->name('agregarForm');
 Route::get('/Administrador/listar/{seccion}',[AdministradorController::class, 'listarSection'])->middleware('auth')->name('listarSecction');
 
+Route::get('Administrador/estadisiticas',[AdministradorController::class, 'getStadistics'])->middleware('auth')->name('stadistics');
+
 //rutas de authh admin
 Route::get('login', [AdministradorController::class, 'showLoginForm'])->middleware('guest')->name('adminLogin');
 Route::post('login', [AdministradorController::class, 'login'])->middleware('guest')->name('adminLogin_post');

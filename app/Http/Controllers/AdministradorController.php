@@ -45,4 +45,8 @@ class AdministradorController extends Controller
         }
     }
 
+    public function getStadistics(){
+        return view("Administrador.estadisiticas");
+    }
+
 }

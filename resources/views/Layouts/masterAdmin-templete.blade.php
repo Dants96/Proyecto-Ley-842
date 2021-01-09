@@ -18,7 +18,9 @@
             color: #fff;
             background: #0169a4;
         }
-
+        #sidebar ul.components{
+            border-bottom: 1px solid #b7b7b7;
+        }
         ul ul a {
             background: #b7b7b7;
             color: black;
@@ -96,6 +98,7 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="{{route('stadistics')}}">Estadísticas</a>
                     <a href="{{route('noBuild')}}">Ayuda</a>
                 </li>
             </ul>
