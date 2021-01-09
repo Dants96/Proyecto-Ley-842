@@ -3,6 +3,14 @@ html {
     background-color: #56baed;
 }
 
+.shadow-std{
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+}
+
+.no-rborder{
+    border-radius: 0%;
+}
+
 /*
     DEMO STYLE
 */

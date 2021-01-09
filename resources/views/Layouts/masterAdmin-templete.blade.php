@@ -6,8 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <title>Administrador - @yield('titulo')</title>
     <style>
+        .btn-slmenu{
+            width: fit-content;
+            height: fit-content;
+            padding-left: 4px;
+            padding-right: 4px;
+            margin-left: 4px;
+            margin-top: 4px; 
+            background: #09347a !important;
+        }
+        .slideDown{
+            display: none;
+        }
+        .fadeInjs{
+            opacity: 0;
+        }
         #sidebar,
         #sidebar .sidebar-header {
             background: #09347a;
@@ -41,7 +57,7 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar Holder -->
-        <nav id="sidebar" class="">
+        <nav id="sidebar" class="navbar-expand">
             <div class="sidebar-header" style="text-align: center;padding: 0px;">
                 <a href="{{route('adminInicio')}}"><img style="width: 70%" src="{{asset('images/logo2.1t.png')}}"
                         id="icon" alt="Icon" /></a>
@@ -109,6 +125,7 @@
                 </li>
             </ul>
         </nav>
+        <a id="cerrar-slide" href="#" class="btn btn-info btn-slmenu"><i id="icon-cerrar" class="fas fa-times"></i></a>
 
         <!-- Page Content Holder -->
         <div id="content">
@@ -123,6 +140,28 @@
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script>
+        $('document').ready(function(){
+            $('.slideDown').slideDown(1000, function(){
+                $('.fadeInjs').animate({opacity:1, duration: 400});
+            });
+
+            $('#cerrar-slide').on('click', function(){
+               
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+                
+                if($('#icon-cerrar').hasClass("fa-times")){
+                    $('#icon-cerrar').removeClass("fa-times");
+                    $('#icon-cerrar').addClass("fa-ellipsis-v");
+                }else{
+                    $('#icon-cerrar').removeClass("fa-ellipsis-v");
+                    $('#icon-cerrar').addClass("fa-times");
+                }
+            });
+        })
+        
     </script>
     @yield('codigoExtra')
 
