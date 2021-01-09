@@ -25,6 +25,24 @@ class AdministradorController extends Controller
         return redirect()->route('adminInicio');
     }
 
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('inicio');
+    }
     
+    public function addSection($seccion){
+        if(in_array($seccion, array("titulo", "capitulo", "articulo"))){
+            return view("Administrador.agregar-{$seccion}");
+        }else{
+            return redirect()->route('adminInicio');
+        }
+    }
+    public function listarSection($seccion){
+        if(in_array($seccion, array("titulo", "capitulo", "articulo"))){
+            return view("Administrador.modificar-{$seccion}");
+        }else{
+            return redirect()->route('adminInicio');
+        }
+    }
 
 }

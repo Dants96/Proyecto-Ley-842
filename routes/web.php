@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('home');
 })->name('inicio');
 
+// pagina de no terminados
+Route::get('/nobuild', function(){
+    return view('notFound');
+})->name('noBuild');
 
 Route::get('/modeltest', function(){
     $datos = Articulo::all();
@@ -31,8 +35,11 @@ Route::get('/Administrador/inicio',['middleware' => 'auth', function(){
     return view('Administrador.inicio');
 }])->name('adminInicio');
 
+Route::get('/Administrador/agregar/{seccion}',[AdministradorController::class, 'addSection'])->middleware('auth')->name('agregarForm');
+Route::get('/Administrador/listar/{seccion}',[AdministradorController::class, 'listarSection'])->middleware('auth')->name('listarSecction');
+
 //rutas de authh admin
-Route::get('login', [AdministradorController::class, 'showLoginForm'])->name('adminLogin');
-Route::post('login', [AdministradorController::class, 'login'])->name('adminLogin_post');
-Route::post('logout', [AdministradorController::class, 'logout'])->name('adminLogout');
+Route::get('login', [AdministradorController::class, 'showLoginForm'])->middleware('guest')->name('adminLogin');
+Route::post('login', [AdministradorController::class, 'login'])->middleware('guest')->name('adminLogin_post');
+Route::post('logout', [AdministradorController::class, 'logout'])->middleware('auth')->name('adminLogout');
 
