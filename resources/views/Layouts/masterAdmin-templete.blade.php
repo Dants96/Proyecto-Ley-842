@@ -9,6 +9,7 @@
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <title>Administrador - @yield('titulo')</title>
     <style>
+        @yield('estilos')
         .btn-slmenu{
             width: fit-content;
             height: fit-content;
@@ -18,6 +19,11 @@
             margin-top: 4px; 
             background: #09347a !important;
         }
+
+        .shadow-std{
+            border-top: solid 2px #0169a4;
+        }
+
         .slideDown{
             display: none;
         }

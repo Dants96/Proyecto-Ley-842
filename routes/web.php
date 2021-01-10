@@ -36,6 +36,7 @@ Route::get('/Administrador/inicio',['middleware' => 'auth', function(){
 }])->name('adminInicio');
 
 Route::get('/Administrador/agregar/{seccion}',[AdministradorController::class, 'addSection'])->middleware('auth')->name('agregarForm');
+Route::post('/Administrador/agregar/',[AdministradorController::class, 'storeTitulo'])->middleware('auth')->name('agregarTitulo');
 Route::get('/Administrador/listar/{seccion}',[AdministradorController::class, 'listarSection'])->middleware('auth')->name('listarSecction');
 
 Route::get('Administrador/estadisiticas',[AdministradorController::class, 'getStadistics'])->middleware('auth')->name('stadistics');
