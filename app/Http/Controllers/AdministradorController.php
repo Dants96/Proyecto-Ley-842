@@ -79,6 +79,8 @@ class AdministradorController extends Controller
         $registro->fecha = date('Y-m-d');
         $registro->tipo = $tipo;
         $registro->save();
+
+        $this->sumModEst($tipo);
         return true;
     }
 
@@ -135,7 +137,6 @@ class AdministradorController extends Controller
         $titulo->save();
 
         $this->addEdicion('titulo', $titulo->id, 'ADC');
-        $this->sumModEst('ADC');
 
         return $this->showSuccess('Se ha agregado el Titulo', $request->input('nombre_tit'), 'Título', 'adición');
 
@@ -158,9 +159,27 @@ class AdministradorController extends Controller
         $articulo->save();
 
         $this->addEdicion('articulo',$articulo->id, 'ADC');
-        $this->sumModEst('ADC');
 
         return $this->showSuccess('Se ha agregado el Artículo', $request->input('nombre_articulo'), 'Artículo', 'adición');
+    }
+
+    public function storeCapitulo(Request $request){
+        $this->validate($request, [
+            'nombre_capitulo' => 'required|max:100',
+            'numero_capitulo' => 'required|numeric|max:999',
+            'titulo' => 'required|numeric|exists:titulos,id'
+        ]);
+        
+        $capitulo = new Capitulo();
+        $capitulo->nombre = $request->input('nombre_capitulo');
+        $capitulo->numero = $request->input('numero_capitulo');
+        $capitulo->fecha_modificacion = date('Y-m-d');
+        $capitulo->id_titulo = $request->input('titulo');
+        $capitulo->save();
+
+        $this->addEdicion('capitulo',$capitulo->id, 'ADC');
+        
+        return $this->showSuccess('Se ha agregado el Capítulo', $request->input('nombre_capitulo'), 'Capítulo', 'adición');
     }
 
     public function listarSection($seccion){
