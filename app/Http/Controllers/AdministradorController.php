@@ -41,10 +41,10 @@ class AdministradorController extends Controller
     public function addSection($seccion){
         switch($seccion){
             case 'titulo':
-                return view("Administrador.agregar-{$seccion}");
+                return view("Administrador.agregar-{$seccion}",['numero'=> Titulo::all('numero')->max('numero')]);
                 
             case 'articulo':
-                return view("Administrador.agregar-{$seccion}", ["capitulos" => Capitulo::all('id', 'nombre')]);
+                return view("Administrador.agregar-{$seccion}", ["capitulos" => Capitulo::all('id', 'nombre', 'id_titulo'), "titulos" => Titulo::all('id', 'nombre')]);
                 
             case 'capitulo':
                 return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::all('id', 'nombre')]);
@@ -114,11 +114,12 @@ class AdministradorController extends Controller
     * @param2 tipo del objeto modificado
     * @param3 operacion realizada
     */
-    private function showSuccess($msg, $nombre, $tipo, $opr){
+    private function showSuccess($msg, $nombre, $tipo, $opr, $numero){
         $infoProceso = [
             'msg'=> $msg, 
             'objeto_nombre' =>  $nombre,
             'objeto_tipo' =>  $tipo,
+            'objeto_numero' =>  $numero,
             'operacion' => $opr
         ];
         return view('Administrador.proceso-exitoso', array('proceso' => $infoProceso));
@@ -127,59 +128,58 @@ class AdministradorController extends Controller
     public function storeTitulo(Request $request){
         $this->validate($request, [
             'nombre_tit' => 'required|max:100',
-            'numero_tit' => 'required|numeric|max:999|unique:titulos,numero',
         ]);
         
         $titulo = new Titulo();
         $titulo->nombre = $request->input('nombre_tit');
-        $titulo->numero = $request->input('numero_tit');
+        $titulo->numero = int(Titulo::all('numero')->max('numero')) + 1;
         $titulo->fecha_modificacion = date('Y-m-d');
         $titulo->save();
 
         $this->addEdicion('titulo', $titulo->id, 'ADC');
 
-        return $this->showSuccess('Se ha agregado el Titulo', $request->input('nombre_tit'), 'Título', 'adición');
+        return $this->showSuccess('Se ha agregado el Titulo', $request->input('nombre_tit'), 'Título', 'adición', $titulo->numer);
 
     }
 
     public function storeArticulo(Request $request){
         $this->validate($request, [
             'nombre_articulo' => 'required|max:100',
-            'numero_articulo' => 'required|numeric|max:999',
             'capitulo' => 'required|numeric|exists:capitulos,id',
             'contenido' => 'required'
         ]);
         
         $articulo = new Articulo();
+        $capitulo_id = $request->input('capitulo');
         $articulo->nombre = $request->input('nombre_articulo');
-        $articulo->numero = $request->input('numero_articulo');
+        $articulo->numero = (Articulo::where('id_capitulo', '=', $capitulo_id)->get('numero')->max('numero')) + 1;
         $articulo->fecha_modificacion = date('Y-m-d');
         $articulo->contenido = $request->input('contenido');
-        $articulo->id_capitulo = $request->input('capitulo');
+        $articulo->id_capitulo = $capitulo_id;
         $articulo->save();
 
         $this->addEdicion('articulo',$articulo->id, 'ADC');
 
-        return $this->showSuccess('Se ha agregado el Artículo', $request->input('nombre_articulo'), 'Artículo', 'adición');
+        return $this->showSuccess('Se ha agregado el Artículo', $request->input('nombre_articulo'), 'Artículo', 'adición', $articulo->numero);
     }
 
     public function storeCapitulo(Request $request){
         $this->validate($request, [
-            'nombre_capitulo' => 'required|max:100',
-            'numero_capitulo' => 'required|numeric|max:999',
+            'nombre_capitulo' => 'required|max:100',            
             'titulo' => 'required|numeric|exists:titulos,id'
         ]);
         
         $capitulo = new Capitulo();
+        $titulo_id = $request->input('titulo');
         $capitulo->nombre = $request->input('nombre_capitulo');
-        $capitulo->numero = $request->input('numero_capitulo');
+        $capitulo->numero = (Capitulo::where('id_titulo', '=', $titulo_id)->get('numero')->max('numero')) + 1;
         $capitulo->fecha_modificacion = date('Y-m-d');
-        $capitulo->id_titulo = $request->input('titulo');
+        $capitulo->id_titulo = $titulo_id;
         $capitulo->save();
 
         $this->addEdicion('capitulo',$capitulo->id, 'ADC');
         
-        return $this->showSuccess('Se ha agregado el Capítulo', $request->input('nombre_capitulo'), 'Capítulo', 'adición');
+        return $this->showSuccess('Se ha agregado el Capítulo', $request->input('nombre_capitulo'), 'Capítulo', 'adición', $capitulo->numero);
     }
 
     public function listarSection($seccion){

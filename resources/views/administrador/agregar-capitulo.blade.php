@@ -13,8 +13,7 @@ Agregar Capítulo
             <div class="form-group">
                 <input class="form-control margin-std" type="text" name="nombre_capitulo" id="nombre_capitulo"
                     placeholder="Nombre del Capítulo" required value="{{ old('nombre_capitulo')}}" />
-                <input class="form-control margin-std" type="number" name="numero_capitulo" id="numero_capitulo"
-                    placeholder="Numero del Capítulo" title="El numero no puede repetirse en otro titulo." required value="{{ old('numero_capitulo')}}" />
+                    
                 <div class="margin-std">
                     <label class="lead" for="titulo">Seleccione el capítulo al que pertenece: </label>
                     <select class="form-control" id="titulo" name="titulo" required>
@@ -24,6 +23,9 @@ Agregar Capítulo
                         @endforeach
                     </select>
                 </div>
+                <small style="margin-left: 5px; magin-bottom:5px" id="" class="form-text text-muted">
+                    El número de Capítulo se asigna automáticamente.
+                  </small>
         
                 <div class="row-btn margin-std d-flex flex-row-reverse">
                     <button type="submit" class="btn btn-success">Agregar</button>

@@ -12,9 +12,12 @@ Agregar titulo
             @csrf
             <div class="form-group">
                 <input class="form-control margin-std" type="text" name="nombre_tit" id="nombre_tit"
-                    placeholder="Nombre del Titulo" required value="{{ old('nombre_tit')}}" />
+                    placeholder="Nombre del Título" required value="{{ old('nombre_tit')}}" />
                 <input class="form-control margin-std" type="number" name="numero_tit" id="numero_tit"
-                    placeholder="Numero del Titulo" title="El numero no puede repetirse en otro titulo." required value="{{ old('numero_tit')}}"  />
+                   title="el número de Título se asignará automáticamente." required value="{{ $numero }}" readonly  />
+                   <small style="margin-left: 5px" id="" class="form-text text-muted">
+                    El número de Título se asigna automáticamente.
+                  </small>
                 <div class="row-btn margin-std d-flex flex-row-reverse">
                     <button type="submit" class="btn btn-success">Agregar</button>
                     <button type="reset" class="btn btn-primary">Limpiar</button>
