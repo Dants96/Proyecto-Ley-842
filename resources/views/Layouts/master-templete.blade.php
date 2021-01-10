@@ -21,7 +21,7 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar" class="active">
             <div class="sidebar-header" style="text-align: center;padding: 0px;">
-                <a href="{{route('adminInicio')}}"><img style="width: 70%" src="{{asset('images/logo2.1t.png')}}"
+                <a href="{{route('adminInicio')}}"><img style="width: 70%" src="{{asset('images/logo2.1mejoradodark.png')}}"
                     id="icon" alt="Icon" /></a>
             </div>
 
