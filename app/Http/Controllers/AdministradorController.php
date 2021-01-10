@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Estadistica;
 use App\Models\Titulo;
+use App\Models\EdicionTitulo;
+
 
 class AdministradorController extends Controller
 {
@@ -39,6 +42,58 @@ class AdministradorController extends Controller
         }
     }
 
+    // la funcion guarda una modificacion echa a un titulo, @param id del titulo modificado
+    // @param2 tipo de midificacion.
+
+    private function addEdicionTitulo($id_titulo, $tipo){
+        $registro = new EdicionTitulo();
+        $registro->id_administrador = Auth::user()->id;
+        $registro->id_titulo = $id_titulo;
+        $registro->fecha = date('Y-m-d');
+        $registro->tipo = $tipo;
+        $registro->save();
+    }
+
+
+    // actualiza el numero de modificaiones en la tabla, @param tipo de modificacion 
+    private function sumModEst($tipo){
+        switch($tipo){
+            case 'ADC':
+                $estadistica = Estadistica::latest()->first();
+                $estadistica->numero_adiciones ++;
+                $estadistica->save();
+                break;
+            case 'MOD':
+                $estadistica = Estadistica::latest()->first();
+                $estadistica->numero_modificaciones ++;
+                $estadistica->save();
+                break;
+            case 'SUP':
+                $estadisitica = Estadistica::latest()->first();
+                $estadisitica->numero_supreciones ++;
+                $estadisitica->save();
+                break;
+            default:
+                break;                
+        }
+    }
+
+    /*retorna la vista de exito , 
+    * @param mensaje
+    * @param1 nombre del objeto modificado
+    * @param2 tipo del objeto modificado
+    * @param3 operacion realizada
+    */
+    private function showSuccess($msg, $nombre, $tipo, $opr){
+        $infoProceso = [
+            'msg'=> $msg, 
+            'objeto_nombre' =>  $nombre,
+            'objeto_tipo' =>  $tipo,
+            'operacion' => $opr
+        ];
+        return view('Administrador.proceso-exitoso', ['proceso'=> $infoProceso]);
+    }
+
     public function storeTitulo(Request $request){
         $this->validate($request, [
             'nombre_tit' => 'required|max:100',
@@ -51,9 +106,10 @@ class AdministradorController extends Controller
         $titulo->fecha_modificacion = date('Y-m-d');
         $titulo->save();
 
-        echo '<script language="javascript">alert("El Titulo ha sido registrado exitosamente");</script>';
+        $this->addEdicionTitulo($titulo->id, 'ADC');
+        $this->sumModEst('ADC');
 
-        return redirect()->route('adminInicio');
+        return $this->showSuccess('Se ha agregado el Titulo', $request->input('nombre_tit'), 'Título', 'adición');
 
     }
 

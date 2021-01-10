@@ -20,9 +20,9 @@ margin-left: 7px;
             @csrf
             <div class="form-group">
                 <input class="form-control margin-std" type="text" name="nombre_tit" id="nombre_tit"
-                    placeholder="Nombre del Articulo" required value="{{ old('nombre_tit')}}" />
+                    placeholder="Nombre del Titulo" required value="{{ old('nombre_tit')}}" />
                 <input class="form-control margin-std" type="number" name="numero_tit" id="numero_tit"
-                    placeholder="Numero del Articulo" title="El numero no puede repetirse en otro titulo." required {{ old('numero_tit')}} />
+                    placeholder="Numero del Titulo" title="El numero no puede repetirse en otro titulo." required {{ old('numero_tit')}} />
                 <div class="row-btn margin-std d-flex flex-row-reverse">
                     <button type="submit" class="btn btn-success">Agregar</button>
                     <button type="reset" class="btn btn-primary">Limpiar</button>
