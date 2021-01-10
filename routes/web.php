@@ -34,10 +34,14 @@ Route::get('/modeltest', function(){
 Route::get('/Administrador/inicio',['middleware' => 'auth', function(){
     return view('Administrador.inicio');
 }])->name('adminInicio');
-
+Route::get('/Administrador', ['middleware' => 'auth', function(){
+    return redirect()->route('adminInicio');
+}]);
 
 Route::get('/Administrador/agregar/{seccion}',[AdministradorController::class, 'addSection'])->middleware('auth')->name('agregarForm');
-Route::post('/Administrador/agregar/',[AdministradorController::class, 'storeTitulo'])->middleware('auth')->name('agregarTitulo');
+Route::post('/Administrador/agregar/titulo',[AdministradorController::class, 'storeTitulo'])->middleware('auth')->name('agregarTitulo');
+Route::post('/Administrador/agregar/articulo',[AdministradorController::class, 'storeArticulo'])->middleware('auth')->name('agregarArticulo');
+Route::post('/Administrador/agregar/capitulo',[AdministradorController::class, 'storeCapitulo'])->middleware('auth')->name('agregarCapitulo');
 Route::get('/Administrador/listar/{seccion}',[AdministradorController::class, 'listarSection'])->middleware('auth')->name('listarSecction');
 
 Route::get('Administrador/estadisiticas',[AdministradorController::class, 'getStadistics'])->middleware('auth')->name('stadistics');

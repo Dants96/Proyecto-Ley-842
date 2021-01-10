@@ -9,7 +9,12 @@
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <title>Administrador - @yield('titulo')</title>
     <style>
-        @yield('estilos')
+        form .margin-std{
+        margin-bottom: 7px;
+        }
+        .row-btn .btn{
+        margin-left: 7px;
+        }
         .btn-slmenu{
             width: fit-content;
             height: fit-content;
@@ -56,8 +61,10 @@
         a.article:hover {
             background: #f78153 !important;
         }
+        
 
     </style>
+    @yield('estilos')
 </head>
 
 <body>

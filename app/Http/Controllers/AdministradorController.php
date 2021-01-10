@@ -8,7 +8,11 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Estadistica;
 use App\Models\Titulo;
+use App\Models\Capitulo;
+use App\Models\Articulo;
 use App\Models\EdicionTitulo;
+use App\Models\EdicionCapitulo;
+use App\Models\EdicionArticulo;
 
 
 class AdministradorController extends Controller
@@ -35,23 +39,47 @@ class AdministradorController extends Controller
     }
     
     public function addSection($seccion){
-        if(in_array($seccion, array("titulo", "capitulo", "articulo"))){
-            return view("Administrador.agregar-{$seccion}");
-        }else{
-            return redirect()->route('adminInicio');
+        switch($seccion){
+            case 'titulo':
+                return view("Administrador.agregar-{$seccion}");
+                
+            case 'articulo':
+                return view("Administrador.agregar-{$seccion}", ["capitulos" => Capitulo::all('id', 'nombre')]);
+                
+            case 'capitulo':
+                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::all('id', 'nombre')]);
+                
+            default:
+                return redirect()->route('adminInicio');
+
         }
     }
 
     // la funcion guarda una modificacion echa a un titulo, @param id del titulo modificado
     // @param2 tipo de midificacion.
 
-    private function addEdicionTitulo($id_titulo, $tipo){
-        $registro = new EdicionTitulo();
-        $registro->id_administrador = Auth::user()->id;
-        $registro->id_titulo = $id_titulo;
+    private function addEdicion($seccion, $id_seccion, $tipo){
+        switch($seccion){
+            case 'titulo':
+                $registro = new EdicionTitulo();
+                $registro->id_titulo = $id_seccion;
+                break;
+            case 'capitulo':
+                $registro = new EdicionCapitulo();
+                $registro->id_capitulo = $id_seccion;
+                break;
+            case 'articulo':
+                $registro = new EdicionArticulo();
+                $registro->id_articulo = $id_seccion;
+                break;
+            default:
+                return false;
+        }
+        $registro->id_administrador = Auth::user()->id;        
         $registro->fecha = date('Y-m-d');
         $registro->tipo = $tipo;
         $registro->save();
+        return true;
     }
 
 
@@ -91,7 +119,7 @@ class AdministradorController extends Controller
             'objeto_tipo' =>  $tipo,
             'operacion' => $opr
         ];
-        return view('Administrador.proceso-exitoso', ['proceso'=> $infoProceso]);
+        return view('Administrador.proceso-exitoso', array('proceso' => $infoProceso));
     }
 
     public function storeTitulo(Request $request){
@@ -106,11 +134,33 @@ class AdministradorController extends Controller
         $titulo->fecha_modificacion = date('Y-m-d');
         $titulo->save();
 
-        $this->addEdicionTitulo($titulo->id, 'ADC');
+        $this->addEdicion('titulo', $titulo->id, 'ADC');
         $this->sumModEst('ADC');
 
         return $this->showSuccess('Se ha agregado el Titulo', $request->input('nombre_tit'), 'Título', 'adición');
 
+    }
+
+    public function storeArticulo(Request $request){
+        $this->validate($request, [
+            'nombre_articulo' => 'required|max:100',
+            'numero_articulo' => 'required|numeric|max:999',
+            'capitulo' => 'required|numeric|exists:capitulos,id',
+            'contenido' => 'required'
+        ]);
+        
+        $articulo = new Articulo();
+        $articulo->nombre = $request->input('nombre_articulo');
+        $articulo->numero = $request->input('numero_articulo');
+        $articulo->fecha_modificacion = date('Y-m-d');
+        $articulo->contenido = $request->input('contenido');
+        $articulo->id_capitulo = $request->input('capitulo');
+        $articulo->save();
+
+        $this->addEdicion('articulo',$articulo->id, 'ADC');
+        $this->sumModEst('ADC');
+
+        return $this->showSuccess('Se ha agregado el Artículo', $request->input('nombre_articulo'), 'Artículo', 'adición');
     }
 
     public function listarSection($seccion){
