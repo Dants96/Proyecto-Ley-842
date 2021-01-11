@@ -44,10 +44,10 @@ class AdministradorController extends Controller
                 return view("Administrador.agregar-{$seccion}",['numero'=> Titulo::all('numero')->max('numero')]);
                 
             case 'articulo':
-                return view("Administrador.agregar-{$seccion}", ["capitulos" => Capitulo::all('id', 'nombre', 'id_titulo'), "titulos" => Titulo::all('id', 'nombre')]);
+                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::all('id', 'nombre', 'numero')]);
                 
             case 'capitulo':
-                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::all('id', 'nombre')]);
+                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::all('id', 'nombre', 'numero')]);
                 
             default:
                 return redirect()->route('adminInicio');

@@ -14,21 +14,21 @@ Agregar Articulo
                 <input class="form-control margin-std" type="text" name="nombre_articulo" id="nombre_articulo"
                     placeholder="Nombre del Artículo" required value="{{ old('nombre_articulo')}}" />
                
+
+
+                    <div class="margin-std">
+                        <label class="lead" for="capitulo">Seleccione el Titulo al que pertenece: </label>
+                        <select class="form-control " id="titulo" name="titulo" style="text-overflow: ellipsis;" required>
+                            <option selected>Titulo</option>
+                            @foreach ($titulos as $titulo)
+                            <option value={{$titulo->id}}><p>{{$titulo->numero}}. {{$titulo->nombre}}</p></option>
+                            @endforeach
+                        </select>
+                    </div>
+
                 <div class="margin-std">
                     <label class="lead" for="capitulo">Seleccione el capítulo al que pertenece: </label>
-                    <select class="form-control" id="capitulo" name="capitulo" required>
-                        <option selected>Capitulo</option>
-                        @foreach ($capitulos as $capitulo)
-                        <option value={{$capitulo->id}}>
-                            <p>
-                            @foreach ($titulos as $titulo)
-                                @if ($titulo->id == $capitulo->id_titulo)
-                                    {{$titulo->nombre}}
-                                @endif
-                            @endforeach
-                            , {{$capitulo->nombre}}
-                            </p></option>
-                        @endforeach
+                    <select class="form-control " id="capitulo" name="capitulo" style="text-overflow: ellipsis;" required>                        
                     </select>
                 </div>
                 <label class="lead" for="contenido">Contenido del Artículo: </label>
@@ -42,7 +42,7 @@ Agregar Articulo
 
                 <div class="row-btn margin-std d-flex flex-row-reverse">
                     <button type="submit" class="btn btn-success">Agregar</button>
-                    <button type="reset" class="btn btn-primary">Limpiar</button>
+                    <button type="reset" class="btn btn-primary" id="limpiar">Limpiar</button>
                     <a href="{{route('noBuild')}}" class="btn btn-warning" target="_">Artículo Actuales</a>
                 </div>
 
@@ -60,4 +60,28 @@ Agregar Articulo
     </div>
 </div>
 
+@endsection
+
+@section('codigoExtra')
+    <script>
+        $("#titulo").on('change', function(){
+            $.ajax({
+                url: 'get/capitulos',
+                method: 'GET',
+                data:{
+                    id_titulo:$('#titulo').val(),
+                }
+            }).done(function(res){
+                let respuesta = JSON.parse(res);
+                $('#capitulo').html("");
+                for(let i=0; i<respuesta.length; i++){
+                    $('#capitulo').append('<option value="'+respuesta[i].id+'">'+respuesta[i].numero+'. '+respuesta[i].nombre+'</option>');
+                }
+            });
+        });
+        $("#limpiar").on('click', function(){
+            $('#capitulo').html("");
+        });
+
+    </script>
 @endsection

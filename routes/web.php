@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\ContenidoController;
 use App\Models\Articulo;
 
 /*
@@ -54,3 +55,6 @@ Route::post('logout', [AdministradorController::class, 'logout'])->middleware('a
 
 Route::get('/nosotros', function () {return view('about');})->name('nosotros');
 Route::get('/infoLey842', function () {return view('info-ley');})->name('info');
+
+//rutas Ajax
+Route::get('/Administrador/agregar/get/capitulos', [ContenidoController::class, 'getCapitulos'])->name('getCapitulos');
