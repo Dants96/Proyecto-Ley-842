@@ -66,10 +66,10 @@ Agregar Articulo
     <script>
         $("#titulo").on('change', function(){
             $.ajax({
-                url: 'get/capitulos',
+                url: 'get/capitulos/from',
                 method: 'GET',
                 data:{
-                    id_titulo:$('#titulo').val(),
+                    id_from:$('#titulo').val(),
                 }
             }).done(function(res){
                 let respuesta = JSON.parse(res);

@@ -29,12 +29,6 @@
             border-top: solid 2px #0169a4;
         }
 
-        .slideDown{
-            display: none;
-        }
-        .fadeInjs{
-            opacity: 0;
-        }
         #sidebar,
         #sidebar .sidebar-header {
             background: #09347a;
@@ -116,13 +110,13 @@
                         class="dropdown-toggle">Modificar Sección</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu2">
                         <li>
-                            <a href="{{route('listarSecction', ['seccion'=>'titulo'])}}">Título</a>
+                            <a href="{{route('listarSecctions', ['seccion'=>'titulo'])}}">Título</a>
                         </li>
                         <li>
-                            <a href="{{route('listarSecction', ['seccion'=>'capitulo'])}}">Capítulo</a>
+                            <a href="{{route('listarSecctions', ['seccion'=>'capitulo'])}}">Capítulo</a>
                         </li>
                         <li>
-                            <a href="{{route('listarSecction', ['seccion'=>'articulo'])}}">Artículo</a>
+                            <a href="{{route('listarSecctions', ['seccion'=>'articulo'])}}">Artículo</a>
                         </li>
                     </ul>
                 </li>

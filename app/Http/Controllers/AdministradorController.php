@@ -182,12 +182,27 @@ class AdministradorController extends Controller
         return $this->showSuccess('Se ha agregado el Capítulo', $request->input('nombre_capitulo'), 'Capítulo', 'adición', $capitulo->numero);
     }
 
-    public function listarSection($seccion){
-        if(in_array($seccion, array("titulo", "capitulo", "articulo"))){
-            return view("Administrador.modificar-{$seccion}");
-        }else{
-            return redirect()->route('adminInicio');
+    public function listarSections($seccion){        
+        switch($seccion){
+            case 'titulo':
+                return view("Administrador.listar-seccion", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Título']);
+            case 'capitulo':
+                return view("Administrador.listar-seccion", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Capítulo']);
+            case 'articulo':
+                return view("Administrador.listar-seccion", ['secciones'=> Capitulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Artículo']);  
+            default:
+                return redirect()->route('daminInicio');            
         }
+    }
+
+    public function editTitulo($id_seccion){
+        return Titulo::findOrFail($id_seccion);
+    }
+    public function editCapitulo($id_seccion){
+        return Capitulo::findOrFail($id_seccion);
+    }
+    public function editArticulo($id_seccion){
+        return Articulo::findOrFail($id_seccion);
     }
 
     public function getStadistics(){
