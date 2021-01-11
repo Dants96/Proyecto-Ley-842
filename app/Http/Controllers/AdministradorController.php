@@ -185,11 +185,11 @@ class AdministradorController extends Controller
     public function listarSections($seccion){        
         switch($seccion){
             case 'titulo':
-                return view("Administrador.listar-seccion", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Título']);
+                return view("Administrador.listar-secciones", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Título']);
             case 'capitulo':
-                return view("Administrador.listar-seccion", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Capítulo']);
+                return view("Administrador.listar-secciones", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Capítulo']);
             case 'articulo':
-                return view("Administrador.listar-seccion", ['secciones'=> Capitulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Artículo']);  
+                return view("Administrador.listar-secciones", ['secciones'=> Capitulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Artículo']);  
             default:
                 return redirect()->route('daminInicio');            
         }
