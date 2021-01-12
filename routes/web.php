@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ContenidoController;
+use App\Http\Controllers\EstadisticasController;
+use App\Http\Controllers\PlataformaController;
 use App\Models\Capitulo;
+use App\Models\Estadistica;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +19,8 @@ use App\Models\Capitulo;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('inicio');
+
+Route::get('/', [PlataformaController::class, 'getInicio'])->name('inicio');
 
 // pagina de no terminados
 Route::get('/nobuild', function(){
@@ -30,6 +32,8 @@ Route::get('/test', function(){
     //echo print_r(DB::select('select capitulos.id, capitulos.nombre, capitulos.numero, titulos.numero as titulo_numero FROM capitulos JOIN titulos WHERE capitulos.id_titulo = titulos.id'));
 });
 
+
+//rutas de administrador
 Route::get('/Administrador/inicio',['middleware' => 'auth', function(){
     return view('Administrador.inicio');
 }])->name('adminInicio');
@@ -48,7 +52,8 @@ Route::get('/Administrador/editar/titulo/{id_seccion}',[AdministradorController:
 Route::get('/Administrador/editar/articulo/{id_seccion}',[AdministradorController::class, 'editArticulo'])->middleware('auth')->name('editarArticulo');
 Route::get('/Administrador/editar/capitulo/{id_seccion}',[AdministradorController::class, 'editCapitulo'])->middleware('auth')->name('editarCapitulo');
 
-Route::get('Administrador/estadisiticas',[AdministradorController::class, 'getStadistics'])->middleware('auth')->name('stadistics');
+//rutas de estadisticas 
+Route::get('Administrador/estadisticas',[EstadisticasController::class, 'getStadistics'])->middleware('auth')->name('stadistics');
 
 //rutas de authh admin
 Route::get('login', [AdministradorController::class, 'showLoginForm'])->middleware('guest')->name('adminLogin');
