@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ContenidoController;
-use App\Models\Articulo;
+use App\Models\Capitulo;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +26,8 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-    $datos = Articulo::all();
-    echo($datos);
-    dd($datos);
-    
+    echo Capitulo::select('capitulos.id', 'capitulos.nombre', 'capitulos.numero', 'titulos.numero as titulo')->join('titulos', 'capitulos.id_titulo', '=', 'titulos.id')->where('titulos.id', '=', '2')->get();
+    //echo print_r(DB::select('select capitulos.id, capitulos.nombre, capitulos.numero, titulos.numero as titulo_numero FROM capitulos JOIN titulos WHERE capitulos.id_titulo = titulos.id'));
 });
 
 Route::get('/Administrador/inicio',['middleware' => 'auth', function(){

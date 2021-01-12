@@ -41,7 +41,7 @@ Modificar {{$seccion}}
             <select class="form-control " id="padre" name="padre" style="text-overflow: ellipsis;">
                 <option selected>{{($seccion == 'Capítulo')? 'Títulos':'Capítulos'}}</option>
                 @foreach ($secciones as $seccionOut)
-                <option value="{{$seccionOut->id}}">{{$seccionOut->numero}}. {{$seccionOut->nombre}}</option>
+                <option value="{{$seccionOut->id}}">{{($seccion == 'Artículo')? 'Título: #'.$seccionOut->titulo: ''}}, {{$seccionOut->numero}}. {{$seccionOut->nombre}}</option>
                 @endforeach
             </select>
 
@@ -87,16 +87,15 @@ Modificar {{$seccion}}
         }).done(function (res) {
             let respuesta = JSON.parse(res);
             $('#listaCA').html("");
-            if ("{{$seccion}}" == "Capítulo") {
-                url = "/Administrador/editar/capitulo/";
-            } else if ("{{$seccion}}" == "Artículo") {
-                url = "/Administrador/editar/articulo/";
-            }
+
             for (let i = 0; i < respuesta.length; i++) {
-                let ruta = url + respuesta[i].id;
-                $('#listaCA').append(
-                    `<a href="${ruta}"><li class="list-group-item item-lista">${respuesta[i].numero}. ${respuesta[i].nombre}</li></a>`
-                    );
+                @if($seccion == 'Capítulo')
+                let ruta = "/Administrador/editar/capitulo/"+ respuesta[i].id;                           
+                @elseif($seccion == 'Artículo')
+                let ruta = "/Administrador/editar/articulo/"+ respuesta[i].id;
+                @endif  
+                let opcion = `${respuesta[i].numero}. ${respuesta[i].nombre}`;                  
+                $('#listaCA').append(`<a href="${ruta}"><li class="list-group-item item-lista">${opcion}</li></a>`);
             }
             if (respuesta.length) {
                 $('#display-lista').slideDown();

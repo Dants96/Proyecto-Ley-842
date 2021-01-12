@@ -152,7 +152,7 @@ class AdministradorController extends Controller
         $articulo = new Articulo();
         $capitulo_id = $request->input('capitulo');
         $articulo->nombre = $request->input('nombre_articulo');
-        $articulo->numero = (Articulo::where('id_capitulo', '=', $capitulo_id)->get('numero')->max('numero')) + 1;
+        $articulo->numero = (Articulo::all('id')->max('id')) + 1;
         $articulo->fecha_modificacion = date('Y-m-d');
         $articulo->contenido = $request->input('contenido');
         $articulo->id_capitulo = $capitulo_id;
@@ -186,10 +186,11 @@ class AdministradorController extends Controller
         switch($seccion){
             case 'titulo':
                 return view("Administrador.listar-secciones", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Título']);
-            case 'capitulo':
+            case 'capitulo':                
                 return view("Administrador.listar-secciones", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Capítulo']);
             case 'articulo':
-                return view("Administrador.listar-secciones", ['secciones'=> Capitulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Artículo']);  
+                $capitulos = Capitulo::select('capitulos.id', 'capitulos.nombre', 'capitulos.numero', 'titulos.numero as titulo')->join('titulos', 'capitulos.id_titulo', '=', 'titulos.id')->get();
+                return view("Administrador.listar-secciones", ['secciones'=> $capitulos, 'seccion'=>'Artículo']);  
             default:
                 return redirect()->route('daminInicio');            
         }
