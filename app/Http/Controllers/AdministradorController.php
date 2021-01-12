@@ -185,12 +185,12 @@ class AdministradorController extends Controller
     public function listarSections($seccion){        
         switch($seccion){
             case 'titulo':
-                return view("Administrador.listar-secciones", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Título']);
+                return view("Administrador.listar-secciones-modificacion", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Título']);
             case 'capitulo':                
-                return view("Administrador.listar-secciones", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Capítulo']);
+                return view("Administrador.listar-secciones-modificacion", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Capítulo']);
             case 'articulo':
                 $capitulos = Capitulo::select('capitulos.id', 'capitulos.nombre', 'capitulos.numero', 'titulos.numero as titulo')->join('titulos', 'capitulos.id_titulo', '=', 'titulos.id')->get();
-                return view("Administrador.listar-secciones", ['secciones'=> $capitulos, 'seccion'=>'Artículo']);  
+                return view("Administrador.listar-secciones-modificacion", ['secciones'=> $capitulos, 'seccion'=>'Artículo']);  
             default:
                 return redirect()->route('daminInicio');            
         }
@@ -204,10 +204,6 @@ class AdministradorController extends Controller
     }
     public function editArticulo($id_seccion){
         return Articulo::findOrFail($id_seccion);
-    }
-
-    public function getStadistics(){
-        return view("Administrador.estadisiticas");
-    }
+    }   
 
 }

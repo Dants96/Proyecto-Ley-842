@@ -9,6 +9,9 @@
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <title>Administrador - @yield('titulo')</title>
     <style>
+        .jumbotron h1{
+            text-align: center;
+        }
         form .margin-std{
         margin-bottom: 7px;
         }

@@ -41,12 +41,12 @@ Modificar {{$seccion}}
             <select class="form-control " id="padre" name="padre" style="text-overflow: ellipsis;">
                 <option selected>{{($seccion == 'Capítulo')? 'Títulos':'Capítulos'}}</option>
                 @foreach ($secciones as $seccionOut)
-                <option value="{{$seccionOut->id}}">{{($seccion == 'Artículo')? 'Título: #'.$seccionOut->titulo: ''}}, {{$seccionOut->numero}}. {{$seccionOut->nombre}}</option>
+                <option value="{{$seccionOut->id}}"> {{$seccionOut->numero}}. {{$seccionOut->nombre}}</option>
                 @endforeach
             </select>
 
             <div id="display-lista" class="lista" style="display: none">
-                <label id="labelCA" class="lead" for="listaCA">Seleccione el {{$seccion}} a editar: </label>
+                <label id="labelCA" class="lead" for="listaCA">Seleccione el {{$seccion}} a modificar: </label>
                 <ul id="listaCA" class="list-group list-group-flush">
 
                 </ul>
