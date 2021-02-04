@@ -67,3 +67,7 @@ Route::get('/infoLey842', function () {return view('info-ley');})->name('info');
 //rutas Ajax
 Route::get('/Administrador/{path}/get/capitulos/from', [ContenidoController::class, 'getCapitulosFrom'])->middleware('auth');
 Route::get('/Administrador/{path}/get/articulos/from', [ContenidoController::class, 'getArticulosFrom'])->middleware('auth');
+
+
+//chartisan 
+Route::get('/Administrador/estadisticas/chartData', [EstadisticasController::class, 'getChartData'])->middleware('auth')->name('getChartData');
