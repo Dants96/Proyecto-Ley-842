@@ -11,6 +11,12 @@ html {
     border-radius: 0%;
 }
 
+.slideDown{
+    display: none;
+}
+.fadeInjs{
+    opacity: 0;
+}
 /*
     DEMO STYLE
 */

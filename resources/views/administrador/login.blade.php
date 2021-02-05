@@ -35,7 +35,7 @@
             <!-- Login Form -->
             <form action="{{route('adminLogin_post')}}"  method="POST" autocomplete="off">
                 @csrf
-                <input type="text" id="cedula" class="fadeIn second" name="cedula" placeholder="Cedula" required>
+                <input type="text" id="cedula" class="fadeIn second" name="cedula" placeholder="Cedula" required value="{{ old('cedula') }}">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña" required>
                 <input type="submit" class="fadeIn fourth" value="Acceder">
             </form>

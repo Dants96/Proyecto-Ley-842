@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Estadisitca extends Model
+class Visita extends Model
 {
-    use HasFactory;
+    use HasFactory;    
+    protected $table = 'visitas_diarias';
 }
