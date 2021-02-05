@@ -87,24 +87,20 @@ class AdministradorController extends Controller
 
     // actualiza el numero de modificaiones en la tabla, @param tipo de modificacion 
     private function sumModEst($tipo){
-        switch($tipo){
-            case 'ADC':
-                $estadistica = Estadistica::latest()->first();
-                $estadistica->numero_adiciones ++;
-                $estadistica->save();
-                break;
-            case 'MOD':
-                $estadistica = Estadistica::latest()->first();
-                $estadistica->numero_modificaciones ++;
-                $estadistica->save();
-                break;
-            case 'SUP':
-                $estadisitica = Estadistica::latest()->first();
-                $estadisitica->numero_supreciones ++;
-                $estadisitica->save();
-                break;
-            default:
-                break;                
+        if(in_array($tipo, ['ADC', 'MOD', 'SUP'])){
+            $estadistica = Estadistica::latest()->first();
+            switch($tipo){
+                case 'ADC':
+                    $estadistica->numero_adiciones ++;
+                    break;
+                case 'MOD':
+                    $estadistica->numero_modificaciones ++;
+                    break;
+                case 'SUP':
+                    $estadistica->numero_supreciones ++;
+                    break;                
+            }
+            $estadistica->save();
         }
     }
 
@@ -132,13 +128,13 @@ class AdministradorController extends Controller
         
         $titulo = new Titulo();
         $titulo->nombre = $request->input('nombre_tit');
-        $titulo->numero = int(Titulo::all('numero')->max('numero')) + 1;
+        $titulo->numero = intval(Titulo::all('numero')->max('numero')) + 1;
         $titulo->fecha_modificacion = date('Y-m-d');
         $titulo->save();
 
         $this->addEdicion('titulo', $titulo->id, 'ADC');
 
-        return $this->showSuccess('Se ha agregado el Titulo', $request->input('nombre_tit'), 'Título', 'adición', $titulo->numer);
+        return $this->showSuccess('Se ha agregado el Titulo', $request->input('nombre_tit'), 'Título', 'adición', $titulo->numero);
 
     }
 
@@ -156,6 +152,7 @@ class AdministradorController extends Controller
         $articulo->fecha_modificacion = date('Y-m-d');
         $articulo->contenido = $request->input('contenido');
         $articulo->id_capitulo = $capitulo_id;
+        $articulo->paragrafo = true;
         $articulo->save();
 
         $this->addEdicion('articulo',$articulo->id, 'ADC');

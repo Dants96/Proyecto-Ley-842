@@ -83,5 +83,6 @@ Agregar Articulo
             $('#capitulo').html("");
         });
 
+        $("#pageSubmenuAdd").addClass("show");
     </script>
 @endsection

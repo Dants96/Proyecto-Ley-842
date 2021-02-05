@@ -58,6 +58,10 @@
         a.article:hover {
             background: #f78153 !important;
         }
+
+        li a:hover, li a:active{
+            color: black
+        }
         
 
     </style>
@@ -75,9 +79,9 @@
             <ul class="list-unstyled components">
                 <p style="text-align: center">Menu de Administracion</p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Opciones
+                    <a href="#sesion-opcions" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Opciones
                         de Sesión</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <ul class="collapse list-unstyled" id="sesion-opcions">
                         <li>
                             <a href="{{route('noBuild')}}">Administrador Info</a>
                         </li>
@@ -94,9 +98,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Agregar
+                    <a href="#pageSubmenuAdd" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Agregar
                         Sección</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <ul class="collapse list-unstyled" id="pageSubmenuAdd">
                         <li>
                             <a href="{{route('agregarForm', ['seccion'=>'titulo'])}}">Título</a>
                         </li>
@@ -109,9 +113,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false"
+                    <a href="#pageSubmenu2Mod" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Modificar Sección</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu2">
+                    <ul class="collapse list-unstyled" id="pageSubmenu2Mod">
                         <li>
                             <a href="{{route('listarSecctions', ['seccion'=>'titulo'])}}">Título</a>
                         </li>

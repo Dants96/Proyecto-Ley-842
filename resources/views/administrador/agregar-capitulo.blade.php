@@ -48,3 +48,8 @@ Agregar Capítulo
 </div>
 
 @endsection
+@section('codigoExtra')
+<script>
+$("#pageSubmenuAdd").addClass("show");    
+</script>    
+@endsection

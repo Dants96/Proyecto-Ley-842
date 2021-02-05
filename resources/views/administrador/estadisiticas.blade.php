@@ -37,19 +37,18 @@ Estadísticas
             <ul>
                 <div class="row justify-content-center">
                     <div class="col-mb">
-                        <p class="font-weight-bold">Número visitas a la plataforma de lectura: </p>
-                        <p class="font-weight-bold">Número de modificaciones realizadas: </p>
-                        <p class="font-weight-bold">Número de secciones editadas: </p>
-                        <p class="font-weight-bold">Número de secciones agregadas: </p>
-                        <p class="font-weight-bold">Número de secciones eliminadas: </p>
+                        <row><p class="font-weight-bold">Número visitas a la plataforma de lectura: </p></row>
+                        <row><p class="font-weight-bold">Número de modificaciones realizadas: </p></row>
+                        <row><p class="font-weight-bold">Número de secciones editadas: </p></row>
+                        <row><p class="font-weight-bold">Número de secciones agregadas: </p></row>
+                        <row><p class="font-weight-bold">Número de secciones eliminadas: </p></row>
                     </div>
                     <div class="col-8">
-                        <p>{{$estadisticas->visitas_pagina}}</p>
-                        <p>{{$estadisticas->numero_modificaciones}}</p>
-                        <p>{{$estadisticas->numero_adiciones}}</p>
-                        <p>{{$estadisticas->numero_supreciones}}</p>
-                        <p>{{$estadisticas->numero_modificaciones + $estadisticas->numero_adiciones + $estadisticas->numero_supreciones}}
-                        </p>
+                        <row><p>{{$estadisticas->visitas_pagina}}</p></row>
+                        <row><p>{{$estadisticas->numero_modificaciones + $estadisticas->numero_adiciones + $estadisticas->numero_supreciones}}</p></row>
+                        <row><p>{{$estadisticas->numero_modificaciones}}</p></row>
+                        <row><p>{{$estadisticas->numero_adiciones}}</p></row>
+                        <row><p>{{$estadisticas->numero_supreciones}}</p></row>
                     </div>
                 </div>
 
