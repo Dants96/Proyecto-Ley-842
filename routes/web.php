@@ -32,42 +32,41 @@ Route::get('/test', function(){
     //echo print_r(DB::select('select capitulos.id, capitulos.nombre, capitulos.numero, titulos.numero as titulo_numero FROM capitulos JOIN titulos WHERE capitulos.id_titulo = titulos.id'));
 });
 
-
-//rutas de administrador
-Route::get('/Administrador/inicio',['middleware' => 'auth', function(){
-    return view('Administrador.inicio');
-}])->name('adminInicio');
-Route::get('/Administrador', ['middleware' => 'auth', function(){
-    return redirect()->route('adminInicio');
-}]);
-
-Route::get('/Administrador/agregar/{seccion}',[AdministradorController::class, 'addSection'])->middleware('auth')->name('agregarForm');
-Route::post('/Administrador/agregar/titulo',[AdministradorController::class, 'storeTitulo'])->middleware('auth')->name('agregarTitulo');
-Route::post('/Administrador/agregar/articulo',[AdministradorController::class, 'storeArticulo'])->middleware('auth')->name('agregarArticulo');
-Route::post('/Administrador/agregar/capitulo',[AdministradorController::class, 'storeCapitulo'])->middleware('auth')->name('agregarCapitulo');
-
-Route::get('/Administrador/listar/{seccion}',[AdministradorController::class, 'listarSections'])->middleware('auth')->name('listarSecctions');
-
-Route::get('/Administrador/editar/titulo/{id_seccion}',[AdministradorController::class, 'editTitulo'])->middleware('auth')->name('editarTitulo');
-Route::get('/Administrador/editar/articulo/{id_seccion}',[AdministradorController::class, 'editArticulo'])->middleware('auth')->name('editarArticulo');
-Route::get('/Administrador/editar/capitulo/{id_seccion}',[AdministradorController::class, 'editCapitulo'])->middleware('auth')->name('editarCapitulo');
-
-//rutas de estadisticas 
-Route::get('Administrador/estadisticas',[EstadisticasController::class, 'getStadistics'])->middleware('auth')->name('stadistics');
-
-//rutas de authh admin
+//rutas de auth admin
 Route::get('login', [AdministradorController::class, 'showLoginForm'])->middleware('guest')->name('adminLogin');
 Route::post('login', [AdministradorController::class, 'login'])->middleware('guest')->name('adminLogin_post');
 Route::post('logout', [AdministradorController::class, 'logout'])->middleware('auth')->name('adminLogout');
 
 
+Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
+    //index administrador
+    Route::get('/', function(){
+        return redirect()->route('adminInicio');
+    });
+    Route::get('/inicio', function(){
+        return view('Administrador.inicio');
+    })->name('adminInicio');
+    //rutas de agregar
+    Route::get('/agregar/{seccion}',[AdministradorController::class, 'addSection'])->name('agregarForm');
+    Route::post('/agregar/titulo',[AdministradorController::class, 'storeTitulo'])->name('agregarTitulo');
+    Route::post('/agregar/articulo',[AdministradorController::class, 'storeArticulo'])->name('agregarArticulo');
+    Route::post('/agregar/capitulo',[AdministradorController::class, 'storeCapitulo'])->name('agregarCapitulo');
+    //rutas de editar
+    Route::get('/listar/{seccion}',[AdministradorController::class, 'listarSections'])->name('listarSecctions');
+    Route::get('/editar/titulo/{id_seccion}',[AdministradorController::class, 'editTitulo'])->name('editarTitulo');
+    Route::get('/editar/articulo/{id_seccion}',[AdministradorController::class, 'editArticulo'])->name('editarArticulo');
+    Route::get('/editar/capitulo/{id_seccion}',[AdministradorController::class, 'editCapitulo'])->name('editarCapitulo');
+    //rutas de estadisticas 
+    Route::get('/estadisticas',[EstadisticasController::class, 'getStadistics'])->name('stadistics');
+    //rutas Ajax
+    Route::get('/{path}/get/capitulos/from', [ContenidoController::class, 'getCapitulosFrom']);
+    Route::get('/{path}/get/articulos/from', [ContenidoController::class, 'getArticulosFrom']);
+    //chartisan 
+    Route::get('/estadisticas/chartData', [EstadisticasController::class, 'getChartData'])->name('getChartData');
+});
+
+
 Route::get('/nosotros', function () {return view('about');})->name('nosotros');
 Route::get('/infoLey842', function () {return view('info-ley');})->name('info');
 
-//rutas Ajax
-Route::get('/Administrador/{path}/get/capitulos/from', [ContenidoController::class, 'getCapitulosFrom'])->middleware('auth');
-Route::get('/Administrador/{path}/get/articulos/from', [ContenidoController::class, 'getArticulosFrom'])->middleware('auth');
 
-
-//chartisan 
-Route::get('/Administrador/estadisticas/chartData', [EstadisticasController::class, 'getChartData'])->middleware('auth')->name('getChartData');
