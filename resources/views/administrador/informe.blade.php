@@ -2,6 +2,10 @@
 @section('titulo')
     Inicio
 @endsection
+@section('estilos')
+<link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/>
+
+@endsection
 @section('contenido')
 <div class="jumbotron no-rborder shadow-std slideDown">
     <div class="fadeInjs">
@@ -10,8 +14,49 @@
         <p class="lead font-weight-bold">Fecha: {{date('Y / m / d')}}</p>        
         <hr class="my-4">
         <div class="info-content">
-            {{print_r($infoArr)}}
+            <table id="example" class="display" width="100%"></table>
 
         </div>
   </div>
+@endsection
+@section('codigoExtra')
+<script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}" defer></script>
+
+<script>
+
+    const dataSet = [
+        @foreach($infoArr as $key => $item)
+        ["{{$key}}",
+        "{{$item['tipoMod']}}",
+        "{{$item['fechaMod']}}",
+        "{{$item['idAdmin']}}",
+        "{{$item['nomAdmin']}}",
+        "{{$item['cedulaAdmin']}}",
+        "{{$item['idSeccion']}}",
+        "{{$item['nomSeccion']}}",
+        "{{$item['tipoSeccion']}}",],
+        @endforeach
+    ];
+
+    $(document).ready(function() {
+        $('#example').DataTable({
+            data: dataSet,
+            "autoWidth": false,
+            scrollY:'50vh',
+            scrollCollapse: true,
+            paging: false,
+            columns: [
+                { title: "#" },
+                { title: "Tipo" },
+                { title: "Fecha" },
+                { title: "ID Admin" },
+                { title: "Nombre Admin." },
+                { title: "Cédula Admin" },
+                { title: "ID Sección" },
+                { title: "Nombre Sección" },
+                { title: "Tipo Sección" },
+            ]
+        });
+    });
+</script>
 @endsection

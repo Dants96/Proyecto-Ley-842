@@ -13,7 +13,7 @@ Estadísticas
 
 @endsection
 @section('contenido')
-<div class="jumbotron shadow-std no-rborder">
+<div class="jumbotron no-rborder shadow-std slideDown">
     <h1 class="font-weight-bold">Estadísticas</h1>
     <p class="lead text-capitalize font-weight-bold">Administrador: {{Auth::user()->id}}, {{Auth::user()-> nombres}}
         {{Auth::user()-> apellidos}}</p>
@@ -58,6 +58,7 @@ Estadísticas
         </div>
         <div class="tab-pane fade" id="ModificacionesStats" role="tabpanel" aria-labelledby="ModificacionesStats-tab">
             <p>Este gráfico muestra el número de ediciones realizadas, separadas por tipo de modificación (Adición, Modificación, Eliminación),  en un lapso de 30 días.</p>
+            <p>Número de modificaciones totales realizadas a la ley: <span class="font-weight-bold">{{$estadisticas->numero_modificaciones + $estadisticas->numero_adiciones + $estadisticas->numero_supreciones}}</span></p>
             <div id="chart" style="width: 99%"></div>
             <table class="table table-bordered border- text-center" style="margin-top: 20px">
                 <tr>
@@ -134,15 +135,15 @@ Estadísticas
             labels: labelsCh
         },
         datasets: [{
-                name: 'Adiciones',
+                name: 'Adiciónes',
                 values: adcValues
             },
             {
-                name: 'Modificaciones',
+                name: 'Ediciónes',
                 values: modValues
             },
             {
-                name: 'Eliminaciones',
+                name: 'Eliminaciónes',
                 values: supValues
             },
         ],

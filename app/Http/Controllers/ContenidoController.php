@@ -24,7 +24,7 @@ class ContenidoController extends Controller
     // Informes 
     private function getArrayInforme($seccion){
 
-        $selectArr = ["edicion_{$seccion}s.id",
+        $selectArr = [
         "edicion_{$seccion}s.id_administrador",
         "administradores.nombres",
         "administradores.apellidos",
@@ -68,6 +68,20 @@ class ContenidoController extends Controller
         return $arr;
     }
 
+    private function getDescMod($tipoMod){
+        switch ($tipoMod) {
+            case "ADC":
+                return "Adición";
+                break;
+            case "MOD":
+                return "Edición";
+                break;
+            case "SUP":
+                return "Eliminación";
+                break;
+        }
+    }
+
     public function getInforme(Request $request){
         $titulos = $this->getArrayInforme('titulo');
         $capitulos = $this->getArrayInforme('capitulo');
@@ -76,13 +90,13 @@ class ContenidoController extends Controller
 
         foreach($titulos as $item){
             $fecha = new DateTime($item->created_at);
-            $newItem = ['id' => $item->id,
+            $newItem = [
              'idAdmin' => $item->id_administrador,
              'nomAdmin' => $item->nombres . $item->apellidos,
              'cedulaAdmin' => $item->cedula,
              'idSeccion' => $item->id_titulo,
              'nomSeccion' => $item->nombre,
-             'tipoMod' => $item->tipo,
+             'tipoMod' => $this->getDescMod($item->tipo),
              'fechaMod' => $fecha->format('Y-m-d H:m:s'),
              'tipoSeccion' => 'Titulo'
             ];
@@ -91,13 +105,13 @@ class ContenidoController extends Controller
 
         foreach($capitulos as $item){
             $fecha = new DateTime($item->created_at);
-            $newItem = ['id' => $item->id,
+            $newItem = [
              'idAdmin' => $item->id_administrador,
              'nomAdmin' => $item->nombres . $item->apellidos,
              'cedulaAdmin' => $item->cedula,
              'idSeccion' => $item->id_capitulo,
              'nomSeccion' => $item->nombre,
-             'tipoMod' => $item->tipo,
+             'tipoMod' => $this->getDescMod($item->tipo),
              'fechaMod' => $fecha->format('Y-m-d H:m:s'),
              'tipoSeccion' => 'Capitulo'
             ];
@@ -106,13 +120,13 @@ class ContenidoController extends Controller
 
         foreach($articulos as $item){
             $fecha = new DateTime($item->created_at);
-            $newItem = ['id' => $item->id,
+            $newItem = [
              'idAdmin' => $item->id_administrador,
              'nomAdmin' => $item->nombres . $item->apellidos,
              'cedulaAdmin' => $item->cedula,
              'idSeccion' => $item->id_articulo,
              'nomSeccion' => $item->nombre,
-             'tipoMod' => $item->tipo,
+             'tipoMod' => $this->getDescMod($item->tipo),
              'fechaMod' => $fecha->format('Y-m-d H:m:s'),
              'tipoSeccion' => 'Articulo'
             ];

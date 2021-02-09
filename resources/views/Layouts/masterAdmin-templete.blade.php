@@ -114,7 +114,7 @@
                 </li>
                 <li>
                     <a href="#pageSubmenu2Mod" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Modificar Sección</a>
+                        class="dropdown-toggle">Editar Sección</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu2Mod">
                         <li>
                             <a href="{{route('listarSecctions', ['seccion'=>'titulo'])}}">Título</a>
