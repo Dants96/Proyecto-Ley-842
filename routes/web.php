@@ -7,6 +7,9 @@ use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\PlataformaController;
 use App\Models\Capitulo;
 use App\Models\Estadistica;
+use App\Models\EdicionArticulo;
+use App\Models\EdicionTitulo;
+use App\Models\EdicionCapitulo;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +31,22 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-    echo Capitulo::select('capitulos.id', 'capitulos.nombre', 'capitulos.numero', 'titulos.numero as titulo')->join('titulos', 'capitulos.id_titulo', '=', 'titulos.id')->where('titulos.id', '=', '2')->get();
+    $arraRq = ["edicion_articulos.id",
+    "edicion_articulos.id_administrador",
+    "administradores.nombres",
+    "administradores.apellidos",
+    "administradores.cedula", 
+    "edicion_articulos.id_articulo",
+    "articulos.nombre", 
+    "edicion_articulos.tipo", 
+    "edicion_articulos.created_at"
+];
+    $result = EdicionArticulo::select($arraRq)->join(["administradores", 
+     "edicion_articulos.id_administrador", 
+     "=", 
+     "administradores.id"
+    ])->join("articulos", "edicion_articulos.id_articulo", "=", "articulos.id")->get();
+    echo $result;
     //echo print_r(DB::select('select capitulos.id, capitulos.nombre, capitulos.numero, titulos.numero as titulo_numero FROM capitulos JOIN titulos WHERE capitulos.id_titulo = titulos.id'));
 });
 
@@ -63,6 +81,8 @@ Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
     Route::get('/{path}/get/articulos/from', [ContenidoController::class, 'getArticulosFrom']);
     //chartisan 
     Route::get('/estadisticas/chartData', [EstadisticasController::class, 'getChartData'])->name('getChartData');
+    //Rutas de informes
+    Route::get('/informe', [ContenidoController::class, 'getInforme'])->name('getInforme');
 });
 
 
