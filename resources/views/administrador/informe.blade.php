@@ -1,6 +1,6 @@
 @extends('Layouts.masterAdmin-templete')
 @section('titulo')
-    Inicio
+    Infomrme {{$source}}
 @endsection
 @section('estilos')
 <link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/>
@@ -9,21 +9,20 @@
 @section('contenido')
 <div class="jumbotron no-rborder shadow-std slideDown">
     <div class="fadeInjs">
-        <h1 class="display-4">Plataforma de Administracion</h1>
+        <h1 class="display-4">Infomrme {{($source == "404")? "No Encontrado": "de ".$source}}</h1>
         <p class="lead text-capitalize font-weight-bold">Administrador: {{Auth::user()->id}}, {{Auth::user()-> nombres}} {{Auth::user()-> apellidos}}</p>
         <p class="lead font-weight-bold">Fecha: {{date('Y / m / d')}}</p>        
         <hr class="my-4">
         <div class="info-content">
             <table id="example" class="display" width="100%"></table>
-
         </div>
   </div>
 @endsection
 @section('codigoExtra')
+@if ($source == 'Modificaciónes')
+    
 <script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}" defer></script>
-
 <script>
-
     const dataSet = [
         @foreach($infoArr as $key => $item)
         ["{{$key}}",
@@ -40,9 +39,13 @@
 
     $(document).ready(function() {
         $('#example').DataTable({
+            dom: "Bfrtip",
+            buttons: [
+                'copy', 'excel', 'pdf', 'print'
+            ],
             data: dataSet,
-            "autoWidth": false,
-            scrollY:'50vh',
+            "autoWidth": true,
+            scrollY:'70vh',
             scrollCollapse: true,
             paging: false,
             columns: [
@@ -59,4 +62,5 @@
         });
     });
 </script>
+@endif
 @endsection
