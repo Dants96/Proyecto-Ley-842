@@ -9,7 +9,7 @@ use App\Models\Capitulo;
 use App\Models\Estadistica;
 use App\Models\EdicionArticulo;
 use App\Models\EdicionTitulo;
-use App\Models\EdicionCapitulo;
+use App\Models\Visita;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,23 +31,13 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-    $arraRq = ["edicion_articulos.id",
-    "edicion_articulos.id_administrador",
-    "administradores.nombres",
-    "administradores.apellidos",
-    "administradores.cedula", 
-    "edicion_articulos.id_articulo",
-    "articulos.nombre", 
-    "edicion_articulos.tipo", 
-    "edicion_articulos.created_at"
-];
-    $result = EdicionArticulo::select($arraRq)->join(["administradores", 
-     "edicion_articulos.id_administrador", 
-     "=", 
-     "administradores.id"
-    ])->join("articulos", "edicion_articulos.id_articulo", "=", "articulos.id")->get();
-    echo $result;
-    //echo print_r(DB::select('select capitulos.id, capitulos.nombre, capitulos.numero, titulos.numero as titulo_numero FROM capitulos JOIN titulos WHERE capitulos.id_titulo = titulos.id'));
+    $fechaFetch = '2020-07-02';
+    $res = Visita::select('contador')->where('fecha', '=', $fechaFetch)->get()->first();
+    if($res){
+        echo $res->contador;
+    }else{echo "nonas";}
+    //var_dump($res);
+    
 });
 
 //rutas de auth admin

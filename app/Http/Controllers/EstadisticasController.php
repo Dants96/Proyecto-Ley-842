@@ -8,6 +8,7 @@ use  App\Models\Estadistica;
 use App\Models\EdicionArticulo;
 use App\Models\EdicionCapitulo;
 use App\Models\EdicionTitulo;
+use App\Models\Visita;
 use DateTime;
 use DateInterval;
 
@@ -15,30 +16,17 @@ class EstadisticasController extends Controller
 {
     public function getStadistics(){
         $estadisticas = Estadistica::find(date('Y'));
-        $datosChartMod = $this->dataChartEdc();
-        return view("Administrador.estadisiticas", ['estadisticas' => $estadisticas, 'datosModchart' => $datosChartMod]);
+        $datosChartMod = $this->dataChartMod();
+        $datosChartVisit = $this->dataChartVisit();
+        return view("Administrador.estadisiticas",
+        ['estadisticas' => $estadisticas, 
+        'datosModchart' => $datosChartMod, 
+        'datosVisitchart' => $datosChartVisit,
+        ]);
     }
-
-    public function getChartData(){
-        $extra = [
-            "some_key" => "some_value",
-            "some_key2" => "some_value2",
-        ];
-
-        $chart = Chartisan::build()
-        ->labels(['First', 'Second', 'Third'])
-        ->extra($extra)
-        ->dataset('Sample 1', [1, 2, 3])
-        ->dataset('Sample 2', [3, 2, 1])
-        ->toJSON();
-        
-        return response($chart, 200)->header('content-type', 'application/json; charset=utf-8');
-    }
-
-
-    
+ 
     // funcion para crear los datos de la grafica de ultimos 30 dias de modificaciones.
-    private function dataChartEdc(){
+    private function dataChartMod(){
         $dias = array();        
         for($i=30; $i>=0; $i--){            
             $fechaHoy = new DateTime('today');   
@@ -64,6 +52,21 @@ class EstadisticasController extends Controller
             array_push($dias, ['dia' => $fechaFetch, 'contADC' => $contADC, 'contMOD' => $contMOD, 'contSUP' => $contSUP]);
         }
         return $dias;        
+    }
+
+    private function dataChartVisit(){
+        $dias = array();
+        for($i=30; $i>=0; $i--){
+            $fechaHoy = new DateTime('today'); 
+            $fechaFetch = $fechaHoy->sub(new DateInterval('P'.$i.'D'));
+            $fechaFetch = $fechaHoy->format('Y-d-m');
+            
+            $visita = Visita::select('contador')->where('fecha', '=', $fechaFetch)->get()->first();
+            $cont = ($visita)? $visita->contador : 0 ;
+
+            array_push($dias, ['dia' => $fechaFetch, 'contVisit' => $cont]);
+        }
+        return $dias;
     }
     
 

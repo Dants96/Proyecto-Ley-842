@@ -83,56 +83,64 @@ class ContenidoController extends Controller
     }
 
     public function getInforme(Request $request){
-        $titulos = $this->getArrayInforme('titulo');
-        $capitulos = $this->getArrayInforme('capitulo');
-        $articulos = $this->getArrayInforme('articulo');
-        $informeArr = array();
 
-        foreach($titulos as $item){
-            $fecha = new DateTime($item->created_at);
-            $newItem = [
-             'idAdmin' => $item->id_administrador,
-             'nomAdmin' => $item->nombres . $item->apellidos,
-             'cedulaAdmin' => $item->cedula,
-             'idSeccion' => $item->id_titulo,
-             'nomSeccion' => $item->nombre,
-             'tipoMod' => $this->getDescMod($item->tipo),
-             'fechaMod' => $fecha->format('Y-m-d H:m:s'),
-             'tipoSeccion' => 'Titulo'
-            ];
-            array_push($informeArr, $newItem);
+        switch($request->input('source')){
+            case 'modificaciones':
+                $titulos = $this->getArrayInforme('titulo');
+                $capitulos = $this->getArrayInforme('capitulo');
+                $articulos = $this->getArrayInforme('articulo');
+                $informeArr = array();
+
+                foreach($titulos as $item){
+                    $fecha = new DateTime($item->created_at);
+                    $newItem = [
+                    'idAdmin' => $item->id_administrador,
+                    'nomAdmin' => $item->nombres . $item->apellidos,
+                    'cedulaAdmin' => $item->cedula,
+                    'idSeccion' => $item->id_titulo,
+                    'nomSeccion' => $item->nombre,
+                    'tipoMod' => $this->getDescMod($item->tipo),
+                    'fechaMod' => $fecha->format('Y-m-d H:m:s'),
+                    'tipoSeccion' => 'Titulo'
+                    ];
+                    array_push($informeArr, $newItem);
+                }
+
+                foreach($capitulos as $item){
+                    $fecha = new DateTime($item->created_at);
+                    $newItem = [
+                    'idAdmin' => $item->id_administrador,
+                    'nomAdmin' => $item->nombres . $item->apellidos,
+                    'cedulaAdmin' => $item->cedula,
+                    'idSeccion' => $item->id_capitulo,
+                    'nomSeccion' => $item->nombre,
+                    'tipoMod' => $this->getDescMod($item->tipo),
+                    'fechaMod' => $fecha->format('Y-m-d H:m:s'),
+                    'tipoSeccion' => 'Capitulo'
+                    ];
+                    array_push($informeArr, $newItem);
+                }
+
+                foreach($articulos as $item){
+                    $fecha = new DateTime($item->created_at);
+                    $newItem = [
+                    'idAdmin' => $item->id_administrador,
+                    'nomAdmin' => $item->nombres . $item->apellidos,
+                    'cedulaAdmin' => $item->cedula,
+                    'idSeccion' => $item->id_articulo,
+                    'nomSeccion' => $item->nombre,
+                    'tipoMod' => $this->getDescMod($item->tipo),
+                    'fechaMod' => $fecha->format('Y-m-d H:m:s'),
+                    'tipoSeccion' => 'Articulo'
+                    ];
+                    array_push($informeArr, $newItem);
+                }
+                                
+                return view('administrador.informe', ['infoArr' => $informeArr, 'source' => 'Modificaciónes']);
+            default : 
+                return view('administrador.informe', ['source' => '404']);
         }
-
-        foreach($capitulos as $item){
-            $fecha = new DateTime($item->created_at);
-            $newItem = [
-             'idAdmin' => $item->id_administrador,
-             'nomAdmin' => $item->nombres . $item->apellidos,
-             'cedulaAdmin' => $item->cedula,
-             'idSeccion' => $item->id_capitulo,
-             'nomSeccion' => $item->nombre,
-             'tipoMod' => $this->getDescMod($item->tipo),
-             'fechaMod' => $fecha->format('Y-m-d H:m:s'),
-             'tipoSeccion' => 'Capitulo'
-            ];
-            array_push($informeArr, $newItem);
-        }
-
-        foreach($articulos as $item){
-            $fecha = new DateTime($item->created_at);
-            $newItem = [
-             'idAdmin' => $item->id_administrador,
-             'nomAdmin' => $item->nombres . $item->apellidos,
-             'cedulaAdmin' => $item->cedula,
-             'idSeccion' => $item->id_articulo,
-             'nomSeccion' => $item->nombre,
-             'tipoMod' => $this->getDescMod($item->tipo),
-             'fechaMod' => $fecha->format('Y-m-d H:m:s'),
-             'tipoSeccion' => 'Articulo'
-            ];
-            array_push($informeArr, $newItem);
-        }
-
-        return view('administrador.informe', ['infoArr' => $informeArr]);
     }
+
+        
 }

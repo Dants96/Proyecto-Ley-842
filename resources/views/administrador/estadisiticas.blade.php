@@ -7,14 +7,12 @@ Estadísticas
     .tab-pane p {
         margin-top: 10px;
     }
-
 </style>
-
-
 @endsection
 @section('contenido')
 <div class="jumbotron no-rborder shadow-std slideDown">
-    <h1 class="font-weight-bold">Estadísticas</h1>
+    <div class="fadeInjs">
+        <h1 class="font-weight-bold">Estadísticas</h1>
     <p class="lead text-capitalize font-weight-bold">Administrador: {{Auth::user()->id}}, {{Auth::user()-> nombres}}
         {{Auth::user()-> apellidos}}</p>
     <p class="lead font-weight-bold">Fecha: {{date('Y / m / d')}}</p>        
@@ -52,29 +50,40 @@ Estadísticas
                         <row><p>{{$estadisticas->numero_supreciones}}</p></row>
                     </div>
                 </div>
-
-
             </ul>
         </div>
         <div class="tab-pane fade" id="ModificacionesStats" role="tabpanel" aria-labelledby="ModificacionesStats-tab">
-            <p>Este gráfico muestra el número de ediciones realizadas, separadas por tipo de modificación (Adición, Modificación, Eliminación),  en un lapso de 30 días.</p>
+            <p>El gráfico muestra el número de ediciones realizadas, separadas por tipo de modificación (Adición, Modificación, Eliminación),  en un lapso de 30 días.</p>
             <p>Número de modificaciones totales realizadas a la ley: <span class="font-weight-bold">{{$estadisticas->numero_modificaciones + $estadisticas->numero_adiciones + $estadisticas->numero_supreciones}}</span></p>
-            <div id="chart" style="width: 99%"></div>
-            <table class="table table-bordered border- text-center" style="margin-top: 20px">
+            <div id="chartMod" style="width: 99%"></div>
+            <table class="table table-bordered text-center" style="margin-top: 20px">
                 <tr>
                     <td scope="col"><p>Si requiere información detallada puede ver aquí el informe completo de modificaciones realizadas a la ley.</p></td>
                     <td scope="col" style="vertical-align:middle">
                         
-                           <button id="informe-btn" class="btn btn-info">Informe</button>
+                           <button id="informe-mod-btn" class="btn btn-info">Informe</button>
                                                                
                     </td>
                 </tr>
             </table>
             
         </div>
-        <div class="tab-pane fade" id="plataformaStats" role="tabpanel" aria-labelledby="plataformaStats-tab">historico
+        <div class="tab-pane fade" id="plataformaStats" role="tabpanel" aria-labelledby="plataformaStats-tab">
+            <p>El gráfico muestra el número de visitas realizadas a la plataforma de lectura, en un lapso de 30 días.</p>
+            <p>Número totla de visitas: <span class="font-weight-bold">{{$estadisticas->visitas_pagina}}</span></p>
+            <div id="chartvisit" style="width: 99%"></div>
+            <table class="table table-bordered text-center" style="margin-top: 20px">
+                <tr>                    
+                    <td scope="col"><p>Si requiere información detallada puede ver aquí el informe completo de las visitas realizadas a la ley y sus secciones.</p></td>
+                    <td scope="col" style="vertical-align:middle">                        
+                           <button id="informe-visit-btn" class="btn btn-info">Informe</button>                                                               
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
+    </div>
+    
 </div>
 
 @endsection
@@ -86,8 +95,8 @@ Estadísticas
 <script src="{{asset('js/chartisan_chartjs.umd.js')}}"></script>
 
 <script>
-    // ir al informe
-    $("#informe-btn").on("click", () =>{
+    // ir al informe Modificaciones
+    $("#informe-mod-btn").on("click", () =>{
         let formulario = document.createElement('form');
         let input = document.createElement('input');
 
@@ -104,7 +113,7 @@ Estadísticas
         formulario.submit();
     });
 
-    // grafica con chartisan api
+    // grafica Modificaciones con chartisan api
     let labelsCh = [
         @foreach ($datosModchart as $item)
             "{{$item['dia']}}",
@@ -149,7 +158,7 @@ Estadísticas
         ],
     }
     const chart = new Chartisan({
-        el: '#chart',
+        el: '#chartMod',
         //data:,
         //url: '/Administrador/estadisticas/chartData',
         data: data,
@@ -167,6 +176,46 @@ Estadísticas
         }).displayAxes([true, true])
         
     });
+
+    // grafica Visitas con chartisan api
+    let labelsChDays = [
+        @foreach ($datosVisitchart as $item)
+            "{{$item['dia']}}",
+        @endforeach
+    ];
+
+    let contValues = [
+        @foreach ($datosVisitchart as $item)
+            "{{$item['contVisit']}}",
+        @endforeach
+    ]
+
+    const dataVisit = {
+        chart: {
+            label: '#de conts',
+            labels: labelsChDays
+        },
+        datasets: [{
+                name: 'Visitas',
+                values: contValues
+        }],
+    }
+    const chartVisit = new Chartisan({
+        el: '#chartvisit',
+        //data:,
+        //url: '/Administrador/estadisticas/chartData',
+        data: dataVisit,
+        hooks: new ChartisanHooks().title('Visitas a la Plataforma Ultimos 30 dias').colors().borderColors().datasets([{            
+            type: 'line',
+            fill: false
+        }]).legend({
+            position: 'bottom'
+        }).displayAxes([true, true])
+        
+    });
+
+
+    
 
 </script>
 
