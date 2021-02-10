@@ -123,7 +123,7 @@ Estadísticas
         formulario.style.display = "none";
 
 
-        input.setAttribute("value", "visitas");
+        input.setAttribute("value", "vistas");
         input.setAttribute("name", "source");
 
         formulario.appendChild(input);
