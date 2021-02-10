@@ -70,7 +70,7 @@ Estadísticas
         </div>
         <div class="tab-pane fade" id="plataformaStats" role="tabpanel" aria-labelledby="plataformaStats-tab">
             <p>El gráfico muestra el número de visitas realizadas a la plataforma de lectura, en un lapso de 30 días.</p>
-            <p>Número totla de visitas: <span class="font-weight-bold">{{$estadisticas->visitas_pagina}}</span></p>
+            <p>Número total de visitas: <span class="font-weight-bold">{{$estadisticas->visitas_pagina}}</span></p>
             <div id="chartvisit" style="width: 99%"></div>
             <table class="table table-bordered text-center" style="margin-top: 20px">
                 <tr>                    
@@ -106,6 +106,24 @@ Estadísticas
 
 
         input.setAttribute("value", "modificaciones");
+        input.setAttribute("name", "source");
+
+        formulario.appendChild(input);
+        document.body.appendChild(formulario);
+        formulario.submit();
+    });
+
+    // ir al informe visitas
+    $("#informe-visit-btn").on("click", () =>{
+        let formulario = document.createElement('form');
+        let input = document.createElement('input');
+
+        formulario.setAttribute("method", "get");
+        formulario.setAttribute("action", "{{route('getInforme')}}");
+        formulario.style.display = "none";
+
+
+        input.setAttribute("value", "visitas");
         input.setAttribute("name", "source");
 
         formulario.appendChild(input);

@@ -5,7 +5,7 @@ use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ContenidoController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\PlataformaController;
-use App\Models\Capitulo;
+use App\Models\Articulo;
 use App\Models\Estadistica;
 use App\Models\EdicionArticulo;
 use App\Models\EdicionTitulo;
@@ -31,11 +31,10 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-    $fechaFetch = '2020-07-02';
-    $res = Visita::select('contador')->where('fecha', '=', $fechaFetch)->get()->first();
-    if($res){
-        echo $res->contador;
-    }else{echo "nonas";}
+    
+    $res = Articulo::where('id', '=', '81')->get()->first();
+    
+    var_dump($res->fecha_modificacion);
     //var_dump($res);
     
 });

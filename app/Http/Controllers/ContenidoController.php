@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Capitulo;
-use App\Models\Articulo;
 use App\Models\EdicionTitulo;
 use App\Models\EdicionCapitulo;
 use App\Models\EdicionArticulo;
+use App\Models\Titulo;
+use App\Models\Capitulo;
+use App\Models\Articulo;
 use DateTime;
 
 class ContenidoController extends Controller
@@ -21,7 +22,7 @@ class ContenidoController extends Controller
         $articulos_list = Articulo::select('id', 'nombre', 'numero', 'contenido')->where('id_capitulo', '=', $request->input('id_from'))->get();
         return response(json_encode($articulos_list), 200)->header('content-type', 'text/plain');
     }
-    // Informes 
+    // Informe datos Modificaciones
     private function getArrayInforme($seccion){
 
         $selectArr = [
@@ -82,6 +83,25 @@ class ContenidoController extends Controller
         }
     }
 
+
+    // Retorna la lista de parametro pero con los objetos del query agregados como un item array
+    private function createItemVisita($query, $array, $seccion){
+        foreach($query as $item){
+            $newItem = [
+                'id' => $item->id,
+                'numero' => $item->numero,
+                'nombre' => $item->nombre,
+                'vistas' => $item->vistas,
+                'creado' => $item->created_at->format('Y-m-d'),
+                'modificado' => $item->fecha_modificacion,
+                'paragrafo' => ($seccion == 'Artículo')? (($item->paragrafo)? 'si':'no'):'No aplica',
+                'tipoSeccion' => $seccion
+            ];
+            array_push($array, $newItem);
+        }
+        return $array;
+    }
+
     public function getInforme(Request $request){
 
         switch($request->input('source')){
@@ -92,7 +112,7 @@ class ContenidoController extends Controller
                 $informeArr = array();
 
                 foreach($titulos as $item){
-                    $fecha = new DateTime($item->created_at);
+                    //$fecha = new DateTime($item->created_at);
                     $newItem = [
                     'idAdmin' => $item->id_administrador,
                     'nomAdmin' => $item->nombres . $item->apellidos,
@@ -100,14 +120,14 @@ class ContenidoController extends Controller
                     'idSeccion' => $item->id_titulo,
                     'nomSeccion' => $item->nombre,
                     'tipoMod' => $this->getDescMod($item->tipo),
-                    'fechaMod' => $fecha->format('Y-m-d H:m:s'),
+                    'fechaMod' => $item->created_at->format('Y-m-d H:m:s'),
                     'tipoSeccion' => 'Titulo'
                     ];
                     array_push($informeArr, $newItem);
                 }
 
                 foreach($capitulos as $item){
-                    $fecha = new DateTime($item->created_at);
+                    //$fecha = new DateTime($item->created_at);
                     $newItem = [
                     'idAdmin' => $item->id_administrador,
                     'nomAdmin' => $item->nombres . $item->apellidos,
@@ -115,14 +135,14 @@ class ContenidoController extends Controller
                     'idSeccion' => $item->id_capitulo,
                     'nomSeccion' => $item->nombre,
                     'tipoMod' => $this->getDescMod($item->tipo),
-                    'fechaMod' => $fecha->format('Y-m-d H:m:s'),
+                    'fechaMod' => $item->created_at->format('Y-m-d H:m:s'),
                     'tipoSeccion' => 'Capitulo'
                     ];
                     array_push($informeArr, $newItem);
                 }
 
                 foreach($articulos as $item){
-                    $fecha = new DateTime($item->created_at);
+                    //$fecha = new DateTime($item->created_at);
                     $newItem = [
                     'idAdmin' => $item->id_administrador,
                     'nomAdmin' => $item->nombres . $item->apellidos,
@@ -130,17 +150,32 @@ class ContenidoController extends Controller
                     'idSeccion' => $item->id_articulo,
                     'nomSeccion' => $item->nombre,
                     'tipoMod' => $this->getDescMod($item->tipo),
-                    'fechaMod' => $fecha->format('Y-m-d H:m:s'),
+                    'fechaMod' => $item->created_at->format('Y-m-d H:m:s'),
                     'tipoSeccion' => 'Articulo'
                     ];
                     array_push($informeArr, $newItem);
                 }
                                 
                 return view('administrador.informe', ['infoArr' => $informeArr, 'source' => 'Modificaciónes']);
+
+            case 'vistas':
+                $titulos = Titulo::select('id', 'nombre', 'numero', 'vistas', 'created_at', 'fecha_modificacion')->get();
+                $capitulos = Capitulo::select('id', 'nombre', 'numero', 'vistas', 'created_at', 'fecha_modificacion')->get();;
+                $articulos = Articulo::select('id', 'nombre', 'numero', 'vistas', 'created_at', 'fecha_modificacion', 'paragrafo')->get();;
+                $informeArr = array();
+                $informeArr = $this->createItemVisita($titulos, $informeArr, 'Título');
+                $informeArr = $this->createItemVisita($capitulos, $informeArr, 'Capítulo');
+                $informeArr = $this->createItemVisita($articulos, $informeArr, 'Artículo');                
+
+                return view('administrador.informe', ['infoArr' => $informeArr, 'source' => 'Vistas']);    
             default : 
                 return view('administrador.informe', ['source' => '404']);
         }
+
+      
     }
+
+    
 
         
 }
