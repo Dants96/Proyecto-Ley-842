@@ -46,10 +46,20 @@
         }
 
         .jumbotron p{
-            color: #6d6d6d;
+            color: #4e4e4e;
         }
         .jumbotron h1{
             margin-button: 20px;
+            font-size: 1.1rem;
+            font-weight: 600 !important
+        }
+        .jumbotron h2{            
+            font-size: 0.9rem;
+            font-weight: 600 !important
+        }
+
+        .titulo-header, .capitulo-header{
+            margin-bottom: 20px;
         }
         
     </style>
@@ -121,7 +131,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="navbar-btn active">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
                         <span></span>
                         <span></span>
                         <span></span>

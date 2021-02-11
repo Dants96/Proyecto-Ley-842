@@ -73,19 +73,22 @@ class PlataformaController extends Controller
 
     }
 
-    // retorna un array con la informacion enlazada del titulo sus capitulos y sus articulos
+    
+    // retorna un array con la informacion enlazada del titulo, sus capitulos y sus articulos
+    //esta mousequeherramienta misteriosa va a sernos util mas tarde :v 
     private function getTituloArr($id){
-        $titulo = Titulo::find($id);
-        $Capitulos = Capitulo::where('id_titulo', '=', $id)->get();
-        $capituloArr = array();
+        $titulo = Titulo::findOrFail($id);
+        $capitulos = Capitulo::where('id_titulo', '=', $titulo->id)->get();
+        $capitulosArr = array();
         foreach($capitulos as $capitulo){
-            
+            $articulos = Articulo::where('id_capitulo','=', $capitulo->id)->get();
+            array_push($capitulosArr, ['contenido' => $capitulo, 'articulos' => $articulos]);
         }
-
+        return ['contenido'=> $titulo, 'capitulos' => $capitulosArr];
     }
 
     public function getLeyTitulo($idSc){
-        return $idSc;
+        return view('titulo', ['titulo' => $this->getTituloArr($idSc), 'loop' => false]);
     }
     public function getLeyCapitulo($idSc){
 
