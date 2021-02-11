@@ -22,8 +22,21 @@ use App\Models\Visita;
 |
 */
 
+//rutas de Plataforma
 
 Route::get('/', [PlataformaController::class, 'getInicio'])->name('inicio');
+Route::get('ley-completa', [PlataformaController::class, 'getLeyCompleta'])->name('LeyCompleta');
+Route::get('indices/{seccion}',[PlataformaController::class, 'getIndeOf'])->name('indexOf');
+
+Route::get('ley-titulo/{idSc}', [PlataformaController::class, 'getLeyTitulo'])->name('getLeyTitulo');
+Route::get('ley-capitulo/{idSc}', [PlataformaController::class, 'getLeyCapitulo'])->name('getLeyCapitulo');
+Route::get('ley-articulo/{idSc}', [PlataformaController::class, 'getLeyArticulo'])->name('getLeyArticulo');
+
+Route::get('nosotros', function () {return view('about');})->name('nosotros');
+Route::get('infoLey842', function () {return view('info-ley');})->name('info');
+
+
+
 
 // pagina de no terminados
 Route::get('/nobuild', function(){
@@ -75,7 +88,5 @@ Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
 });
 
 
-Route::get('/nosotros', function () {return view('about');})->name('nosotros');
-Route::get('/infoLey842', function () {return view('info-ley');})->name('info');
 
 
