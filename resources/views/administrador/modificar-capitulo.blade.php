@@ -12,12 +12,13 @@ Modificar Capítulo
             @csrf
             <div class="form-group">
                 <input class="form-control margin-std" type="text" name="nombre_capitulo" id="nombre_capitulo"
-                    placeholder="Nombre del Capítulo" required value="{{ old('nombre_capitulo')}}" />
+                    placeholder="Nombre del Capítulo" required value="{{$infold->nombre}}" />
                     
                 <div class="margin-std">
                     <label class="lead" for="titulo">Seleccione el capítulo al que pertenece: </label>
                     <select class="form-control" id="titulo" name="titulo" required>
-                        <option selected>Títulos</option>
+                        <option selected value={{$tituloq->id}}>{{$tituloq->numero}}. {{$tituloq->nombre}}</option>
+                        <option></option>
                         @foreach ($titulos as $titulo)
                         <option value={{$titulo->id}}><p>{{$titulo->numero}}. {{$titulo->nombre}}</p></option>
                         @endforeach

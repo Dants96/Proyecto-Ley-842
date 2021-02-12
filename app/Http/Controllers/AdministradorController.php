@@ -197,17 +197,16 @@ class AdministradorController extends Controller
         return view('Administrador.modificar-titulo')->with('infold', Titulo::findOrFail($id_seccion)); ;
     }
     public function editCapitulo($id_seccion){
-        return view('Administrador.modificar-capitulo', ["titulos" => Titulo::all('id', 'nombre', 'numero')])->with('infold', Capitulo::findOrFail($id_seccion)); ;
+        $titlo = Titulo::select('id', 'nombre', 'numero')->where('id', '=', Capitulo::findOrFail($id_seccion)->id_titulo)->get()->first();
+        return view('Administrador.modificar-capitulo', ["titulos" => Titulo::all('id', 'nombre', 'numero'),
+                    "tituloq"=>$titlo])->with('infold', Capitulo::findOrFail($id_seccion)); ;
     }
     public function editArticulo($id_seccion){
         $capto = Capitulo::select('id', 'nombre', 'numero','id_titulo')->where('id', '=', Articulo::findOrFail($id_seccion)->id_capitulo)->get()->first();
         $titlo = Titulo::select('id', 'nombre','numero')->where('id', '=', $capto->id_titulo)->get()->first();
         return view('Administrador.modificar-articulo', 
-                    ["titulos" => Titulo::all('id', 'nombre', 'numero'), 
-                    "capitulos" => Capitulo::select('id', 'nombre', 'numero')->where('id_titulo', '=', $capto->id_titulo)->get(),
-                    "capituloq"=>$capto, 
-                    "tituloq"=>$titlo])
-                    ->with('infold', Articulo::findOrFail($id_seccion));
+                    ["titulos" => Titulo::all('id', 'nombre', 'numero'), "capitulos" => Capitulo::select('id', 'nombre', 'numero')->where('id_titulo', '=', $capto->id_titulo)->get(),
+                    "capituloq"=>$capto, "tituloq"=>$titlo])->with('infold', Articulo::findOrFail($id_seccion));
     }   
 
 }
