@@ -5,6 +5,9 @@
 
 @section('contenido')
 <div class="jumbotron no-rborder shadow-std">
+    <div class="header-info">
+        <p class="text-left text-uppercase">creado el <cite>{{$titulo['contenido']->created_at->format('Y-m-d')}}</cite>, modificado por ultima vez el <cite>{{$titulo['contenido']->fecha_modificacion}}</cite>.</p>   
+    </div>
     <div class="titulo-header font-weight-bold text-center">
         <h1>TITULO {{$titulo['contenido']->numero}}.</h1>
         <h1>{{$titulo['contenido']->nombre}}<h1>
@@ -19,7 +22,14 @@
         </div>            
         @endforeach
     @endforeach  
-    <p class="text-right">Título creado el <cite>{{$titulo['contenido']->created_at->format('Y-m-d')}}</cite>, modificado por ultima vez el <cite>{{$titulo['contenido']->fecha_modificacion}}</cite>.</p>
 </div>
 
+@endsection
+
+@section('codigoExtra')
+    <script>
+        $(document).ready(() => {
+            $("#homeSubmenu").addClass('show');            
+        });
+    </script>
 @endsection

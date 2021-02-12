@@ -61,7 +61,15 @@
         .titulo-header, .capitulo-header{
             margin-bottom: 20px;
         }
-        
+
+        .header-info{
+            margin-bottom: 25px;
+        }
+        .header-info p{
+            margin: 0;
+            font-size: smaller;
+        }
+    
     </style>
     @yield('estilos')
 </head>

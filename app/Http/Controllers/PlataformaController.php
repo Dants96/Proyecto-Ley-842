@@ -91,9 +91,14 @@ class PlataformaController extends Controller
         return view('titulo', ['titulo' => $this->getTituloArr($idSc), 'loop' => false]);
     }
     public function getLeyCapitulo($idSc){
-
+        $capitulo = Capitulo::findOrFail($idSc);
+        $titulo_ref = Titulo::select('numero', 'nombre')->where('id', '=', $capitulo->id_titulo)->get()->first();
+        return view('capitulo', ['capitulo'=> ['contenido'=>$capitulo, 'articulos'=>Articulo::where('id_capitulo', '=', $capitulo->id)->get()], 'tituloRef'=>$titulo_ref]);
     }
     public function getLeyArticulo($idSc){
-
+        $articulo = Articulo::where('id', '=', $idSc)->get()->first();
+        $capitulo_ref = Capitulo::select('numero', 'nombre', 'id_titulo')->where('id', '=', $articulo->id_capitulo)->get()->first();
+        $titulo_ref = Titulo::select('numero', 'nombre')->where('id', '=', $capitulo_ref->id_titulo)->get()->first();
+        return view('articulo', ['articulo' => $articulo, 'capituloRef' => $capitulo_ref, 'tituloRef' => $titulo_ref]);
     }
 }
