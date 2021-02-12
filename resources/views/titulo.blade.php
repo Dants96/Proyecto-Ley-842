@@ -15,7 +15,7 @@
     </div>        
         @foreach ($capitulo['articulos'] as $articulo)
         <div class="articulo-content">
-            <p><span class="font-weight-bold">{{($articulo->paragrafo)? 'PARAGRAFO':'ARTÍCULO'}} {{$articulo->numero}}. {{$articulo->nombre}}</span> {{$articulo->contenido}}</p>
+            <p><span class="font-weight-bold">{{/*($articulo->paragrafo)? 'PARAGRAFO':'ARTÍCULO'*/ 'ARTÍCULO'}} {{$articulo->numero}}. {{$articulo->nombre}}</span> {{$articulo->contenido}}</p>
         </div>            
         @endforeach
     @endforeach  
