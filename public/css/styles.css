@@ -1,6 +1,6 @@
 
 html {
-    background-color: #56baed;
+    /*background-color: #56baed;*/
 }
 
 .shadow-std{
@@ -26,6 +26,7 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    font-size: 0.8rem;
 }
 
 p {

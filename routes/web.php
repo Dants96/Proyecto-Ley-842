@@ -9,7 +9,7 @@ use App\Models\Articulo;
 use App\Models\Estadistica;
 use App\Models\EdicionArticulo;
 use App\Models\EdicionTitulo;
-use App\Models\Visita;
+use App\Models\Titulo;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +22,21 @@ use App\Models\Visita;
 |
 */
 
+//rutas de Plataforma
 
 Route::get('/', [PlataformaController::class, 'getInicio'])->name('inicio');
+Route::get('ley/completa', [PlataformaController::class, 'getLeyCompleta'])->name('LeyCompleta');
+Route::get('indices/{seccion}',[PlataformaController::class, 'getIndexOf'])->name('indexOf');
+
+Route::get('ley/titulo/{idSc}', [PlataformaController::class, 'getLeyTitulo'])->name('getLeyTitulo');
+Route::get('ley/capitulo/{idSc}', [PlataformaController::class, 'getLeyCapitulo'])->name('getLeyCapitulo');
+Route::get('ley/articulo/{idSc}', [PlataformaController::class, 'getLeyArticulo'])->name('getLeyArticulo');
+
+Route::get('nosotros', function () {return view('about');})->name('nosotros');
+Route::get('infoLey842', function () {return view('info-ley');})->name('info');
+
+
+
 
 // pagina de no terminados
 Route::get('/nobuild', function(){
@@ -31,9 +44,8 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-    echo Capitulo::select('id', 'nombre', 'numero')->where('id_titulo', '=', 3)->get();
-
-    //echo print_r(DB::select('select capitulos.id, capitulos.nombre, capitulos.numero, titulos.numero as titulo_numero FROM capitulos JOIN titulos WHERE capitulos.id_titulo = titulos.id'));
+    $res = Estadistica::getCurr();
+    var_dump($res->id);
 });
 
 //rutas de auth admin
@@ -74,7 +86,5 @@ Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
 });
 
 
-Route::get('/nosotros', function () {return view('about');})->name('nosotros');
-Route::get('/infoLey842', function () {return view('info-ley');})->name('info');
 
 

@@ -7,6 +7,28 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <title>App Name - @yield('titulo')</title>
     <style>
+        a{
+    display: inline-block;
+    text-decoration: none;
+  }
+  .underlineHover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #6d7fcc !important;
+    content: "";
+    transition: width 0.2s;
+  }
+
+  .underlineHover:hover {
+    color: #0d0d0d;
+  }
+
+  .underlineHover:hover:after {
+    width: 100%;
+  }
          .slideDown{
             display: none;
         }
@@ -16,6 +38,41 @@
         .jumbotron{
             padding-top:2rem;
         }
+        .navbar.navbar-light{
+            background-color: #f5f5f5 !important;
+            box-shadow: none;
+            border: 1px solid #e0e0e0;
+        }
+
+        .shadow-std{
+            border-top: solid 2.3px #4700A3;
+        }
+
+        .jumbotron p{
+            color: #4e4e4e;
+        }
+        .jumbotron h1{
+            margin-button: 20px;
+            font-size: 1.1rem;
+            font-weight: 600 !important
+        }
+        .jumbotron h2{            
+            font-size: 0.9rem;
+            font-weight: 600 !important
+        }
+
+        .titulo-header, .capitulo-header{
+            margin-bottom: 20px;
+        }
+
+        .header-info{
+            margin-bottom: 25px;
+        }
+        .header-info p{
+            margin: 0;
+            font-size: smaller;
+        }
+    
     </style>
     @yield('estilos')
 </head>
@@ -23,25 +80,28 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar Holder -->
-        <nav id="sidebar" class="active">
+        <nav id="sidebar">
             <div class="sidebar-header" style="text-align: center;padding: 0px;">
-                <a href="{{route('adminInicio')}}"><img style="width: 70%" src="{{asset('images/logo2.1mejoradodark.png')}}"
+                <a href="{{route('inicio')}}"><img style="width: 70%" src="{{asset('images/logo2.1mejoradodark.png')}}"
                     id="icon" alt="Icon" /></a>
             </div>
 
             <ul class="list-unstyled components">
-                <p>Menu de Navegacion</p>
+                <p class="text-center">Menu de Navegacion</p>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Indices</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="#">Títulos </a>
+                            <a href="{{route('LeyCompleta')}}">Ley Completa</a>
                         </li>
                         <li>
-                            <a href="#">Capítulos</a>
+                            <a href="{{route('indexOf', ['seccion' => 'Títulos'])}}">Títulos</a>
                         </li>
                         <li>
-                            <a href="#">Artículos</a>
+                            <a href="{{route('indexOf', ['seccion' => 'Capítulos'])}}">Capítulos</a>
+                        </li>
+                        <li>
+                            <a href="{{route('indexOf', ['seccion' => 'Artículos'])}}">Artículos</a>
                         </li>
                     </ul>
                 </li>
@@ -82,7 +142,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="navbar-btn active">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -99,7 +159,7 @@
                                 <a class="nav-link" href="{{route('inicio')}}">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('info')}}">Info</a>
+                                <a class="nav-link" href="{{route('info')}}">Info Ley</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('adminLogin')}}">Administrador</a>
