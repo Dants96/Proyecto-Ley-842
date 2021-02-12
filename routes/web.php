@@ -28,7 +28,8 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-    echo Capitulo::select('capitulos.id', 'capitulos.nombre', 'capitulos.numero', 'titulos.numero as titulo')->join('titulos', 'capitulos.id_titulo', '=', 'titulos.id')->where('titulos.id', '=', '2')->get();
+    echo Capitulo::select('id', 'nombre', 'numero')->where('id_titulo', '=', 3)->get();
+
     //echo print_r(DB::select('select capitulos.id, capitulos.nombre, capitulos.numero, titulos.numero as titulo_numero FROM capitulos JOIN titulos WHERE capitulos.id_titulo = titulos.id'));
 });
 
@@ -61,6 +62,8 @@ Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
     //rutas Ajax
     Route::get('/{path}/get/capitulos/from', [ContenidoController::class, 'getCapitulosFrom']);
     Route::get('/{path}/get/articulos/from', [ContenidoController::class, 'getArticulosFrom']);
+    Route::get('/{path}/{numero}/get/capitulos/from2', [ContenidoController::class, 'getCapitulosFrom']);
+    //Route::get('/{path}/{numero}/get/articulos/from', [ContenidoController::class, 'getArticulosFrom']);
     //chartisan 
     Route::get('/estadisticas/chartData', [EstadisticasController::class, 'getChartData'])->name('getChartData');
 });

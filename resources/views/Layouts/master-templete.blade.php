@@ -13,6 +13,9 @@
         .fadeInjs{
             opacity: 0;
         }
+        .jumbotron{
+            padding-top:2rem;
+        }
     </style>
     @yield('estilos')
 </head>

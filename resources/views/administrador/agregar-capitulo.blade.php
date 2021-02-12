@@ -19,7 +19,7 @@ Agregar Capítulo
                     <select class="form-control" id="titulo" name="titulo" required>
                         <option selected>Títulos</option>
                         @foreach ($titulos as $titulo)
-                        <option value={{"$titulo->id"}}><p>{{$titulo->numero}}. {{$titulo->nombre}}</p></option>
+                        <option value={{$titulo->id}}><p>{{$titulo->numero}}. {{$titulo->nombre}}</p></option>
                         @endforeach
                     </select>
                 </div>
