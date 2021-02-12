@@ -63,6 +63,12 @@
             color: black
         }
         
+        .jumbotron p{
+            color: #6d6d6d;
+        }
+        .jumbotron h1{
+            margin-button: 20px;
+        }
 
     </style>
     @yield('estilos')
@@ -72,8 +78,8 @@
     <div class="wrapper">
         <!-- Sidebar Holder -->
         <nav id="sidebar" class="navbar-expand">
-            <div class="sidebar-header" style="text-align: center;padding: 0px;">
-                <a href="{{route('adminInicio')}}"><img style="width: 70%" src="{{asset('images/logo2.1t.png')}}"
+            <div class="sidebar-header" style="text-align: center;padding: 0px; background: #002569;">
+                <a href="{{route('adminInicio')}}"><img style="width: 70%" src="{{asset('images/logo2.1mejoradodark.png')}}"
                         id="icon" alt="Icon" /></a>
             </div>
             <ul class="list-unstyled components">
@@ -114,7 +120,7 @@
                 </li>
                 <li>
                     <a href="#pageSubmenu2Mod" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Modificar Sección</a>
+                        class="dropdown-toggle">Editar Sección</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu2Mod">
                         <li>
                             <a href="{{route('listarSecctions', ['seccion'=>'titulo'])}}">Título</a>

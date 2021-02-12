@@ -5,8 +5,11 @@ use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ContenidoController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\PlataformaController;
-use App\Models\Capitulo;
+use App\Models\Articulo;
 use App\Models\Estadistica;
+use App\Models\EdicionArticulo;
+use App\Models\EdicionTitulo;
+use App\Models\Visita;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +31,18 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
+<<<<<<< HEAD
     echo Capitulo::select('id', 'nombre', 'numero')->where('id_titulo', '=', 3)->get();
 
     //echo print_r(DB::select('select capitulos.id, capitulos.nombre, capitulos.numero, titulos.numero as titulo_numero FROM capitulos JOIN titulos WHERE capitulos.id_titulo = titulos.id'));
+=======
+    
+    $res = Articulo::where('id', '=', '81')->get()->first();
+    
+    var_dump($res->fecha_modificacion);
+    //var_dump($res);
+    
+>>>>>>> dcf87e26fef00343aa32f26c9267b5b224223c4c
 });
 
 //rutas de auth admin
@@ -66,6 +78,8 @@ Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
     //Route::get('/{path}/{numero}/get/articulos/from', [ContenidoController::class, 'getArticulosFrom']);
     //chartisan 
     Route::get('/estadisticas/chartData', [EstadisticasController::class, 'getChartData'])->name('getChartData');
+    //Rutas de informes
+    Route::get('/informe', [ContenidoController::class, 'getInforme'])->name('getInforme');
 });
 
 
