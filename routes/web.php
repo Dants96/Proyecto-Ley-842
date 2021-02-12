@@ -31,18 +31,9 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-<<<<<<< HEAD
     echo Capitulo::select('id', 'nombre', 'numero')->where('id_titulo', '=', 3)->get();
 
     //echo print_r(DB::select('select capitulos.id, capitulos.nombre, capitulos.numero, titulos.numero as titulo_numero FROM capitulos JOIN titulos WHERE capitulos.id_titulo = titulos.id'));
-=======
-    
-    $res = Articulo::where('id', '=', '81')->get()->first();
-    
-    var_dump($res->fecha_modificacion);
-    //var_dump($res);
-    
->>>>>>> dcf87e26fef00343aa32f26c9267b5b224223c4c
 });
 
 //rutas de auth admin
