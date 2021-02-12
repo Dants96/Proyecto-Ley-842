@@ -75,7 +75,7 @@ class PlataformaController extends Controller
 
     
     // retorna un array con la informacion enlazada del titulo, sus capitulos y sus articulos
-    //esta mousequeherramienta misteriosa va a sernos util mas tarde :v 
+    // esta mousequeherramienta misteriosa va a sernos util mas tarde :v 
     private function getTituloArr($id){
         $titulo = Titulo::findOrFail($id);
         $capitulos = Capitulo::where('id_titulo', '=', $titulo->id)->get();
@@ -90,15 +90,27 @@ class PlataformaController extends Controller
     public function getLeyTitulo($idSc){
         return view('titulo', ['titulo' => $this->getTituloArr($idSc), 'loop' => false]);
     }
+    
     public function getLeyCapitulo($idSc){
         $capitulo = Capitulo::findOrFail($idSc);
         $titulo_ref = Titulo::select('numero', 'nombre')->where('id', '=', $capitulo->id_titulo)->get()->first();
         return view('capitulo', ['capitulo'=> ['contenido'=>$capitulo, 'articulos'=>Articulo::where('id_capitulo', '=', $capitulo->id)->get()], 'tituloRef'=>$titulo_ref]);
     }
+    
     public function getLeyArticulo($idSc){
         $articulo = Articulo::where('id', '=', $idSc)->get()->first();
         $capitulo_ref = Capitulo::select('numero', 'nombre', 'id_titulo')->where('id', '=', $articulo->id_capitulo)->get()->first();
         $titulo_ref = Titulo::select('numero', 'nombre')->where('id', '=', $capitulo_ref->id_titulo)->get()->first();
         return view('articulo', ['articulo' => $articulo, 'capituloRef' => $capitulo_ref, 'tituloRef' => $titulo_ref]);
     }
+
+    public function getLeyCompleta(){
+        $titIdsArr = Titulo::select('id')->get();
+        $titArrs = array();
+        foreach ($titIdsArr as $titId){
+            array_push($titArrs, $this->getTituloArr($titId->id));
+        }
+        return view('todoLey',['titulos' => $titArrs]);
+    }
+
 }

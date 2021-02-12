@@ -1,6 +1,6 @@
 @extends('Layouts.master-templete')
 @section('titulo')
-    Inicio
+Título {{$titulo['contenido']->numero}}
 @endsection
 
 @section('contenido')
