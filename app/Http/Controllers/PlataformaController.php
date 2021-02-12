@@ -15,7 +15,7 @@ class PlataformaController extends Controller
     // agrega las vistas al dia actual en la base de datos , si no hay lo crea
     private function agregarVisita(){
         $year = date('Y');
-        $estadisticas = Estadistica::find($year);
+        $estadisticas = Estadistica::getCurr();
         $estadisticas->visitas_pagina++;
         $estadisticas->save();
         
@@ -36,7 +36,7 @@ class PlataformaController extends Controller
         return view('home');
     }
 
-    public function getIndeOf($seccion){
+    public function getIndexOf($seccion){
         switch($seccion){
             case 'Títulos':
                 $titulos = Titulo::select('id', 'numero', 'nombre')->get();
@@ -73,6 +73,31 @@ class PlataformaController extends Controller
 
     }
 
+    // agragar una vista a la seccion espesifica 
+    private function agregarVista($seccion, $idSec){
+        $estadisticas = Estadistica::getCurr();
+        switch ($seccion) {
+            case 'titulo':
+                $query = Titulo::find($idSec);  
+                $estadisticas->num_vistas_titulos ++;
+                break;
+            case 'capitulo':
+                $query = Capitulo::find($idSec);   
+                $estadisticas->num_vistas_capitulos ++;             
+                break;
+            case 'articulo':
+                $query = Articulo::find($idSec);  
+                $estadisticas->num_vistas_articulos ++;              
+                break;
+        }
+        if($query){
+            $query->vistas ++;
+            $query->save();            
+            $estadisticas->save();
+        }         
+        
+    }
+
     
     // retorna un array con la informacion enlazada del titulo, sus capitulos y sus articulos
     // esta mousequeherramienta misteriosa va a sernos util mas tarde :v 
@@ -88,12 +113,15 @@ class PlataformaController extends Controller
     }
 
     public function getLeyTitulo($idSc){
-        return view('titulo', ['titulo' => $this->getTituloArr($idSc), 'loop' => false]);
+        $titulo = $this->getTituloArr($idSc);
+        $this->agregarVista('titulo', $idSc);
+        return view('titulo', ['titulo' => $titulo, 'loop' => false]);
     }
     
     public function getLeyCapitulo($idSc){
         $capitulo = Capitulo::findOrFail($idSc);
         $titulo_ref = Titulo::select('numero', 'nombre')->where('id', '=', $capitulo->id_titulo)->get()->first();
+        $this->agregarVista('capitulo', $idSc);
         return view('capitulo', ['capitulo'=> ['contenido'=>$capitulo, 'articulos'=>Articulo::where('id_capitulo', '=', $capitulo->id)->get()], 'tituloRef'=>$titulo_ref]);
     }
     
@@ -101,6 +129,7 @@ class PlataformaController extends Controller
         $articulo = Articulo::where('id', '=', $idSc)->get()->first();
         $capitulo_ref = Capitulo::select('numero', 'nombre', 'id_titulo')->where('id', '=', $articulo->id_capitulo)->get()->first();
         $titulo_ref = Titulo::select('numero', 'nombre')->where('id', '=', $capitulo_ref->id_titulo)->get()->first();
+        $this->agregarVista('articulo', $idSc);
         return view('articulo', ['articulo' => $articulo, 'capituloRef' => $capitulo_ref, 'tituloRef' => $titulo_ref]);
     }
 

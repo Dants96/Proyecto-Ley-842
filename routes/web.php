@@ -9,7 +9,7 @@ use App\Models\Articulo;
 use App\Models\Estadistica;
 use App\Models\EdicionArticulo;
 use App\Models\EdicionTitulo;
-use App\Models\Visita;
+use App\Models\Titulo;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ use App\Models\Visita;
 
 Route::get('/', [PlataformaController::class, 'getInicio'])->name('inicio');
 Route::get('ley/completa', [PlataformaController::class, 'getLeyCompleta'])->name('LeyCompleta');
-Route::get('indices/{seccion}',[PlataformaController::class, 'getIndeOf'])->name('indexOf');
+Route::get('indices/{seccion}',[PlataformaController::class, 'getIndexOf'])->name('indexOf');
 
 Route::get('ley/titulo/{idSc}', [PlataformaController::class, 'getLeyTitulo'])->name('getLeyTitulo');
 Route::get('ley/capitulo/{idSc}', [PlataformaController::class, 'getLeyCapitulo'])->name('getLeyCapitulo');
@@ -44,8 +44,8 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-    
-    
+    $res = Estadistica::getCurr();
+    var_dump($res->id);
 });
 
 //rutas de auth admin
