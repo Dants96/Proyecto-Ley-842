@@ -6,10 +6,11 @@ Modificar Capítulo
 @section('contenido')
 <div class="jumbotron shadow-std no-rborder slideDown">
     <div class="fadeInjs">
-        <h1 class="font-weight-bold">Agregar un nuevo Capítulo</h1>
+        <h1 class="font-weight-bold">Editar Capítulo {{$infold->numero}} del título {{$tituloq->numero}}</h1>
         <p class="lead text-capitalize font-weight-bold">Administrador: {{Auth::user()->id}}, {{Auth::user()-> nombres}} {{Auth::user()-> apellidos}} <br/> Fecha: {{date('Y / m / d')}}</p>
-        <form action="{{route('agregarCapitulo')}}" method="POST" autocomplete="off">
+        <form action="{{route('editarCapitulo',['id_seccion'=>$infold->id])}}" method="POST" autocomplete="off">
             @csrf
+            @method('PUT')
             <div class="form-group">
                 <input class="form-control margin-std" type="text" name="nombre_capitulo" id="nombre_capitulo"
                     placeholder="Nombre del Capítulo" required value="{{$infold->nombre}}" />
@@ -17,10 +18,10 @@ Modificar Capítulo
                 <div class="margin-std">
                     <label class="lead" for="titulo">Seleccione el capítulo al que pertenece: </label>
                     <select class="form-control" id="titulo" name="titulo" required>
-                        <option selected value={{$tituloq->id}}>{{$tituloq->numero}}. {{$tituloq->nombre}}</option>
+                        <option selected value="{{$tituloq->id}}">{{$tituloq->numero}}. {{$tituloq->nombre}}</option>
                         <option></option>
                         @foreach ($titulos as $titulo)
-                        <option value={{$titulo->id}}><p>{{$titulo->numero}}. {{$titulo->nombre}}</p></option>
+                        <option value="{{$titulo->id}}"><p>{{$titulo->numero}}. {{$titulo->nombre}}</p></option>
                         @endforeach
                     </select>
                 </div>
@@ -29,7 +30,7 @@ Modificar Capítulo
                 </small>
         
                 <div class="row-btn margin-std d-flex flex-row-reverse">
-                    <button type="submit" class="btn btn-success">Agregar</button>
+                    <button type="submit" class="btn btn-success">Editar</button>
                     <button type="reset" class="btn btn-primary">Limpiar</button>
                     <a href="{{route('noBuild')}}" class="btn btn-warning" target="_">Capítulos Actuales</a>
                 </div>
