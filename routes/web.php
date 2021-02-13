@@ -33,7 +33,7 @@ Route::get('ley/capitulo/{idSc}', [PlataformaController::class, 'getLeyCapitulo'
 Route::get('ley/articulo/{idSc}', [PlataformaController::class, 'getLeyArticulo'])->name('getLeyArticulo');
 
 Route::get('nosotros', function () {return view('about');})->name('nosotros');
-Route::get('infoLey842', function () {return view('info-ley');})->name('info');
+Route::get('masInfo', function () {return view('info-ley');})->name('info');
 
 
 

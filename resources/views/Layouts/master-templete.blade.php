@@ -118,7 +118,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{route('info')}}">Info Ley 842</a>
+                    <a href="{{route('info')}}">Mas Información</a>
                     <a href="{{route('nosotros')}}">Contactanos</a>
                 </li>
             </ul>
