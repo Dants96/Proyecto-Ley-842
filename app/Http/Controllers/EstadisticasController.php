@@ -59,7 +59,7 @@ class EstadisticasController extends Controller
         for($i=30; $i>=0; $i--){
             $fechaHoy = new DateTime('today'); 
             $fechaFetch = $fechaHoy->sub(new DateInterval('P'.$i.'D'));
-            $fechaFetch = $fechaHoy->format('Y-d-m');
+            $fechaFetch = $fechaHoy->format('Y-m-d');
             
             $visita = Visita::select('contador')->where('fecha', '=', $fechaFetch)->get()->first();
             $cont = ($visita)? $visita->contador : 0 ;
