@@ -29,7 +29,7 @@
   .underlineHover:hover:after {
     width: 100%;
   }
-         .slideDown{
+         .slideDown, .slideDownLg{
             display: none;
         }
         .fadeInjs{
@@ -51,15 +51,7 @@
         .jumbotron p{
             color: #4e4e4e;
         }
-        .jumbotron h1{
-            margin-button: 20px;
-            font-size: 1.1rem;
-            font-weight: 600 !important
-        }
-        .jumbotron h2{            
-            font-size: 0.9rem;
-            font-weight: 600 !important
-        }
+       
 
         .titulo-header, .capitulo-header{
             margin-bottom: 20px;
@@ -182,15 +174,19 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     
+    
+
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.slideDown').slideDown(1000, function(){
-                $('.fadeInjs').animate({opacity:1, duration: 400});
-            });
+
+            $('.slideDown').slideDown(1000);
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
+
+            $('.slideDownLg').slideDown(2000);
+          
         });
 
     </script>
