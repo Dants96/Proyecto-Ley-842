@@ -19,7 +19,7 @@ class PlataformaController extends Controller
         $estadisticas->visitas_pagina++;
         $estadisticas->save();
         
-        $hoy = date('Y-d-m');
+        $hoy = date('Y-m-d');
         $visita_diaria = visita::where('fecha','=', $hoy)->first();
         if($visita_diaria){
             $visita_diaria->contador++;
