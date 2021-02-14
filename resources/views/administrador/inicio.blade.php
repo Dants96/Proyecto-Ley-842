@@ -10,7 +10,7 @@
         <p class="lead font-weight-bold">Fecha: {{date('Y / m / d')}}</p>
         <p class="lead">Desde este apartado, podrá modificar la <strong class="font-weight-bold">Ley 842 de 2003</strong>, adicionando o cambiando información de títulos, capítulos o artículos. Además de estadísticas de uso de la plataforma de lectura y de la plataforma de administración.</p>
         <hr class="my-4">
-        <p>Las opciones disponibles se presentan en el panel de navegación de lado izquierdo de la pantalla.</p>
+        <p>Las opciones disponibles se presentan en el panel de navegación de lado izquierdo de la pantalla.</p>        
         </div>
   </div>
 @endsection

@@ -9,7 +9,6 @@ Inicio
 
     aqui van banner y coasas de Inicio;
 
-
 </div>
 
 @endsection
