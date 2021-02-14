@@ -69,9 +69,12 @@ Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
     Route::post('/agregar/capitulo',[AdministradorController::class, 'storeCapitulo'])->name('agregarCapitulo');
     //rutas de editar
     Route::get('/listar/{seccion}',[AdministradorController::class, 'listarSections'])->name('listarSecctions');
-    Route::get('/editar/titulo/{id_seccion}',[AdministradorController::class, 'editTitulo'])->name('editarTitulo');
-    Route::get('/editar/articulo/{id_seccion}',[AdministradorController::class, 'editArticulo'])->name('editarArticulo');
-    Route::get('/editar/capitulo/{id_seccion}',[AdministradorController::class, 'editCapitulo'])->name('editarCapitulo');
+    Route::get('/editar/titulo/{id_seccion}',[AdministradorController::class, 'vistaEditTitulo'])->name('vistaEditarTitulo');
+    Route::get('/editar/articulo/{id_seccion}',[AdministradorController::class, 'vistaEditArticulo'])->name('vistaEditarArticulo');
+    Route::get('/editar/capitulo/{id_seccion}',[AdministradorController::class, 'vistaEditCapitulo'])->name('vistaEditarCapitulo');
+    Route::put('/editar/titulo/{id_seccion}',[AdministradorController::class, 'editTitulo'])->name('editarTitulo');
+    Route::put('/editar/articulo/{id_seccion}',[AdministradorController::class, 'editArticulo'])->name('editarArticulo');
+    Route::put('/editar/capitulo/{id_seccion}',[AdministradorController::class, 'editCapitulo'])->name('editarCapitulo');
     //rutas de estadisticas 
     Route::get('/estadisticas',[EstadisticasController::class, 'getStadistics'])->name('stadistics');
     //rutas Ajax
