@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
     <title>App Name - @yield('titulo')</title>
     <style>
         a{
@@ -29,7 +30,7 @@
   .underlineHover:hover:after {
     width: 100%;
   }
-         .slideDown{
+         .slideDown, .slideDownLg{
             display: none;
         }
         .fadeInjs{
@@ -51,15 +52,7 @@
         .jumbotron p{
             color: #4e4e4e;
         }
-        .jumbotron h1{
-            margin-button: 20px;
-            font-size: 1.1rem;
-            font-weight: 600 !important
-        }
-        .jumbotron h2{            
-            font-size: 0.9rem;
-            font-weight: 600 !important
-        }
+       
 
         .titulo-header, .capitulo-header{
             margin-bottom: 20px;
@@ -72,14 +65,21 @@
             margin: 0;
             font-size: smaller;
         }
+        .nav-tool i{
+            font-size: 2rem;
+        }
     
     </style>
     @yield('estilos')
 </head>
 
 <body>
+    
     <div class="wrapper">
+    
+    
         <!-- Sidebar Holder -->
+        
         <nav id="sidebar">
             <div class="sidebar-header" style="text-align: center;padding: 0px;">
                 <a href="{{route('inicio')}}"><img style="width: 70%" src="{{asset('images/logo2.1mejoradodark.png')}}"
@@ -137,7 +137,7 @@
         </nav>
 
         <!-- Page Content Holder -->
-        <div id="content">
+        <div id="content">            
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -173,6 +173,17 @@
             </div>
            
         </div>
+        
+    </div>
+
+    <div class="container-tool">
+        <input type="checkbox" id="toggle-tool">
+        <label for="toggle-tool" class="button-tool"></label>
+        <nav class="nav-tool">
+            <a href="#"><i class="fas fa-search-minus"></i></a>
+            <a href="#"><i class="fas fa-search-plus"></i></a>
+            <a href="#"><i class="fas fa-lightbulb"></i></a>
+        </nav>
     </div>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -182,15 +193,19 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     
+    <script defer src="{{ asset('fontawesome/js/all.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.slideDown').slideDown(1000, function(){
-                $('.fadeInjs').animate({opacity:1, duration: 400});
-            });
+
+            $('.slideDown').slideDown(1000);
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
+
+            $('.slideDownLg').slideDown(2000);
+          
         });
 
     </script>

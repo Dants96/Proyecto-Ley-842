@@ -14,7 +14,7 @@
         <p class="lead text-capitalize font-weight-bold">Administrador: {{Auth::user()->id}}, {{Auth::user()-> nombres}} {{Auth::user()-> apellidos}}</p>
         <p class="lead font-weight-bold">Fecha: {{date('Y / m / d')}}</p>        
         <hr class="my-4">
-        <div class="info-content">
+        <div class="info-content" style="width: 98.2%; margin: auto">
             <table id="table-inf" class="display" width="100%"></table>
         </div>
   </div>
