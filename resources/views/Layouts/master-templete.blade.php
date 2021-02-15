@@ -153,12 +153,14 @@
                                 </div>
                             </div>
                         </li>
+                        <!--
                         <li>
                             <a href="#">Etiqueta 1</a>
                         </li>
                         <li>
                             <a href="#">Etiqueta 2</a>
                         </li>
+                    -->
                     </ul>
                 </li>
                 <li>

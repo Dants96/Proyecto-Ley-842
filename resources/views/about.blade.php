@@ -21,6 +21,15 @@ Nosotros
         border: 2px solid #4700A3 !important;
         
     }
+    img#logoLL{
+        user-drag: none; 
+user-select: none;
+-moz-user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+    }
+
 
 </style>    
 

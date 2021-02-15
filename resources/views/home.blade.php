@@ -36,8 +36,17 @@ Inicio
         background: -webkit-linear-gradient(340deg, rgba(0, 37, 105, 1) 1%, rgba(71, 0, 163, 1) 55%);
         background: linear-gradient(340deg, rgba(0, 37, 105, 1) 1%, rgba(71, 0, 163, 1) 55%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#002569", endColorstr="#4700a3", GradientType=1);
-
+        
     }
+
+    #banner img{
+        user-drag: none; 
+user-select: none;
+-moz-user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+     }
 
 </style>
 @endsection
