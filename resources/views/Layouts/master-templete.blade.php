@@ -6,7 +6,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
-    <title>App Name - @yield('titulo')</title>
+    <title>Ley Lector - @yield('titulo')</title>
     <style>
         a{
     display: inline-block;
