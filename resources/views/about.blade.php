@@ -14,14 +14,22 @@ Nosotros
         background: transparent !important;
         border: none;
     }
+
+    body[data-disp="apagado"] img#logoLL{
+        /*background-color: white;*/
+        transition: 1.5s;
+        border: 2px solid white !important;
+        
+    }
+
 </style>    
 
 @endsection
 @section('contenido')
 
 <div id="divimgAbout" class="jumbotron shadow-std no-rborder slideDown">
-    <h1 class="h1">¿Quiénes somos?</h1>
-    <p>Somos una iniciativa que busca facilitar la interpretación de los reglamentos que rigen el desempeño de la
+    <h1 class="h1">¿Quiénes somos y Que es Ley Lector?</h1>
+    <p>Ley Lector es una iniciativa que busca facilitar la interpretación de los reglamentos que rigen el desempeño de la
         respectiva profesión. Nuestra intención es hacer de la lectura y consulta de la información yaciente en la Ley
         842 de 2003, una experiencia amigable que supla no sólo la flexibilidad de administración, sino que también
         ofrezca una serie de herramientas que optimicen la búsqueda de información.</p>
@@ -83,9 +91,12 @@ Nosotros
         </div>
         
     </div>
+    <div class="text-center" style="margin-top: 90px">
+        <img id="logoLL" src="{{asset('images/L6.png')}}" alt="Ley Lector" style="transition: 1.5s; border: 2px solid black;
+        border-radius: 100%; width:30%;"/ ">
+        <p class="footer font-weight-bold">Copyright 2021</p>
+    </div>
 </div>
-
-
 </div>
 
 @endsection
