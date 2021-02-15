@@ -41,7 +41,7 @@ class AdministradorController extends Controller
     public function addSection($seccion){
         switch($seccion){
             case 'titulo':
-                return view("Administrador.agregar-{$seccion}",['numero'=> Titulo::all('numero')->max('numero')]);
+                return view("Administrador.agregar-{$seccion}",['numero'=> Titulo::all('numero')->max('numero') + 1]);
                 
             case 'articulo':
                 return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::all('id', 'nombre', 'numero')]);
