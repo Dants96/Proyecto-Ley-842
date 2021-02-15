@@ -18,7 +18,7 @@ Nosotros
     body[data-disp="apagado"] img#logoLL{
         /*background-color: white;*/
         transition: 1.5s;
-        border: 2px solid white !important;
+        border: 2px solid #4700A3 !important;
         
     }
 
@@ -92,7 +92,7 @@ Nosotros
         
     </div>
     <div class="text-center" style="margin-top: 90px">
-        <img id="logoLL" src="{{asset('images/L6.png')}}" alt="Ley Lector" style="transition: 1.5s; border: 2px solid black;
+        <img id="logoLL" src="{{asset('images/L5.png')}}" alt="Ley Lector" style="transition: 1.5s; border: 2px solid black;
         border-radius: 100%; width:30%;"/ ">
         <p class="footer font-weight-bold">Copyright 2021</p>
     </div>
