@@ -9,6 +9,9 @@ use App\Models\EdicionArticulo;
 use App\Models\EdicionCapitulo;
 use App\Models\EdicionTitulo;
 use App\Models\Visita;
+use App\Models\Articulo;
+use App\Models\Capitulo;
+use App\Models\Titulo;
 use DateTime;
 use DateInterval;
 
@@ -22,6 +25,7 @@ class EstadisticasController extends Controller
         ['estadisticas' => $estadisticas, 
         'datosModchart' => $datosChartMod, 
         'datosVisitchart' => $datosChartVisit,
+        'numeroDe' => ['articulos' => Articulo::get('id')->count('id') , 'titulos' => Titulo::get('id')->count('id'), 'capitulos' => Capitulo::get('id')->count('id')]
         ]);
     }
  
