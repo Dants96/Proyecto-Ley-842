@@ -112,8 +112,8 @@ a, a:hover, a:focus {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    color: #000000;
+    background: #fafafa;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {

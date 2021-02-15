@@ -32,6 +32,8 @@ Route::get('ley/titulo/{idSc}', [PlataformaController::class, 'getLeyTitulo'])->
 Route::get('ley/capitulo/{idSc}', [PlataformaController::class, 'getLeyCapitulo'])->name('getLeyCapitulo');
 Route::get('ley/articulo/{idSc}', [PlataformaController::class, 'getLeyArticulo'])->name('getLeyArticulo');
 
+Route::get('ley/mas-visto/{seccion}',[PlataformaController::class, 'getMasVisto'])->name('getMasvisto');
+
 Route::get('nosotros', function () {return view('about');})->name('nosotros');
 Route::get('masInfo', function () {return view('info-ley');})->name('info');
 
@@ -44,8 +46,9 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-    $res = Estadistica::getCurr();
-    var_dump($res->id);
+    $res =  Articulo::get('vistas')->max('vistas');
+    $res = Articulo::select('id', 'vistas')->where('vistas', '=', $res)->get()->first();
+    echo($res);
 });
 
 //rutas de auth admin

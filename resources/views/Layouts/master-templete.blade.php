@@ -84,6 +84,18 @@
                 background: #0d0d0d;
                 color: #f5f5f5;
         }
+
+        #sidebar .dropdown-menu.show {
+        display: block;
+        background: #6d7fcc;
+        color: #F5F5F5;
+        border: none;
+        border-radius: 0%;
+    }
+
+    #sidebar .dropdown-menu.show a:hover {
+        background: #fafafa
+    }
     
     </style>
     @yield('estilos')
@@ -126,13 +138,22 @@
                         class="dropdown-toggle">Etiquetas</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="#">Page 1</a>
+                            <div class="dropright" style="cursor: pointer">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Mas Vistos
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{{route('getMasvisto', ['seccion'=>'titulo'])}}">Título</a>
+                                    <a href="{{route('getMasvisto', ['seccion'=>'capitulo'])}}">Capítulo</a>
+                                    <a href="{{route('getMasvisto', ['seccion'=>'articulo'])}}">Artículo</a>
+                                </div>
+                            </div>
                         </li>
                         <li>
-                            <a href="#">Page 2</a>
+                            <a href="#">Etiqueta 1</a>
                         </li>
                         <li>
-                            <a href="#">Page 3</a>
+                            <a href="#">Etiqueta 2</a>
                         </li>
                     </ul>
                 </li>

@@ -125,12 +125,12 @@ class PlataformaController extends Controller
         return view('capitulo', ['capitulo'=> ['contenido'=>$capitulo, 'articulos'=>Articulo::where('id_capitulo', '=', $capitulo->id)->get()], 'tituloRef'=>$titulo_ref]);
     }
     
-    public function getLeyArticulo($idSc){
+    public function getLeyArticulo($idSc, $visit=false){
         $articulo = Articulo::where('id', '=', $idSc)->get()->first();
         $capitulo_ref = Capitulo::select('numero', 'nombre', 'id_titulo')->where('id', '=', $articulo->id_capitulo)->get()->first();
         $titulo_ref = Titulo::select('numero', 'nombre')->where('id', '=', $capitulo_ref->id_titulo)->get()->first();
         $this->agregarVista('articulo', $idSc);
-        return view('articulo', ['articulo' => $articulo, 'capituloRef' => $capitulo_ref, 'tituloRef' => $titulo_ref]);
+        return view('articulo', ['articulo' => $articulo, 'capituloRef' => $capitulo_ref, 'tituloRef' => $titulo_ref, 'tagVisit' => $visit]);
     }
 
     public function getLeyCompleta(){
@@ -140,6 +140,30 @@ class PlataformaController extends Controller
             array_push($titArrs, $this->getTituloArr($titId->id));
         }
         return view('todoLey',['titulos' => $titArrs]);
+    }
+
+    public function getMasVisto($seccion){
+        switch ($seccion) {
+            case 'articulo':
+                $max =  Articulo::get('vistas')->max('vistas');
+                $artMax = Articulo::select('id', 'vistas')->where('vistas', '=', $max)->get()->first();
+                return $this->getLeyArticulo($artMax->id);
+                break;
+            case 'capitulo':
+                $max =  Capitulo::get('vistas')->max('vistas');
+                $capMax =  Capitulo::select('id', 'vistas')->where('vistas', '=', $max)->get()->first();
+                return $this->getLeyCapitulo($capMax->id);
+                break;
+            case 'titulo':
+                $max =  Titulo::get('vistas')->max('vistas');
+                $titMax =  Titulo::select('id', 'vistas')->where('vistas', '=', $max)->get()->first();
+                return $this->getLeyCapitulo($titMax->id);
+                break;
+                
+            default:
+                return abort(404);
+                break;
+        }
     }
 
 }
