@@ -112,25 +112,25 @@ class PlataformaController extends Controller
         return ['contenido'=> $titulo, 'capitulos' => $capitulosArr];
     }
 
-    public function getLeyTitulo($idSc){
+    public function getLeyTitulo($idSc, $vist=false){
         $titulo = $this->getTituloArr($idSc);
         $this->agregarVista('titulo', $idSc);
-        return view('titulo', ['titulo' => $titulo, 'loop' => false]);
+        return view('titulo', ['titulo' => $titulo, 'tagVist' => $vist]);
     }
     
-    public function getLeyCapitulo($idSc){
+    public function getLeyCapitulo($idSc, $vist=false){
         $capitulo = Capitulo::findOrFail($idSc);
         $titulo_ref = Titulo::select('numero', 'nombre')->where('id', '=', $capitulo->id_titulo)->get()->first();
         $this->agregarVista('capitulo', $idSc);
-        return view('capitulo', ['capitulo'=> ['contenido'=>$capitulo, 'articulos'=>Articulo::where('id_capitulo', '=', $capitulo->id)->get()], 'tituloRef'=>$titulo_ref]);
+        return view('capitulo', ['capitulo'=> ['contenido'=>$capitulo, 'articulos'=>Articulo::where('id_capitulo', '=', $capitulo->id)->get()], 'tituloRef'=>$titulo_ref, 'tagVist'=>$vist]);
     }
     
-    public function getLeyArticulo($idSc, $visit=false){
+    public function getLeyArticulo($idSc, $vist=false){
         $articulo = Articulo::where('id', '=', $idSc)->get()->first();
         $capitulo_ref = Capitulo::select('numero', 'nombre', 'id_titulo')->where('id', '=', $articulo->id_capitulo)->get()->first();
         $titulo_ref = Titulo::select('numero', 'nombre')->where('id', '=', $capitulo_ref->id_titulo)->get()->first();
         $this->agregarVista('articulo', $idSc);
-        return view('articulo', ['articulo' => $articulo, 'capituloRef' => $capitulo_ref, 'tituloRef' => $titulo_ref, 'tagVisit' => $visit]);
+        return view('articulo', ['articulo' => $articulo, 'capituloRef' => $capitulo_ref, 'tituloRef' => $titulo_ref, 'tagVist' => $vist]);
     }
 
     public function getLeyCompleta(){
@@ -147,17 +147,17 @@ class PlataformaController extends Controller
             case 'articulo':
                 $max =  Articulo::get('vistas')->max('vistas');
                 $artMax = Articulo::select('id', 'vistas')->where('vistas', '=', $max)->get()->first();
-                return $this->getLeyArticulo($artMax->id);
+                return $this->getLeyArticulo($artMax->id, true);
                 break;
             case 'capitulo':
                 $max =  Capitulo::get('vistas')->max('vistas');
                 $capMax =  Capitulo::select('id', 'vistas')->where('vistas', '=', $max)->get()->first();
-                return $this->getLeyCapitulo($capMax->id);
+                return $this->getLeyCapitulo($capMax->id, true);
                 break;
             case 'titulo':
                 $max =  Titulo::get('vistas')->max('vistas');
                 $titMax =  Titulo::select('id', 'vistas')->where('vistas', '=', $max)->get()->first();
-                return $this->getLeyCapitulo($titMax->id);
+                return $this->getLeyTitulo($titMax->id, true);
                 break;
                 
             default:

@@ -6,6 +6,9 @@ Título {{$titulo['contenido']->numero}}
 @section('contenido')
 <div class="jumbotron no-rborder shadow-std slideDownLg">
     <div class="header-info">
+        @if ($tagVist)
+        <p class="text-left text-uppercase"><cite>Vistas Acumuladas: {{$titulo['contenido']->vistas}}.</cite></p>
+        @endif
         <p class="text-left text-uppercase">creado el
             <cite>{{$titulo['contenido']->created_at->format('Y-m-d')}}</cite>, modificado por ultima vez el
             <cite>{{$titulo['contenido']->fecha_modificacion}}</cite>.</p>
@@ -34,9 +37,14 @@ Título {{$titulo['contenido']->numero}}
 
 @section('codigoExtra')
 <script>
+   @if (!$tagVist)
     $(document).ready(() => {
         $("#homeSubmenu").addClass('show');
     });
-
+    @else
+    $(document).ready(() => {
+        $("#pageSubmenu").addClass('show');
+    });
+    @endif
 </script>
 @endsection
