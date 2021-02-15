@@ -217,10 +217,10 @@
         <input type="checkbox" id="toggle-tool">
         <label for="toggle-tool" class="button-tool"></label>
         <nav class="nav-tool">
-            <a href="" id="btn-menos" class="buton-tool"><i class="fas fa-search-minus"></i></a>
-            <a href="" id="btn-normal" class="buton-tool"><i class="fas fa-search"></i></a>
-            <a href="" id="btn-mas" class="buton-tool"><i class="fas fa-search-plus"></i></a>
-            <a href="" id="btn-luz" class="buton-tool"><i class="fas fa-lightbulb"></i></a>
+            <a title="Disminuir letra" href="" id="btn-menos" class="buton-tool"><i class="fas fa-search-minus"></i></a>
+            <a title="Letra normal" href="" id="btn-normal" class="buton-tool"><i class="fas fa-search"></i></a>
+            <a title="Aumentar letra" href="" id="btn-mas" class="buton-tool"><i class="fas fa-search-plus"></i></a>
+            <a href="" title="Modo oscuro" id="btn-luz" class="buton-tool"><i class="fas fa-lightbulb"></i></a>
         </nav>
     </div>
 
