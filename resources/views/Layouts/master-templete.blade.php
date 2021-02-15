@@ -68,12 +68,28 @@
         .nav-tool i{
             font-size: 2rem;
         }
+
+        body[data-fsz="0"]{
+                font-size: 0.8rem;
+            
+        }
+        body[data-fsz="1"]{
+                font-size: 1.0rem;
+        }
+        body[data-fsz="2"]{
+                font-size: 1.2rem;
+        }
+
+        body[data-disp="apagado"], body[data-disp="apagado"] .jumbotron{
+                background: #0d0d0d;
+                color: #f5f5f5;
+        }
     
     </style>
     @yield('estilos')
 </head>
 
-<body>
+<body data-fsz="0" data-disp="encendido">
     
     <div class="wrapper">
     
@@ -168,7 +184,7 @@
                     </div>
                 </div>
             </nav>
-            <div class="container">
+            <div class="container" id="contenido-pagina">
                 @yield('contenido')
             </div>
            
@@ -180,9 +196,10 @@
         <input type="checkbox" id="toggle-tool">
         <label for="toggle-tool" class="button-tool"></label>
         <nav class="nav-tool">
-            <a href="#"><i class="fas fa-search-minus"></i></a>
-            <a href="#"><i class="fas fa-search-plus"></i></a>
-            <a href="#"><i class="fas fa-lightbulb"></i></a>
+            <a href="" id="btn-menos" class="buton-tool"><i class="fas fa-search-minus"></i></a>
+            <a href="" id="btn-normal" class="buton-tool"><i class="fas fa-search"></i></a>
+            <a href="" id="btn-mas" class="buton-tool"><i class="fas fa-search-plus"></i></a>
+            <a href="" id="btn-luz" class="buton-tool"><i class="fas fa-lightbulb"></i></a>
         </nav>
     </div>
 
@@ -196,6 +213,7 @@
     <script defer src="{{ asset('fontawesome/js/all.js') }}"></script>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
 
             $('.slideDown').slideDown(1000);
@@ -205,8 +223,40 @@
             });
 
             $('.slideDownLg').slideDown(2000);
-          
+            
+            $('.buton-tool').on('click', function(event){
+                event.preventDefault();
+                let flag = document.body;
+                switch(this.id){
+                    case 'btn-menos':                    
+                        if(flag.dataset.fsz >= 0){
+                            flag.dataset.fsz --;
+                        }                        
+                    break
+                    case 'btn-mas':                    
+                        if(flag.dataset.fsz <= 1){
+                            flag.dataset.fsz ++;
+                        }                        
+                    break
+                    case 'btn-normal':                    
+                        if(flag.dataset.fsz != 0){
+                            flag.dataset.fsz = 0;
+                        }                        
+                    break
+                    case 'btn-luz':
+                        if(flag.dataset.disp == "encendido"){
+                            flag.dataset.disp = "apagado"
+                        }else{
+                            flag.dataset.disp = 'encendido'
+                        }
+                    break
+                }
+                console.log(flag.dataset.fsz);
+            });
+
         });
+
+
 
     </script>
 
