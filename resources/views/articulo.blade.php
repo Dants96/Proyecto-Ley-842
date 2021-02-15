@@ -6,6 +6,9 @@ Articulo {{$articulo->numero}}
 @section('contenido')
 <div class="jumbotron no-rborder shadow-std slideDown">
     <div class="header-info">
+        @if ($tagVist)
+        <p class="text-left text-uppercase"><cite>Vistas Acumuladas: {{$articulo->vistas}}.</cite></p>
+        @endif
         <p class="text-left text-uppercase"><cite>Titulo {{$tituloRef->numero}}. {{$tituloRef->nombre}}</cite></p>
         <p class="text-left text-uppercase"><cite>Capitulo {{$capituloRef->numero}}. {{$capituloRef->nombre}}</cite>.
         </p>
@@ -22,9 +25,14 @@ Articulo {{$articulo->numero}}
 
 @section('codigoExtra')
 <script>
+    @if (!$tagVist)
     $(document).ready(() => {
         $("#homeSubmenu").addClass('show');
     });
-
+    @else
+    $(document).ready(() => {
+        $("#pageSubmenu").addClass('show');
+    });
+    @endif
 </script>
 @endsection

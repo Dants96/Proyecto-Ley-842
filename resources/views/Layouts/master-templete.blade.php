@@ -85,6 +85,10 @@
                 color: #f5f5f5;
         }
 
+        body[data-disp="apagado"] #btn-luz{
+            color: #ffc107;
+        }
+
         #sidebar .dropdown-menu.show {
         display: block;
         background: #6d7fcc;
