@@ -46,9 +46,8 @@ Route::get('/nobuild', function(){
 })->name('noBuild');
 
 Route::get('/test', function(){
-    $res =  Articulo::get('vistas')->max('vistas');
-    $res = Articulo::select('id', 'vistas')->where('vistas', '=', $res)->get()->first();
-    echo($res);
+    $sesrc = Articulo::select('id', 'activo')->where('activo', '=', true)->where('id', '=', 82)->get()->first();
+    echo($sesrc);
 });
 
 //rutas de auth admin
@@ -70,20 +69,24 @@ Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
     Route::post('/agregar/titulo',[AdministradorController::class, 'storeTitulo'])->name('agregarTitulo');
     Route::post('/agregar/articulo',[AdministradorController::class, 'storeArticulo'])->name('agregarArticulo');
     Route::post('/agregar/capitulo',[AdministradorController::class, 'storeCapitulo'])->name('agregarCapitulo');
+    //listar secciones
+    Route::get('/listar/{seccion}/{accion}',[AdministradorController::class, 'listarSections'])->name('listarSecctions');
     //rutas de editar
-    Route::get('/listar/{seccion}',[AdministradorController::class, 'listarSections'])->name('listarSecctions');
     Route::get('/editar/titulo/{id_seccion}',[AdministradorController::class, 'vistaEditTitulo'])->name('vistaEditarTitulo');
     Route::get('/editar/articulo/{id_seccion}',[AdministradorController::class, 'vistaEditArticulo'])->name('vistaEditarArticulo');
     Route::get('/editar/capitulo/{id_seccion}',[AdministradorController::class, 'vistaEditCapitulo'])->name('vistaEditarCapitulo');
     Route::put('/editar/titulo/{id_seccion}',[AdministradorController::class, 'editTitulo'])->name('editarTitulo');
     Route::put('/editar/articulo/{id_seccion}',[AdministradorController::class, 'editArticulo'])->name('editarArticulo');
     Route::put('/editar/capitulo/{id_seccion}',[AdministradorController::class, 'editCapitulo'])->name('editarCapitulo');
+    //rutas de eliminar 
+    Route::delete('/eliminar/seccion', [AdministradorController::class, 'eliminar'])->name('eliminar');
+    Route::get('/eliminar/seccion', function(){return abort(404);})->name('eliminar');
     //rutas de estadisticas 
     Route::get('/estadisticas',[EstadisticasController::class, 'getStadistics'])->name('stadistics');
     //rutas Ajax
-    Route::get('/{path}/get/capitulos/from', [ContenidoController::class, 'getCapitulosFrom']);
-    Route::get('/{path}/get/articulos/from', [ContenidoController::class, 'getArticulosFrom']);
-    Route::get('/{path}/{numero}/get/capitulos/from2', [ContenidoController::class, 'getCapitulosFrom']);
+    Route::get('/get/capitulos/from', [ContenidoController::class, 'getCapitulosFrom']);
+    Route::get('/get/articulos/from', [ContenidoController::class, 'getArticulosFrom']);
+    //Route::get('/{path}/{numero}/get/capitulos/from2', [ContenidoController::class, 'getCapitulosFrom']);
     //Route::get('/{path}/{numero}/get/articulos/from', [ContenidoController::class, 'getArticulosFrom']);
     //chartisan 
     Route::get('/estadisticas/chartData', [EstadisticasController::class, 'getChartData'])->name('getChartData');
