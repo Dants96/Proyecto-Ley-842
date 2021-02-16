@@ -28,9 +28,9 @@ Agregar Capítulo
                   </small>
         
                 <div class="row-btn margin-std d-flex flex-row-reverse">
-                    <button type="submit" class="btn btn-success">Agregar</button>
-                    <button type="reset" class="btn btn-primary">Limpiar</button>
-                    <a href="{{route('noBuild')}}" class="btn btn-warning" target="_">Capítulos Actuales</a>
+                    <button type="submit" class="btn btn-dark">Agregar</button>
+                    <button type="reset" class="btn btn-dark">Limpiar</button>
+                    <a href="{{route('indexOf', ['seccion' => 'Capítulos'])}}" class="btn btn-dark" target="_">Ver Capítulos</a>
                 </div>
 
             </div>
