@@ -106,7 +106,15 @@
             cell.innerHTML = i+1;
         } );
     } ).draw();
+    
+    //dar estilo bootsrap a los botonoes 
+    $(".dt-button").addClass("btn btn-dark btn-sm");
+    $(".dt-button").removeClass("dt-button");
+
+    
     });
+
+    
 </script>
 @endif
 @endsection
