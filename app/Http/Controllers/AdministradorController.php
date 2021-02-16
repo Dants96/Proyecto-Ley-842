@@ -179,17 +179,20 @@ class AdministradorController extends Controller
         return $this->showSuccess('Se ha agregado el Capítulo', $request->input('nombre_capitulo'), 'Capítulo', 'adición', $capitulo->numero);
     }
 
-    public function listarSections($seccion){        
+    public function listarSections($seccion, $accion){        
+        
+        if(!in_array($accion, ['MOD', 'SUP'])){return abort(404);}
+
         switch($seccion){
-            case 'titulo':
-                return view("Administrador.listar-secciones-modificacion", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Título']);
-            case 'capitulo':                
-                return view("Administrador.listar-secciones-modificacion", ['secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Capítulo']);
-            case 'articulo':
+            case 'titulos':
+                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Título']);
+            case 'capitulos':                
+                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Capítulo']);
+            case 'articulos':
                 $capitulos = Capitulo::select('capitulos.id', 'capitulos.nombre', 'capitulos.numero', 'titulos.numero as titulo')->join('titulos', 'capitulos.id_titulo', '=', 'titulos.id')->get();
-                return view("Administrador.listar-secciones-modificacion", ['secciones'=> $capitulos, 'seccion'=>'Artículo']);  
+                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> $capitulos, 'seccion'=>'Artículo']);  
             default:
-                return redirect()->route('daminInicio');            
+                return abort(404);            
         }
     }
 
@@ -269,6 +272,33 @@ class AdministradorController extends Controller
         $this->addEdicion('articulo',$articulo->id, 'MOD');
 
         return $this->showSuccess('Se ha modificado el Artículo', $request->input('nombre_articulo'), 'Artículo', 'edición', $articulo->numero);
+    }
+
+    function eliminar(Request $request){
+        $sesrc = null;
+        switch ($request->input('seccion')) {
+            case 'articulo':
+                $sesrc = Articulo::select('id', 'activo', 'nombre', 'numero')->where('activo', '=', true)->where('id', '=', $request->input('id'))->get()->first();
+                break;
+            case 'capitulo':
+                $sesrc = Capitulo::select('id', 'activo', 'nombre', 'numero')->where('activo', '=', true)->where('id', '=', $request->input('id'))->get()->first();
+                break;
+            case 'titulo':
+                $sesrc = Titulo::select('id', 'activo', 'nombre', 'numero')->where('activo', '=', true)->where('id', '=', $request->input('id'))->get()->first();
+                break;            
+            default:
+                return abort(404);
+                break;
+        }
+
+        if($sesrc){
+            $sesrc->activo = false;
+            $sesrc->save();
+            $this->addEdicion($request->input('seccion'), $sesrc->id, 'SUP');
+            return $this->showSuccess('Se ha eliminado el '.$request->input('seccion'), $sesrc->nombre, $request->input('seccion'), 'eliminacion', $sesrc->numero);
+        }else{
+            return abort(404);
+        }
     }
 
 }

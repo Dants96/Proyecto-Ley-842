@@ -14,8 +14,8 @@ Estadísticas
     <div class="fadeInjs">
         <h1 class="font-weight-bold">Estadísticas</h1>
     <p class="lead text-capitalize font-weight-bold">Administrador: {{Auth::user()->id}}, {{Auth::user()-> nombres}}
-        {{Auth::user()-> apellidos}}</p>
-    <p class="lead font-weight-bold">Fecha: {{date('Y / m / d')}}</p>        
+        {{Auth::user()-> apellidos}}
+        <br/>Fecha: {{date('Y / m / d')}}</p>        
     <ul class="nav nav-tabs font-weight-bold" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="generalStats-tab" data-toggle="tab" href="#generalStats" role="tab"

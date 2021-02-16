@@ -57,7 +57,7 @@ Modificar Articulo
     <script>
         $("#titulo").on('change', function(){
             $.ajax({
-                url: 'get/capitulos/from2',
+                url: '{{url('Administrador/get/capitulos/from')}}',
                 method: 'GET',
                 data:{
                     id_from:$('#titulo').val(),

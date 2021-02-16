@@ -24,7 +24,6 @@ class ContenidoController extends Controller
     }
     // Informe datos Modificaciones
     private function getArrayInforme($seccion){
-
         $selectArr = [
         "edicion_{$seccion}s.id_administrador",
         "administradores.nombres",
@@ -82,7 +81,6 @@ class ContenidoController extends Controller
                 break;
         }
     }
-
 
     // Retorna la lista de parametro pero con los objetos del query agregados como un item array
     private function createItemVisita($query, $array, $seccion){
