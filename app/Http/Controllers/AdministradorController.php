@@ -44,10 +44,10 @@ class AdministradorController extends Controller
                 return view("Administrador.agregar-{$seccion}",['numero'=> Titulo::all('numero')->max('numero') + 1]);
                 
             case 'articulo':
-                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::all('id', 'nombre', 'numero')]);
+                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::select('id', 'nombre', 'numero', 'activo')->where('activo', '=', 1)->get()]);
                 
             case 'capitulo':
-                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::all('id', 'nombre', 'numero')]);
+                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::select('id', 'nombre', 'numero', 'activo')->where('activo', '=', 1)->get()]);
                 
             default:
                 return redirect()->route('adminInicio');
@@ -185,11 +185,11 @@ class AdministradorController extends Controller
 
         switch($seccion){
             case 'titulos':
-                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Título']);
+                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre', 'activo')->where('activo', '=', true)->get(), 'seccion'=>'Título']);
             case 'capitulos':                
-                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre')->get(), 'seccion'=>'Capítulo']);
+                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre', 'activo')->where('activo', '=', true)->get(), 'seccion'=>'Capítulo']);
             case 'articulos':
-                $capitulos = Capitulo::select('capitulos.id', 'capitulos.nombre', 'capitulos.numero', 'titulos.numero as titulo')->join('titulos', 'capitulos.id_titulo', '=', 'titulos.id')->get();
+                $capitulos = Capitulo::select('capitulos.id', 'capitulos.nombre', 'capitulos.numero', 'titulos.numero as titulo', 'titulos.activo')->join('titulos', 'capitulos.id_titulo', '=', 'titulos.id')->where('titulos.activo', '=', true)->get();
                 return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> $capitulos, 'seccion'=>'Artículo']);  
             default:
                 return abort(404);            

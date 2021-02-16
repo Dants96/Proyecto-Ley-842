@@ -80,6 +80,7 @@ Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
     Route::put('/editar/capitulo/{id_seccion}',[AdministradorController::class, 'editCapitulo'])->name('editarCapitulo');
     //rutas de eliminar 
     Route::delete('/eliminar/seccion', [AdministradorController::class, 'eliminar'])->name('eliminar');
+    Route::get('/eliminar/seccion', function(){return abort(404);})->name('eliminar');
     //rutas de estadisticas 
     Route::get('/estadisticas',[EstadisticasController::class, 'getStadistics'])->name('stadistics');
     //rutas Ajax
