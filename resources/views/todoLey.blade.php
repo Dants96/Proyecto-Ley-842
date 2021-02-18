@@ -23,9 +23,7 @@ Ley 842 de 2003
             <h1 class="h3">TITULO {{$titulo['contenido']->numero}}.</h1>
             <h1 class="h3">{{$titulo['contenido']->nombre}}<h1>
         </div>
-        @if(!$titulo['contenido']->activo)
-            </s>
-        @endif
+        
         @foreach ($titulo['capitulos'] as $capitulo)
         @if(!$capitulo['contenido']->activo)
         <s>
@@ -34,8 +32,7 @@ Ley 842 de 2003
             <h2 class="h4">{{($capitulo['contenido']->numero)? 'CAPITULO '.$capitulo['contenido']->numero.'.' : '' }}</h2>
             <h2 class="h4">{{$capitulo['contenido']->nombre}}</h2>
         </div>
-        @if(!$capitulo['contenido']->activo)
-        </s>
+       
         @endif        
             @foreach ($capitulo['articulos'] as $articulo)
             @if(!$articulo->activo)
@@ -48,7 +45,12 @@ Ley 842 de 2003
             </s>
             @endif          
             @endforeach
-        @endforeach  
+            @if(!$capitulo['contenido']->activo)
+            </s>
+        @endforeach
+        @if(!$titulo['contenido']->activo)
+            </s>
+        @endif
         @endforeach
     
 </div>
