@@ -120,22 +120,37 @@
                 </li>
                 <li>
                     <a href="#pageSubmenu2Mod" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Editar Sección</a>
+                        class="dropdown-toggle">Modificar Sección</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu2Mod">
                         <li>
-                            <a href="{{route('listarSecctions', ['seccion'=>'titulo'])}}">Título</a>
+                            <a href="{{route('listarSecctions', ['seccion'=>'titulos', 'accion'=>'MOD'])}}">Título</a>
                         </li>
                         <li>
-                            <a href="{{route('listarSecctions', ['seccion'=>'capitulo'])}}">Capítulo</a>
+                            <a href="{{route('listarSecctions', ['seccion'=>'capitulos', 'accion'=>'MOD'])}}">Capítulo</a>
                         </li>
                         <li>
-                            <a href="{{route('listarSecctions', ['seccion'=>'articulo'])}}">Artículo</a>
+                            <a href="{{route('listarSecctions', ['seccion'=>'articulos', 'accion'=>'MOD'])}}">Artículo</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pageSubmenu3Del" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Eliminar Sección</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu3Del">
+                        <li>
+                            <a href="{{route('listarSecctions', ['seccion'=>'titulos', 'accion'=>'SUP'])}}">Título</a>
+                        </li>
+                        <li>
+                            <a href="{{route('listarSecctions', ['seccion'=>'capitulos', 'accion'=>'SUP'])}}">Capítulo</a>
+                        </li>
+                        <li>
+                            <a href="{{route('listarSecctions', ['seccion'=>'articulos', 'accion'=>'SUP'])}}">Artículo</a>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a href="{{route('stadistics')}}">Estadísticas</a>
-                    <a href="{{route('noBuild')}}">Ayuda</a>
+                    <a href="{{route('nosotros')}}">Ayuda</a>
                 </li>
             </ul>
 

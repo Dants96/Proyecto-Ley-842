@@ -41,9 +41,9 @@ Agregar Articulo
                 
 
                 <div class="row-btn margin-std d-flex flex-row-reverse">
-                    <button type="submit" class="btn btn-success">Agregar</button>
-                    <button type="reset" class="btn btn-primary" id="limpiar">Limpiar</button>
-                    <a href="{{route('noBuild')}}" class="btn btn-warning" target="_">Artículo Actuales</a>
+                    <button type="submit" class="btn btn-dark">Agregar</button>
+                    <button type="reset" class="btn btn-dark" id="limpiar">Limpiar</button>
+                    <a href="{{route('indexOf', ['seccion' => 'Artículos'])}}" class="btn btn-dark" target="_">Ver Artículos</a>
                 </div>
 
             </div>
@@ -66,7 +66,7 @@ Agregar Articulo
     <script>
         $("#titulo").on('change', function(){
             $.ajax({
-                url: 'get/capitulos/from',
+                url: '{{url('Administrador/get/capitulos/from')}}',
                 method: 'GET',
                 data:{
                     id_from:$('#titulo').val(),

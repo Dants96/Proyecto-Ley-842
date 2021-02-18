@@ -14,8 +14,8 @@ Estadísticas
     <div class="fadeInjs">
         <h1 class="font-weight-bold">Estadísticas</h1>
     <p class="lead text-capitalize font-weight-bold">Administrador: {{Auth::user()->id}}, {{Auth::user()-> nombres}}
-        {{Auth::user()-> apellidos}}</p>
-    <p class="lead font-weight-bold">Fecha: {{date('Y / m / d')}}</p>        
+        {{Auth::user()-> apellidos}}
+        <br/>Fecha: {{date('Y / m / d')}}</p>        
     <ul class="nav nav-tabs font-weight-bold" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="generalStats-tab" data-toggle="tab" href="#generalStats" role="tab"
@@ -41,6 +41,13 @@ Estadísticas
                         <row><p class="font-weight-bold">Número de secciones editadas: </p></row>
                         <row><p class="font-weight-bold">Número de secciones agregadas: </p></row>
                         <row><p class="font-weight-bold">Número de secciones eliminadas: </p></row>
+                        <row><p class="font-weight-bold">Número de Articulos: </p></row>
+                        <row><p class="font-weight-bold">Número de Capitulos: </p></row>
+                        <row><p class="font-weight-bold">Número de Titulos: </p></row>
+                        <row><p class="font-weight-bold">Número vistas individuales a Articulos: </p></row>
+                        <row><p class="font-weight-bold">Número vistas individuales a Capitulos: </p></row>
+                        <row><p class="font-weight-bold">Número vistas individuales a Titulos: </p></row>
+
                     </div>
                     <div class="col-8">
                         <row><p>{{$estadisticas->visitas_pagina}}</p></row>
@@ -48,6 +55,12 @@ Estadísticas
                         <row><p>{{$estadisticas->numero_modificaciones}}</p></row>
                         <row><p>{{$estadisticas->numero_adiciones}}</p></row>
                         <row><p>{{$estadisticas->numero_supreciones}}</p></row>
+                        <row><p>{{$numeroDe['articulos']}}</p></row>
+                        <row><p>{{$numeroDe['capitulos']}}</p></row>
+                        <row><p>{{$numeroDe['titulos']}}</p></row>
+                        <row><p>{{$estadisticas->num_vistas_articulos}}</p></row>
+                        <row><p>{{$estadisticas->num_vistas_capitulos}}</p></row>
+                        <row><p>{{$estadisticas->num_vistas_titulos}}</p></row>
                     </div>
                 </div>
             </ul>
