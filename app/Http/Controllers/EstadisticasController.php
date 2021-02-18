@@ -21,7 +21,7 @@ class EstadisticasController extends Controller
         $estadisticas = Estadistica::find(date('Y'));
         $datosChartMod = $this->dataChartMod();
         $datosChartVisit = $this->dataChartVisit();
-        return view("Administrador.estadisiticas",
+        return view("administrador.estadisiticas",
         ['estadisticas' => $estadisticas, 
         'datosModchart' => $datosChartMod, 
         'datosVisitchart' => $datosChartVisit,
