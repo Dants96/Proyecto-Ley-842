@@ -19,6 +19,7 @@ Nosotros
         /*background-color: white;*/
         transition: 1.5s;
         border: 2px solid #4700A3 !important;
+        transform: scale(1.5);
         
     }
     img#logoLL{

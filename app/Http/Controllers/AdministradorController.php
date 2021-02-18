@@ -26,7 +26,7 @@ class AdministradorController extends Controller
     }
 
     public function showLoginForm(){
-        return view('Administrador.login');
+        return view('administrador.login');
     }
 
     public function authenticated(){
