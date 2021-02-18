@@ -33,7 +33,7 @@ Ley 842 de 2003
             <h2 class="h4">{{$capitulo['contenido']->nombre}}</h2>
         </div>
        
-        @endif        
+             
             @foreach ($capitulo['articulos'] as $articulo)
             @if(!$articulo->activo)
             <s>
@@ -47,6 +47,7 @@ Ley 842 de 2003
             @endforeach
             @if(!$capitulo['contenido']->activo)
             </s>
+            @endif   
         @endforeach
         @if(!$titulo['contenido']->activo)
             </s>
