@@ -1,4 +1,4 @@
-@extends('layouts.master-templete')
+@extends('Layouts.master-templete')
 @section('titulo')
 Nosotros
 @endsection
