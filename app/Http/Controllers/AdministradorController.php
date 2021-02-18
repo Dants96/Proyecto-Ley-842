@@ -41,13 +41,13 @@ class AdministradorController extends Controller
     public function addSection($seccion){
         switch($seccion){
             case 'titulo':
-                return view("Administrador.agregar-{$seccion}",['numero'=> Titulo::all('numero')->max('numero') + 1]);
+                return view("administrador.agregar-{$seccion}",['numero'=> Titulo::all('numero')->max('numero') + 1]);
                 
             case 'articulo':
-                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::select('id', 'nombre', 'numero', 'activo')->where('activo', '=', 1)->get()]);
+                return view("administrador.agregar-{$seccion}", ["titulos" => Titulo::select('id', 'nombre', 'numero', 'activo')->where('activo', '=', 1)->get()]);
                 
             case 'capitulo':
-                return view("Administrador.agregar-{$seccion}", ["titulos" => Titulo::select('id', 'nombre', 'numero', 'activo')->where('activo', '=', 1)->get()]);
+                return view("administrador.agregar-{$seccion}", ["titulos" => Titulo::select('id', 'nombre', 'numero', 'activo')->where('activo', '=', 1)->get()]);
                 
             default:
                 return redirect()->route('adminInicio');
@@ -118,7 +118,7 @@ class AdministradorController extends Controller
             'objeto_numero' =>  $numero,
             'operacion' => $opr
         ];
-        return view('Administrador.proceso-exitoso', array('proceso' => $infoProceso));
+        return view('administrador.proceso-exitoso', array('proceso' => $infoProceso));
     }
 
     public function storeTitulo(Request $request){
@@ -185,29 +185,29 @@ class AdministradorController extends Controller
 
         switch($seccion){
             case 'titulos':
-                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre', 'activo')->where('activo', '=', true)->get(), 'seccion'=>'Título']);
+                return view("administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre', 'activo')->where('activo', '=', true)->get(), 'seccion'=>'Título']);
             case 'capitulos':                
-                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre', 'activo')->where('activo', '=', true)->get(), 'seccion'=>'Capítulo']);
+                return view("administrador.listar-secciones", ['accion' => $accion,'secciones'=> Titulo::select('id', 'numero', 'nombre', 'activo')->where('activo', '=', true)->get(), 'seccion'=>'Capítulo']);
             case 'articulos':
                 $capitulos = Capitulo::select('capitulos.id', 'capitulos.nombre', 'capitulos.numero', 'titulos.numero as titulo', 'titulos.activo')->join('titulos', 'capitulos.id_titulo', '=', 'titulos.id')->where('titulos.activo', '=', true)->get();
-                return view("Administrador.listar-secciones", ['accion' => $accion,'secciones'=> $capitulos, 'seccion'=>'Artículo']);  
+                return view("administrador.listar-secciones", ['accion' => $accion,'secciones'=> $capitulos, 'seccion'=>'Artículo']);  
             default:
                 return abort(404);            
         }
     }
 
     public function vistaEditTitulo($id_seccion){
-        return view('Administrador.modificar-titulo')->with('infold', Titulo::findOrFail($id_seccion)); ;
+        return view('administrador.modificar-titulo')->with('infold', Titulo::findOrFail($id_seccion)); ;
     }
     public function vistaEditCapitulo($id_seccion){
         $titlo = Titulo::select('id', 'nombre', 'numero')->where('id', '=', Capitulo::findOrFail($id_seccion)->id_titulo)->get()->first();
-        return view('Administrador.modificar-capitulo', ["titulos" => Titulo::all('id', 'nombre', 'numero'),
+        return view('administrador.modificar-capitulo', ["titulos" => Titulo::all('id', 'nombre', 'numero'),
                     "tituloq"=>$titlo])->with('infold', Capitulo::findOrFail($id_seccion)); ;
     }
     public function vistaEditArticulo($id_seccion){
         $capto = Capitulo::select('id', 'nombre', 'numero','id_titulo')->where('id', '=', Articulo::findOrFail($id_seccion)->id_capitulo)->get()->first();
         $titlo = Titulo::select('id', 'nombre','numero')->where('id', '=', $capto->id_titulo)->get()->first();
-        return view('Administrador.modificar-articulo', 
+        return view('administrador.modificar-articulo', 
                     ["titulos" => Titulo::all('id', 'nombre', 'numero'), "capitulos" => Capitulo::select('id', 'nombre', 'numero')->where('id_titulo', '=', $capto->id_titulo)->get(),
                     "capituloq"=>$capto, "tituloq"=>$titlo])->with('infold', Articulo::findOrFail($id_seccion));
     }   
