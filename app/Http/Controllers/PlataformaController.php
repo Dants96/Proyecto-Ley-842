@@ -39,14 +39,14 @@ class PlataformaController extends Controller
     public function getIndexOf($seccion){
         switch($seccion){
             case 'Títulos':
-                $titulos = Titulo::select('id', 'numero', 'nombre')->get();
+                $titulos = Titulo::select('id', 'numero', 'nombre')->where('activo', '=', true)->get();
                 return view('indices', ['seccion' => $seccion, 'source' => $titulos]);
                 break;
             case 'Capítulos':
                 $source = array();
-                $titulos = Titulo::select('id', 'nombre', 'numero')->get();
+                $titulos = Titulo::select('id', 'nombre', 'numero')->where('activo', '=', true)->get();
                 foreach($titulos as $titulo){
-                    $capitulos = Capitulo::select('id', 'numero', 'nombre')->where('id_titulo', '=', $titulo->id)->get();
+                    $capitulos = Capitulo::select('id', 'numero', 'nombre')->where('id_titulo', '=', $titulo->id)->where('activo', '=', true)->get();
                     array_push($source, ['numero' => $titulo->numero, 'nombre' => $titulo->nombre, 'capitulos' => $capitulos]);
                 }
                 return view('indices', ['seccion' => $seccion, 'source' => $source]);                
@@ -54,12 +54,12 @@ class PlataformaController extends Controller
                 
             case 'Artículos':
                 $source = array();
-                $titulos = Titulo::select('id', 'nombre', 'numero')->get();
+                $titulos = Titulo::select('id', 'nombre', 'numero')->where('activo', '=', true)->get();
                 foreach($titulos as $titulo){
-                    $capitulos = Capitulo::select('id', 'numero', 'nombre')->where('id_titulo', '=', $titulo->id)->get();
+                    $capitulos = Capitulo::select('id', 'numero', 'nombre')->where('id_titulo', '=', $titulo->id)->where('activo', '=', true)->get();
                     $capArray = array();
                     foreach($capitulos as $capitulo){
-                        $articulos =  Articulo::select('id', 'numero', 'nombre')->where('id_capitulo', '=', $capitulo->id)->get();
+                        $articulos =  Articulo::select('id', 'numero', 'nombre')->where('id_capitulo', '=', $capitulo->id)->where('activo', '=', true)->get();
                         array_push($capArray, ['nombre' => $capitulo->nombre, 'numero' => $capitulo->numero, 'articulos' => $articulos]);
                     }
                     array_push($source, ['nombre' => $titulo->nombre, 'numero' => $titulo->numero, 'capitulos' => $capArray]);

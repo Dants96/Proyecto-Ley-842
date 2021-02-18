@@ -14,20 +14,39 @@ Ley 842 de 2003
             <h1 class="h2">El Congreso de Colombia</h1>
             <h1 class="h2">DECRETA:<h1>
         </div>
+        
         @foreach ($titulos as $titulo)
+        @if(!$titulo['contenido']->activo)
+            <s>
+        @endif
         <div class="titulo-header font-weight-bold text-center">
             <h1 class="h3">TITULO {{$titulo['contenido']->numero}}.</h1>
             <h1 class="h3">{{$titulo['contenido']->nombre}}<h1>
         </div>
+        @if(!$titulo['contenido']->activo)
+            </s>
+        @endif
         @foreach ($titulo['capitulos'] as $capitulo)
+        @if(!$capitulo['contenido']->activo)
+        <s>
+        @endif
         <div class="capitulo-header font-weight-bold text-center">
             <h2 class="h4">{{($capitulo['contenido']->numero)? 'CAPITULO '.$capitulo['contenido']->numero.'.' : '' }}</h2>
             <h2 class="h4">{{$capitulo['contenido']->nombre}}</h2>
-        </div>        
+        </div>
+        @if(!$capitulo['contenido']->activo)
+        </s>
+        @endif        
             @foreach ($capitulo['articulos'] as $articulo)
+            @if(!$articulo->activo)
+            <s>
+            @endif 
             <div class="articulo-content">
                 <p><span class="font-weight-bold">{{/*($articulo->paragrafo)? 'PARAGRAFO':'ARTÍCULO'*/ 'ARTÍCULO'}} {{$articulo->numero}}. {{$articulo->nombre}}</span> {{$articulo->contenido}}</p>
-            </div>            
+            </div>   
+            @if(!$articulo->activo)
+            </s>
+            @endif          
             @endforeach
         @endforeach  
         @endforeach
