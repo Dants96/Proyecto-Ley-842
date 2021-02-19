@@ -5,6 +5,7 @@ Articulo {{$articulo->numero}}
 
 @section('contenido')
 <div class="jumbotron no-rborder shadow-std slideDown">
+    <div id="contenido-prt">
     <div class="header-info">
         @if ($tagVist)
         <p class="text-left text-uppercase"><cite>Vistas Acumuladas: {{$articulo->vistas}}.</cite></p>
@@ -19,6 +20,8 @@ Articulo {{$articulo->numero}}
         <p><span class="font-weight-bold h5">{{/*($articulo->paragrafo)? 'PARAGRAFO':'ARTÍCULO'*/ 'ARTÍCULO'}}
                 {{$articulo->numero}}. {{$articulo->nombre}}</span> {{$articulo->contenido}}</p>
     </div>
+    </div>
+    <button class="btn btn-dark btn-print">Imprimir</button>
 </div>
 
 @endsection
@@ -34,5 +37,6 @@ Articulo {{$articulo->numero}}
         $("#pageSubmenu").addClass('show');
     });
     @endif
+
 </script>
 @endsection
