@@ -34,7 +34,7 @@ Inicio
         background: rgb(0, 37, 105);
         background: -moz-linear-gradient(340deg, rgba(0, 37, 105, 1) 1%, rgba(71, 0, 163, 1) 55%);
         background: -webkit-linear-gradient(340deg, rgba(0, 37, 105, 1) 1%, rgba(71, 0, 163, 1) 55%);
-        background: linear-gradient(340deg, rgba(0, 37, 105, 1) 1%, rgba(71, 0, 163, 1) 55%);
+        background: linear-gradient(61deg, rgba(0, 37, 105, 1) 1%, rgba(71, 0, 163, 1) 55%)
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#002569", endColorstr="#4700a3", GradientType=1);
         
     }
