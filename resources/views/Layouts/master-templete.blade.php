@@ -264,9 +264,9 @@
             </ul>
 
             <ul class="list-unstyled CTAs">
-                <li>
+               <!-- <li>
                     <a href="https://www.copnia.gov.co/" class="download" target="_blank">COPNIA</a>
-                </li>
+                </li> -->
                 <li>
                     <a href="{{route('adminLogin')}}" class="article">Administrador</a>
                 </li>
