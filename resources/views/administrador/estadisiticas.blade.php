@@ -33,37 +33,101 @@ Estadísticas
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="generalStats" role="tabpanel" aria-labelledby="generalStats-tab">
             <p>Estadísticas generales de la plataforma de lectura y la plataforma de Administración.</p>
-            <ul>
-                <div class="row justify-content-center">
-                    <div class="col-mb">
-                        <row><p class="font-weight-bold">Número visitas a la plataforma de lectura: </p></row>
-                        <row><p class="font-weight-bold">Número de modificaciones realizadas: </p></row>
-                        <row><p class="font-weight-bold">Número de secciones editadas: </p></row>
-                        <row><p class="font-weight-bold">Número de secciones agregadas: </p></row>
-                        <row><p class="font-weight-bold">Número de secciones eliminadas: </p></row>
-                        <row><p class="font-weight-bold">Número de Articulos: </p></row>
-                        <row><p class="font-weight-bold">Número de Capitulos: </p></row>
-                        <row><p class="font-weight-bold">Número de Titulos: </p></row>
-                        <row><p class="font-weight-bold">Número vistas individuales a Articulos: </p></row>
-                        <row><p class="font-weight-bold">Número vistas individuales a Capitulos: </p></row>
-                        <row><p class="font-weight-bold">Número vistas individuales a Titulos: </p></row>
-
-                    </div>
-                    <div class="col-8">
-                        <row><p>{{$estadisticas->visitas_pagina}}</p></row>
-                        <row><p>{{$estadisticas->numero_modificaciones + $estadisticas->numero_adiciones + $estadisticas->numero_supreciones}}</p></row>
-                        <row><p>{{$estadisticas->numero_modificaciones}}</p></row>
-                        <row><p>{{$estadisticas->numero_adiciones}}</p></row>
-                        <row><p>{{$estadisticas->numero_supreciones}}</p></row>
-                        <row><p>{{$numeroDe['articulos']}}</p></row>
-                        <row><p>{{$numeroDe['capitulos']}}</p></row>
-                        <row><p>{{$numeroDe['titulos']}}</p></row>
-                        <row><p>{{$estadisticas->num_vistas_articulos}}</p></row>
-                        <row><p>{{$estadisticas->num_vistas_capitulos}}</p></row>
-                        <row><p>{{$estadisticas->num_vistas_titulos}}</p></row>
-                    </div>
-                </div>
-            </ul>
+            <div class="">                
+            <table class="table table-striped table-sm" style="width: 70%;
+            margin-left: auto;
+            margin-right: auto">
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número visitas a la plataforma de lectura: </p>
+                    </td>
+                    <td>
+                        <p>{{$estadisticas->visitas_pagina}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número de modificaciones realizadas: </p>
+                    </td>
+                    <td>
+                        <p>{{$estadisticas->numero_modificaciones + $estadisticas->numero_adiciones + $estadisticas->numero_supreciones}}
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número de secciones editadas: </p>
+                    </td>
+                    <td>
+                        <p>{{$estadisticas->numero_modificaciones}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número de secciones agregadas: </p>
+                    </td>
+                    <td>
+                        <p>{{$estadisticas->numero_adiciones}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número de secciones eliminadas: </p>
+                    </td>
+                    <td>
+                        <p>{{$estadisticas->numero_supreciones}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número de Articulos: </p>
+                    </td>
+                    <td>
+                        <p>{{$numeroDe['articulos']}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número de Capitulos: </p>
+                    </td>
+                    <td>
+                        <p>{{$numeroDe['capitulos']}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número de Titulos: </p>
+                    </td>
+                    <td>
+                        <p>{{$numeroDe['titulos']}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número vistas individuales a Articulos: </p>
+                    </td>
+                    <td>
+                        <p>{{$estadisticas->num_vistas_articulos}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número vistas individuales a Capitulos: </p>
+                    </td>
+                    <td>
+                        <p>{{$estadisticas->num_vistas_capitulos}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="font-weight-bold">Número vistas individuales a Titulos: </p>
+                    </td>
+                    <td>
+                        <p>{{$estadisticas->num_vistas_titulos}}</p>
+                    </td>
+                </tr>
+            </table>
+            </div>
         </div>
         <div class="tab-pane fade" id="ModificacionesStats" role="tabpanel" aria-labelledby="ModificacionesStats-tab">
             <p>El gráfico muestra el número de ediciones realizadas, separadas por tipo de modificación (Adición, Modificación, Eliminación),  en un lapso de 30 días.</p>
