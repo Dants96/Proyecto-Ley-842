@@ -21,8 +21,8 @@ Ley 842 de 2003
         <s>
             @endif
             <div class="titulo-header font-weight-bold text-center">
-                <h1 class="h3">TITULO {{$titulo['contenido']->numero}}.</h1>
-                <h1 class="h3">{{$titulo['contenido']->nombre}}<h1>
+                <h1 class="h3">TITULO {!!$titulo['contenido']->numero!!}.</h1>
+                <h1 class="h3">{!!$titulo['contenido']->nombre!!}<h1>
             </div>
 
             @foreach ($titulo['capitulos'] as $capitulo)
@@ -31,8 +31,8 @@ Ley 842 de 2003
                 @endif
                 <div class="capitulo-header font-weight-bold text-center">
                     <h2 class="h4">
-                        {{($capitulo['contenido']->numero)? 'CAPITULO '.$capitulo['contenido']->numero.'.' : '' }}</h2>
-                    <h2 class="h4">{{$capitulo['contenido']->nombre}}</h2>
+                        {!!($capitulo['contenido']->numero)? 'CAPITULO '.$capitulo['contenido']->numero.'.' : '' !!}</h2>
+                    <h2 class="h4">{!!$capitulo['contenido']->nombre!!}</h2>
                 </div>
 
 
@@ -41,8 +41,8 @@ Ley 842 de 2003
                 <s>
                     @endif
                     <div class="articulo-content">
-                        <p><span class="font-weight-bold">{{/*($articulo->paragrafo)? 'PARAGRAFO':'ARTÍCULO'*/ 'ARTÍCULO'}}
-                                {{$articulo->numero}}. {{$articulo->nombre}}</span> {{$articulo->contenido}}</p>
+                        <p><span class="font-weight-bold">{!!/*($articulo->paragrafo)? 'PARAGRAFO':'ARTÍCULO'*/ 'ARTÍCULO'!!}
+                                {!!$articulo->numero!!}. {!!$articulo->nombre!!}</span> {!!$articulo->contenido!!}</p>
                     </div>
                     @if(!$articulo->activo)
                 </s>

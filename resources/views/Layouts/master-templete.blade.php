@@ -27,6 +27,10 @@
     color: #0d0d0d;
   }
 
+  body[data-disp="apagado"] .underlineHover:hover{
+      color: white;
+  }
+
   .underlineHover:hover:after {
     width: 100%;
   }
@@ -160,7 +164,7 @@
     bottom: 5%;
     right: 2.6%;
     transition: all 0.5s ease-in-out;
-    background: white;
+    background: #f5f5f5 !important;
     width: 70px;
     border-radius: 0px;
     transform: translateY(0%);
@@ -297,10 +301,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="{{route('inicio')}}">Inicio</a>
+                                <a class="nav-link"  href="{{route('inicio')}}">Inicio</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('info')}}">Info Ley</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('nosotros')}}">Contactanos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('adminLogin')}}">Administrador</a>
