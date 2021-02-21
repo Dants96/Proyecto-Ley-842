@@ -41,14 +41,13 @@ Estadísticas
                         <row><p class="font-weight-bold">Número de secciones editadas: </p></row>
                         <row><p class="font-weight-bold">Número de secciones agregadas: </p></row>
                         <row><p class="font-weight-bold">Número de secciones eliminadas: </p></row>
-                    </div>
-                    <div class="col-8">
+                    
                         <row><p>{{$estadisticas->visitas_pagina}}</p></row>
                         <row><p>{{$estadisticas->numero_modificaciones + $estadisticas->numero_adiciones + $estadisticas->numero_supreciones}}</p></row>
                         <row><p>{{$estadisticas->numero_modificaciones}}</p></row>
                         <row><p>{{$estadisticas->numero_adiciones}}</p></row>
                         <row><p>{{$estadisticas->numero_supreciones}}</p></row>
-                    </div>
+                   
                 </div>
             </ul>
         </div>
