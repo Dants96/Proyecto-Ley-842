@@ -1,4 +1,4 @@
-@extends('layouts.masterAdmin-templete')
+@extends('Layouts.masterAdmin-templete')
 @section('titulo')
 Estadísticas
 @endsection
@@ -41,13 +41,27 @@ Estadísticas
                         <row><p class="font-weight-bold">Número de secciones editadas: </p></row>
                         <row><p class="font-weight-bold">Número de secciones agregadas: </p></row>
                         <row><p class="font-weight-bold">Número de secciones eliminadas: </p></row>
-                    
+                        <row><p class="font-weight-bold">Número de Articulos: </p></row>
+                        <row><p class="font-weight-bold">Número de Capitulos: </p></row>
+                        <row><p class="font-weight-bold">Número de Titulos: </p></row>
+                        <row><p class="font-weight-bold">Número vistas individuales a Articulos: </p></row>
+                        <row><p class="font-weight-bold">Número vistas individuales a Capitulos: </p></row>
+                        <row><p class="font-weight-bold">Número vistas individuales a Titulos: </p></row>
+
+                    </div>
+                    <div class="col-8">
                         <row><p>{{$estadisticas->visitas_pagina}}</p></row>
                         <row><p>{{$estadisticas->numero_modificaciones + $estadisticas->numero_adiciones + $estadisticas->numero_supreciones}}</p></row>
                         <row><p>{{$estadisticas->numero_modificaciones}}</p></row>
                         <row><p>{{$estadisticas->numero_adiciones}}</p></row>
                         <row><p>{{$estadisticas->numero_supreciones}}</p></row>
-                   
+                        <row><p>{{$numeroDe['articulos']}}</p></row>
+                        <row><p>{{$numeroDe['capitulos']}}</p></row>
+                        <row><p>{{$numeroDe['titulos']}}</p></row>
+                        <row><p>{{$estadisticas->num_vistas_articulos}}</p></row>
+                        <row><p>{{$estadisticas->num_vistas_capitulos}}</p></row>
+                        <row><p>{{$estadisticas->num_vistas_titulos}}</p></row>
+                    </div>
                 </div>
             </ul>
         </div>

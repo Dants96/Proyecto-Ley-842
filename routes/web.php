@@ -62,7 +62,7 @@ Route::group(['prefix' => 'Administrador', 'middleware' => 'auth'], function(){
         return redirect()->route('adminInicio');
     });
     Route::get('/inicio', function(){
-        return view('Administrador.inicio');
+        return view('administrador.inicio');
     })->name('adminInicio');
     //rutas de agregar
     Route::get('/agregar/{seccion}',[AdministradorController::class, 'addSection'])->name('agregarForm');

@@ -1,4 +1,4 @@
-@extends('layouts.masterAdmin-templete')
+@extends('Layouts.masterAdmin-templete')
 @section('titulo')
     {{$proceso['operacion']}} Exitosa
 @endsection

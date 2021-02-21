@@ -6,7 +6,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
-    <title>App Name - @yield('titulo')</title>
+    <title>Ley Lector - @yield('titulo')</title>
     <style>
         a{
     display: inline-block;
@@ -89,6 +89,10 @@
             color: #ffc107;
         }
 
+        body[data-disp="apagado"] .jumbotron p{
+            color: #efefef;
+        }
+
         #sidebar .dropdown-menu.show {
         display: block;
         background: #6d7fcc;
@@ -154,10 +158,10 @@
     transform: translateY(-10%);
     opacity: 0;
     bottom: 5%;
-    right: 2.5%;
+    right: 2.6%;
     transition: all 0.5s ease-in-out;
     background: white;
-    width: 80px;
+    width: 70px;
     border-radius: 0px;
     transform: translateY(0%);
     box-shadow: 2px 3px 10px 0 rgba(0,0,0,0.1);
@@ -167,7 +171,7 @@
     font-size: large;
     text-align: center;
     display: block;
-    margin: 20px 0;
+    margin: 14px 0;
     color: black;
     text-decoration: none;
     text-transform: uppercase;
@@ -247,12 +251,14 @@
                                 </div>
                             </div>
                         </li>
+                        <!--
                         <li>
                             <a href="#">Etiqueta 1</a>
                         </li>
                         <li>
                             <a href="#">Etiqueta 2</a>
                         </li>
+                    -->
                     </ul>
                 </li>
                 <li>
@@ -262,9 +268,9 @@
             </ul>
 
             <ul class="list-unstyled CTAs">
-                <li>
+               <li>
                     <a href="https://www.copnia.gov.co/" class="download" target="_blank">COPNIA</a>
-                </li>
+                </li> 
                 <li>
                     <a href="{{route('adminLogin')}}" class="article">Administrador</a>
                 </li>
@@ -315,10 +321,11 @@
         <input type="checkbox" id="toggle-tool">
         <label for="toggle-tool" class="button-tool"></label>
         <nav class="nav-tool">
-            <a href="" id="btn-menos" class="buton-tool"><i class="fas fa-search-minus"></i></a>
-            <a href="" id="btn-normal" class="buton-tool"><i class="fas fa-search"></i></a>
-            <a href="" id="btn-mas" class="buton-tool"><i class="fas fa-search-plus"></i></a>
-            <a href="" id="btn-luz" class="buton-tool"><i class="fas fa-lightbulb"></i></a>
+            <a title="Disminuir letra" href="" id="btn-menos" class="buton-tool"><i class="fas fa-search-minus"></i></a>
+            <a title="Letra normal" href="" id="btn-normal" class="buton-tool"><i class="fas fa-search"></i></a>
+            <a title="Aumentar letra" href="" id="btn-mas" class="buton-tool"><i class="fas fa-search-plus"></i></a>
+            <a href="" title="Modo oscuro" id="btn-luz" class="buton-tool"><i class="fas fa-lightbulb"></i></a>
+            <a href="" title="Ir al Comienzo" id="btn-subir" class="buton-tool"><i class="fas fa-chevron-circle-up"></i></a>
         </nav>
     </div>
 
@@ -332,6 +339,15 @@
     <script defer src="{{ asset('fontawesome/js/all.js') }}"></script>
 
     <script type="text/javascript">
+        function imprimirDiv(divID){
+            var ficha = document.getElementById(divID);
+            var ventimp = window.open(' ', 'popimpr');
+            ventimp.document.write( ficha.innerHTML );
+            ventimp.document.close();
+            ventimp.print( );
+            ventimp.close();
+        }
+       
 
         $(document).ready(function () {
 
@@ -339,6 +355,10 @@
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
+            });
+
+            $('.btn-print').on('click', () => {
+            imprimirDiv("contenido-prt");
             });
 
             $('.slideDownLg').slideDown(2000);
@@ -351,26 +371,30 @@
                         if(flag.dataset.fsz >= 0){
                             flag.dataset.fsz --;
                         }                        
-                    break
+                        break
                     case 'btn-mas':                    
                         if(flag.dataset.fsz <= 1){
                             flag.dataset.fsz ++;
                         }                        
-                    break
+                        break
                     case 'btn-normal':                    
                         if(flag.dataset.fsz != 0){
                             flag.dataset.fsz = 0;
                         }                        
-                    break
+                        break
                     case 'btn-luz':
                         if(flag.dataset.disp == "encendido"){
                             flag.dataset.disp = "apagado"
                         }else{
                             flag.dataset.disp = 'encendido'
                         }
-                    break
+                        break
+                    case 'btn-subir':
+                        $('body, html').animate({
+			                scrollTop: '0px'
+		                }, 300);
+                        break
                 }
-                console.log(flag.dataset.fsz);
             });
 
         });

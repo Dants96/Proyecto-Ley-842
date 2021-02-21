@@ -150,7 +150,7 @@
                 </li>
                 <li>
                     <a href="{{route('stadistics')}}">Estadísticas</a>
-                    <a href="{{route('noBuild')}}">Ayuda</a>
+                    <a href="{{route('nosotros')}}">Ayuda</a>
                 </li>
             </ul>
 
