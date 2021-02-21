@@ -100,7 +100,7 @@ a, a:hover, a:focus {
 #sidebar .sidebar-header {
     padding: 20px;
     background: #36007e;
-    box-shadow: -6px -1px 10px 0px black
+    box-shadow: -6px -1px 10px 0px black;
 }
 
 #sidebar ul.components {
